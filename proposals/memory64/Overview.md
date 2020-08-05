@@ -247,3 +247,4 @@ have to support 32-bit memory addresses in their ABI.
 [binary memarg]: https://webassembly.github.io/spec/core/binary/instructions.html#binary-memarg
 [text memtype]: https://webassembly.github.io/spec/core/text/types.html#text-memtype
 [text memabbrev]: https://webassembly.github.io/spec/core/text/modules.html#text-mem-abbrev
+[multi memory]: https://github.com/webassembly/multi-memory
