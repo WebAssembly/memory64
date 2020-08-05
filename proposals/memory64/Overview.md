@@ -116,7 +116,7 @@ have to support 32-bit memory addresses in their ABI.
     - ```
           C.mems[0] = limits it   C.datas[x] = ok
       -------------------------------------------
-          C ⊦ memory.grow : [it i32 it] → []
+          C ⊦ memory.grow : [it i32 i32] → []
       ```
   - (and similar for memory instructions from other proposals)
 
