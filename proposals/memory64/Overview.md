@@ -104,19 +104,19 @@ have to support 32-bit memory addresses in their ABI.
     - ```
           C.mems[0] = limits it
       -----------------------------
-      C ⊦ memory.grow : [it i32 it] → []
+      C ⊦ memory.fill : [it i32 it] → []
       ```
   - memory.copy
     - ```
           C.mems[0] = limits it
       -----------------------------
-      C ⊦ memory.grow : [it it it] → []
+      C ⊦ memory.copy : [it it it] → []
       ```
   - memory.init x
     - ```
           C.mems[0] = limits it   C.datas[x] = ok
       -------------------------------------------
-          C ⊦ memory.grow : [it i32 i32] → []
+          C ⊦ memory.init : [it i32 i32] → []
       ```
   - (and similar for memory instructions from other proposals)
 
@@ -127,7 +127,7 @@ have to support 32-bit memory addresses in their ABI.
     - ```
          C.mems[x] = limits it
       ---------------------------
-      C ⊦ memory.size : [] → [it]
+      C ⊦ memory.size x : [] → [it]
       ```
 
   `memory.copy` has two memory index immediates, so will have multiple possible
@@ -136,7 +136,7 @@ have to support 32-bit memory addresses in their ABI.
     - ```
           C.mems[d] = limits it_d   C.mems[s] = limits it_s
       --------------------------------------------------------
-          C ⊦ memory.grow : [it_d it_s f(it_d, it_s)] → []
+          C ⊦ memory.copy d s : [it_d it_s f(it_d, it_s)] → []
 
       where:
 
