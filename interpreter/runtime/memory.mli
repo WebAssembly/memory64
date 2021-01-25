@@ -20,8 +20,8 @@ val alloc : memory_type -> memory (* raises SizeOverflow, OutOfMemory *)
 val type_of : memory -> memory_type
 val size : memory -> size
 val bound : memory -> address
-val to_index : memory -> address -> value
-val of_index : value -> address
+val value_of_address : index_type -> address -> value
+val address_of_value : value -> address
 val grow : memory -> size -> unit
   (* raises SizeLimit, SizeOverflow, OutOfMemory *)
 

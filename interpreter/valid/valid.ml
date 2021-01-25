@@ -159,9 +159,9 @@ let check_memop (c : context) (memop : 'a memop) get_sz at =
   in
   require (1 lsl memop.align <= size) at
     "alignment must not be larger than natural";
-  if it = I32IndexType then
-    require (I64.lt_u memop.offset 0x1_0000_0000L) at
-      "load/store offset out of range";
+  let max_offset = Int64.shift_right_logical (-1L) (64 - 8 * size) in
+  require (I64.le_u memop.offset max_offset) at
+    "offset out of range";
   index_value_type it
 
 
@@ -352,11 +352,11 @@ let check_memory_type (mt : memory_type) at =
   let MemoryType (lim, it) = mt in
   match it with
   | I32IndexType ->
-      check_limits lim I64.le_u 0x1_0000L at
-        "memory size must be at most 65536 pages (4GiB)"
+    check_limits lim I64.le_u 0x1_0000L at
+      "memory size must be at most 65536 pages (4GiB)"
   | I64IndexType ->
-      check_limits lim I64.le_u 0x1_0000_0000_0000L at
-        "memory size must be at most 48-bits of pages"
+    check_limits lim I64.le_u 0x1_0000_0000_0000L at
+      "memory size must be at most 48 bits of pages"
 
 let check_global_type (gt : global_type) at =
   let GlobalType (t, mut) = gt in

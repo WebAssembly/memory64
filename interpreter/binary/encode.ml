@@ -103,9 +103,7 @@ let encode m =
       | FuncType (ins, out) -> vs7 (-0x20); stack_type ins; stack_type out
 
     let limits vu {min; max} it =
-      let flag_max = if max <> None then 1 else 0 in
-      let flag_64 = if it = I64IndexType then 4 else 0 in
-      let flags = flag_64 lor flag_max in
+      let flags = flag (max <> None) 0 + flag (it = I64IndexType) 2 in
       u8 flags; vu min; opt vu max
 
     let table_type = function

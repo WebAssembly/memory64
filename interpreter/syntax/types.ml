@@ -32,7 +32,7 @@ let packed_size = function
   | Pack16 -> 2
   | Pack32 -> 4
 
-let index_value_type = function
+let value_type_of_index_type = function
   | I32IndexType -> I32Type
   | I64IndexType -> I64Type
 
