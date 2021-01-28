@@ -45,10 +45,12 @@ let size mem =
 let type_of mem =
   MemoryType ({min = size mem; max = mem.max}, mem.it)
 
-let to_index mem x =
-  if mem.it = I64IndexType then I64 (x) else I32 (Int64.to_int32 x)
+let index_of mem = mem.it
 
-let of_index x =
+let value_of_address it x =
+  if it = I64IndexType then I64 (x) else I32 (Int64.to_int32 x)
+
+let address_of_value x =
   match x with
   | I64 i -> i
   | I32 i -> I64_convert.extend_i32_u i

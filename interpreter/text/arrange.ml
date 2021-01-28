@@ -58,7 +58,7 @@ let break_string s =
 
 let value_type t = string_of_value_type t
 
-let index_type t = string_of_value_type (index_value_type t)
+let index_type t = string_of_value_type (value_type_of_index_type t)
 
 let elem_type t = string_of_elem_type t
 
@@ -298,8 +298,8 @@ let table off i tab =
 
 let memory off i mem =
   let {mtype = MemoryType (lim, it)} = mem.it in
-  let index_str = if it = I64IndexType then " " ^ index_type it else "" in
-  Node ("memory $" ^ nat (off + i) ^ index_str ^ " " ^ limits nat64 lim, [])
+  Node ("memory $" ^ nat (off + i) ^  " " ^ index_type it ^ " " ^
+        limits nat64 lim, [])
 
 let segment head dat seg =
   let {index; offset; init} = seg.it in

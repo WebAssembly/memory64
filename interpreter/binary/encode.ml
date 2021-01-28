@@ -63,6 +63,8 @@ let encode m =
     let f32 x = u32 (F32.to_bits x)
     let f64 x = u64 (F64.to_bits x)
 
+    let flag b i = if b then 1 lsl i else 0
+
     let len i =
       if Int32.to_int (Int32.of_int i) <> i then
         Code.error Source.no_region

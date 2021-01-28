@@ -171,11 +171,11 @@ let index_type t at =
   | _ -> error at "illegal memory index type"
 
 let memory_data init it c x at =
-    let size = Int64.(div (add (of_int (String.length init)) 65535L) 65536L) in
-    [{mtype = MemoryType ({min = size; max = Some size}, it)} @@ at],
-    [{index = x;
-      offset = [i32_const (0l @@ at) @@ at] @@ at; init} @@ at],
-    [], []
+  let size = Int64.(div (add (of_int (String.length init)) 65535L) 65536L) in
+  [{mtype = MemoryType ({min = size; max = Some size}, it)} @@ at],
+  [{index = x;
+    offset = [i32_const (0l @@ at) @@ at] @@ at; init} @@ at],
+  [], []
 
 %}
 
@@ -264,15 +264,19 @@ func_type :
     { let FuncType (ins, out) = $6 in FuncType ($4 :: ins, out) }
 
 table_type :
-  | limits elem_type { TableType ($1 nat32, $2) }
+  | limits32 elem_type { TableType ($1, $2) }
 
 memory_type :
-  | VALUE_TYPE limits { MemoryType ($2 nat64, index_type $1 (at ())) }
-  | limits { MemoryType ($1 nat64, I32IndexType) }
+  | VALUE_TYPE limits64 { MemoryType ($2, index_type $1 (at ())) }
+  | limits64 { MemoryType ($1, I32IndexType) }
 
-limits :
-  | NAT { fun nat -> {min = nat $1 (ati 1); max = None} }
-  | NAT NAT { fun nat -> {min = nat $1 (ati 1); max = Some (nat $2 (ati 2))} }
+limits32 :
+  | NAT { {min = nat32 $1 (ati 1); max = None} }
+  | NAT NAT { {min = nat32 $1 (ati 1); max = Some (nat32 $2 (ati 2))} }
+
+limits64 :
+  | NAT { {min = nat64 $1 (ati 1); max = None} }
+  | NAT NAT { {min = nat64 $1 (ati 1); max = Some (nat64 $2 (ati 2))} }
 
 type_use :
   | LPAR TYPE var RPAR { $3 }

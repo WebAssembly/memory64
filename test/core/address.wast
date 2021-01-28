@@ -215,7 +215,7 @@
     "(memory 1)"
     "(func (drop (i32.load offset=4294967296 (i32.const 0))))"
   )
-  "load/store offset out of range"
+  "offset out of range"
 )
 
 ;; Load i64 data with different offset/align arguments

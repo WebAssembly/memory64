@@ -39,21 +39,21 @@ let value_type_of_index_type = function
 
 (* Subtyping *)
 
-let match_limits ge le lim1 lim2 =
+let match_limits ge lim1 lim2 =
   ge lim1.min lim2.min &&
   match lim1.max, lim2.max with
   | _, None -> true
   | None, Some _ -> false
-  | Some i, Some j -> le i j
+  | Some i, Some j -> ge j i
 
 let match_func_type ft1 ft2 =
   ft1 = ft2
 
 let match_table_type (TableType (lim1, et1)) (TableType (lim2, et2)) =
-  et1 = et2 && match_limits I32.ge_u I32.le_u lim1 lim2
+  et1 = et2 && match_limits I32.ge_u lim1 lim2
 
 let match_memory_type (MemoryType (lim1, it1)) (MemoryType (lim2, it2)) =
-  it1 = it2 && match_limits I64.ge_u I64.le_u lim1 lim2
+  it1 = it2 && match_limits I64.ge_u lim1 lim2
 
 let match_global_type gt1 gt2 =
   gt1 = gt2
@@ -99,8 +99,9 @@ let string_of_limits to_string {min; max} =
   (match max with None -> "" | Some n -> " " ^ to_string n)
 
 let string_of_memory_type = function
-  | MemoryType (lim, it) -> string_of_limits I64.to_string_u lim ^ " " ^
-                            string_of_value_type (index_value_type it)
+  | MemoryType (lim, it) -> string_of_value_type (value_type_of_index_type it) ^
+                            " " ^ string_of_limits I64.to_string_u lim
+
 
 let string_of_table_type = function
   | TableType (lim, t) -> string_of_limits I32.to_string_u lim ^ " " ^

@@ -159,10 +159,10 @@ let check_memop (c : context) (memop : 'a memop) get_sz at =
   in
   require (1 lsl memop.align <= size) at
     "alignment must not be larger than natural";
-  let max_offset = Int64.shift_right_logical (-1L) (64 - 8 * size) in
-  require (I64.le_u memop.offset max_offset) at
-    "offset out of range";
-  index_value_type it
+  if it = I32IndexType then
+    require (I64.lt_u memop.offset 0x1_0000_0000L) at
+      "offset out of range";
+  it
 
 
 (*
@@ -264,20 +264,20 @@ let rec check_instr (c : context) (e : instr) (s : infer_stack_type) : op_type =
     [t] --> []
 
   | Load memop ->
-    let t = check_memop c memop (Lib.Option.map fst) e.at in
-    [t] --> [memop.ty]
+    let it = check_memop c memop (Lib.Option.map fst) e.at in
+    [value_type_of_index_type it] --> [memop.ty]
 
   | Store memop ->
-    let t = check_memop c memop (fun sz -> sz) e.at in
-    [t; memop.ty] --> []
+    let it = check_memop c memop (fun sz -> sz) e.at in
+    [value_type_of_index_type it; memop.ty] --> []
 
   | MemorySize ->
     let MemoryType (_, it) = memory c (0l @@ e.at) in
-    [] --> [index_value_type it]
+    [] --> [value_type_of_index_type it]
 
   | MemoryGrow ->
     let MemoryType (_, it) = memory c (0l @@ e.at) in
-    [index_value_type it] --> [index_value_type it]
+    [value_type_of_index_type it] --> [value_type_of_index_type it]
 
   | Const v ->
     let t = type_value v.it in
@@ -327,7 +327,7 @@ and check_block (c : context) (es : instr list) (ft : func_type) at =
 
 (* Types *)
 
-let check_limits {min; max} le_u range at msg =
+let check_limits le_u {min; max} range at msg =
   require (le_u min range) at msg;
   match max with
   | None -> ()
@@ -346,16 +346,16 @@ let check_func_type (ft : func_type) at =
 
 let check_table_type (tt : table_type) at =
   let TableType (lim, _) = tt in
-  check_limits lim I32.le_u 0xffff_ffffl at "table size must be at most 2^32-1"
+  check_limits I32.le_u lim 0xffff_ffffl at "table size must be at most 2^32-1"
 
 let check_memory_type (mt : memory_type) at =
   let MemoryType (lim, it) = mt in
   match it with
   | I32IndexType ->
-    check_limits lim I64.le_u 0x1_0000L at
+    check_limits I64.le_u lim 0x1_0000L at
       "memory size must be at most 65536 pages (4GiB)"
   | I64IndexType ->
-    check_limits lim I64.le_u 0x1_0000_0000_0000L at
+    check_limits I64.le_u lim 0x1_0000_0000_0000L at
       "memory size must be at most 48 bits of pages"
 
 let check_global_type (gt : global_type) at =

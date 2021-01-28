@@ -211,7 +211,7 @@ let rec step (c : config) : config =
 
       | Load {offset; ty; sz; _}, a :: vs' ->
         let mem = memory frame.inst (0l @@ e.at) in
-        let addr = Memory.of_index a in
+        let addr = Memory.address_of_value a in
         (try
           let v =
             match sz with
@@ -222,7 +222,7 @@ let rec step (c : config) : config =
 
       | Store {offset; sz; _}, v :: a :: vs' ->
         let mem = memory frame.inst (0l @@ e.at) in
-        let addr = Memory.of_index a in
+        let addr = Memory.address_of_value a in
         (try
           (match sz with
           | None -> Memory.store_value mem addr offset v
@@ -233,15 +233,15 @@ let rec step (c : config) : config =
 
       | MemorySize, vs ->
         let mem = memory frame.inst (0l @@ e.at) in
-        Memory.to_index mem (Memory.size mem) :: vs, []
+        Memory.value_of_address (Memory.index_of mem) (Memory.size mem) :: vs, []
 
       | MemoryGrow, delta :: vs' ->
         let mem = memory frame.inst (0l @@ e.at) in
         let old_size = Memory.size mem in
         let result =
-          try Memory.grow mem (Memory.of_index delta); old_size
+          try Memory.grow mem (Memory.address_of_value delta); old_size
           with Memory.SizeOverflow | Memory.SizeLimit | Memory.OutOfMemory -> -1L
-        in (Memory.to_index mem result) :: vs', []
+        in (Memory.value_of_address (Memory.index_of mem) result) :: vs', []
 
       | Const v, vs ->
         v.it :: vs, []

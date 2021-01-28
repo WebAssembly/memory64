@@ -155,7 +155,7 @@ let func_type s =
 
 let limits vu s =
   let flags = u8 s in
-  require (flags land 0xf8 = 0) s (pos s - 1) "malformed limits flags";
+  require (flags land 0xfa = 0) s (pos s - 1) "malformed limits flags";
   let has_max = (flags land 1 = 1) in
   let is64 = (flags land 4 = 4) in
   let min = vu s in
@@ -164,7 +164,8 @@ let limits vu s =
 
 let table_type s =
   let t = elem_type s in
-  let lim, _ = limits vu32 s in
+  let lim, is64 = limits vu32 s in
+  require (not is64) s (pos s - 1) "tables cannot have 64-bit indices";
   TableType (lim, t)
 
 let memory_type s =
