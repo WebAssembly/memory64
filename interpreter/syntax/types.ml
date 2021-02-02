@@ -99,8 +99,9 @@ let string_of_limits to_string {min; max} =
   (match max with None -> "" | Some n -> " " ^ to_string n)
 
 let string_of_memory_type = function
-  | MemoryType (lim, it) -> string_of_value_type (value_type_of_index_type it) ^
-                            " " ^ string_of_limits I64.to_string_u lim
+  | MemoryType (lim, it) ->
+    string_of_value_type (value_type_of_index_type it) ^
+    " " ^ string_of_limits I64.to_string_u lim
 
 
 let string_of_table_type = function
