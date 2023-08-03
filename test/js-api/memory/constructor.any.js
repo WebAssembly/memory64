@@ -135,27 +135,31 @@ test(() => {
 test(() => {
   const argument = { "initial": 1 };
   const memory = new WebAssembly.Memory(argument);
-  assert_equals(memory.type().index, "u32");
-}, "Memory with default constructor");
+  assert_Memory(memory, { "size": 1, "index": "u32" });
+}, "Memory with index parameter omitted");
 
 test(() => {
   const argument = { "initial": 1, "index": "u32" };
   const memory = new WebAssembly.Memory(argument);
-  assert_equals(memory.type().index, "u32");
+  assert_Memory(memory, { "size": 1, "index": "u32" });
 }, "Memory with u32 index constructor");
 
 test(() => {
   const argument = { "initial": 1, "index": "u64" };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 1 });
-  assert_equals(memory.type().index, "u64");
+  assert_Memory(memory, { "size": 1, "index": "u64" });
 }, "Memory with u64 index constructor");
 
 test(() => {
-  const argument = { "initial": 1, "index": "u64", shared: true };
+  const argument = { "initial": 1, "maximum": 2, "index": "u32", shared: true };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 1 });
-  assert_equals(memory.type().index, "u64");
+  assert_Memory(memory, { "size": 1, "index": "u32", shared: true });
+}, "Shared memory with u32 index constructor");
+
+test(() => {
+  const argument = { "initial": 1, "maximum": 2, "index": "u64", shared: true };
+  const memory = new WebAssembly.Memory(argument);
+  assert_Memory(memory, { "size": 1, "index": "u64", shared: true });
 }, "Shared memory with u64 index constructor");
 
 test(() => {
