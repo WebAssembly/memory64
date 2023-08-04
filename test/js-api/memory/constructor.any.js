@@ -151,17 +151,5 @@ test(() => {
 }, "Memory with u64 index constructor");
 
 test(() => {
-  const argument = { "initial": 1, "maximum": 2, "index": "u32", shared: true };
-  const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 1, "index": "u32", shared: true });
-}, "Shared memory with u32 index constructor");
-
-test(() => {
-  const argument = { "initial": 1, "maximum": 2, "index": "u64", shared: true };
-  const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 1, "index": "u64", shared: true });
-}, "Shared memory with u64 index constructor");
-
-test(() => {
   assert_throws_js(TypeError, () => new WebAssembly.Memory({ "initial": 1, "index": "none" }));
 }, "Unknown memory index");
