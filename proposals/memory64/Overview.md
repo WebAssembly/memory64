@@ -27,7 +27,7 @@ In addition to this page limit, all [memory instructions][] currently use the
 [`i32` type][i32] as a memory index. This means they can address at most
 2<sup>32</sup> bytes as well.
 
-For many applications, 4 gibibytes of memory is enough. Using 32-bit memory
+For many applications, 4 gigabytes of memory is enough. Using 32-bit memory
 indexes is sufficient in this case, and has the additional benefit that
 pointers in the producer language are smaller, which can yield memory savings.
 However, for applications that need more memory than this, there are no easy
