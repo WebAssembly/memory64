@@ -107,6 +107,8 @@ The following grammar handles the corresponding update to the <a class="referenc
 \def\mathdef2767#1{{}}\mathdef2767{label} &amp; \href{../text/instructions.html#text-label}{\mathtt{label}}_I &amp;::=&amp;
   v{:}\href{../text/values.html#text-id}{\mathtt{id}} &amp;\Rightarrow&amp; \{\href{../text/conventions.html#text-context}{\mathsf{labels}}~v\} \href{../syntax/conventions.html#notation-compose}{\oplus} I
     &amp; (\mathrel{\mbox{if}} v \notin I.\href{../text/conventions.html#text-context}{\mathsf{labels}}) \\ &amp;&amp;|&amp;
+  v{:}\href{../text/values.html#text-id}{\mathtt{id}} &amp;\Rightarrow&amp; \{\href{../text/conventions.html#text-context}{\mathsf{labels}}~v\} \href{../syntax/conventions.html#notation-compose}{\oplus} (I \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} \href{../text/conventions.html#text-context}{\mathsf{labels}}[i] = \epsilon)
+    &amp; (\mathrel{\mbox{if}} I.\href{../text/conventions.html#text-context}{\mathsf{labels}}[i] = v) \\ &amp;&amp;|&amp;
   \epsilon &amp;\Rightarrow&amp; \{\href{../text/conventions.html#text-context}{\mathsf{labels}}~(\epsilon)\} \href{../syntax/conventions.html#notation-compose}{\oplus} I \\
 \end{array}\end{split}\]</div>
 <div class="admonition note">
@@ -114,6 +116,8 @@ The following grammar handles the corresponding update to the <a class="referenc
 <p>The new label entry is inserted at the <em>beginning</em> of the label list in the identifier context.
 This effectively shifts all existing labels up by one,
 mirroring the fact that control instructions are indexed relatively not absolutely.</p>
+<p>If a label with the same name already exists,
+then it is shadowed and the earlier label becomes inaccessible.</p>
 </div>
 </section>
 <section id="control-instructions">
@@ -193,7 +197,7 @@ However, the special case of a type use that is syntactically empty or consists 
 \def\mathdef2767#1{{}}\mathdef2767{instruction} &amp; \href{../text/instructions.html#text-plaininstr}{\mathtt{plaininstr}}_I &amp;::=&amp; \dots \\ &amp;&amp;|&amp;
   \def\mathdef2831#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef2831{ref.null}~~t{:}\href{../text/types.html#text-heaptype}{\mathtt{heaptype}} &amp;\Rightarrow&amp; \href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}null}}~t \\ &amp;&amp;|&amp;
   \def\mathdef2832#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef2832{ref.is\_null} &amp;\Rightarrow&amp; \href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}is\_null}} \\ &amp;&amp;|&amp;
-  \def\mathdef2833#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef2833{ref.func}~~x{:}\href{../text/modules.html#text-funcidx}{\mathtt{funcidx}} &amp;\Rightarrow&amp; \href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}func}}~x \\ &amp;&amp;|&amp;
+  \def\mathdef2833#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef2833{ref.func}~~x{:}\href{../text/modules.html#text-funcidx}{\mathtt{funcidx}} &amp;\Rightarrow&amp; \href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}func}}~x \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="parametric-instructions">
@@ -791,7 +795,7 @@ Lexically, an <span class="math notranslate nohighlight">\(\href{../text/instruc
   \def\mathdef3277#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef3277{f64x2.convert\_low\_i32x4\_s} &amp;\Rightarrow&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{f64x2}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{convert}}\mathsf{\_low\_i32x4\_s}\\  &amp;&amp;|&amp;
   \def\mathdef3278#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef3278{f64x2.convert\_low\_i32x4\_u} &amp;\Rightarrow&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{f64x2}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{convert}}\mathsf{\_low\_i32x4\_u}\\ &amp;&amp;|&amp;
   \def\mathdef3279#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef3279{f32x4.demote\_f64x2\_zero} &amp;\Rightarrow&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{f32x4}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{demote}}\mathsf{\_f64x2\_zero}\\ &amp;&amp;|&amp;
-  \def\mathdef3280#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef3280{f64x2.promote\_low\_f32x4} &amp;\Rightarrow&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{f64x2}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{promote}}\mathsf{\_low\_f32x4}\\ &amp;&amp;|&amp;
+  \def\mathdef3280#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef3280{f64x2.promote\_low\_f32x4} &amp;\Rightarrow&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{f64x2}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{promote}}\mathsf{\_low\_f32x4}\\
 \end{array}\end{split}\]</div>
 </section>
 <section id="folded-instructions">

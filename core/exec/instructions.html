@@ -93,13 +93,13 @@
 The mapping of numeric instructions to their underlying operators is expressed by the following definition:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lll&#64;{\qquad}l}
-\mathit{op}_{\mathsf{i}N}(n_1,\dots,n_k) &amp;=&amp; \mathrm{i}\mathit{op}_N(n_1,\dots,n_k) \\
-\mathit{op}_{\mathsf{f}N}(z_1,\dots,z_k) &amp;=&amp; \mathrm{f}\mathit{op}_N(z_1,\dots,z_k) \\
+\mathit{op}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}}(i_1,\dots,i_k) &amp;=&amp; \href{../exec/numerics.html#int-ops}{\mathrm{i}\mathit{op}}_N(i_1,\dots,i_k) \\
+\mathit{op}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{f}N}}(z_1,\dots,z_k) &amp;=&amp; \href{../exec/numerics.html#float-ops}{\mathrm{f}\mathit{op}}_N(z_1,\dots,z_k) \\
 \end{array}\end{split}\]</div>
 <p>And for <a class="reference internal" href="#exec-cvtop"><span class="std std-ref">conversion operators</span></a>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lll&#64;{\qquad}l}
-\mathit{cvtop}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}^?}_{t_1,t_2}(c) &amp;=&amp; \mathit{cvtop}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}^?}_{|t_1|,|t_2|}(c) \\
+\href{../syntax/instructions.html#syntax-cvtop}{\mathit{cvtop}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}^?}_{t_1,t_2}(c) &amp;=&amp; \href{../exec/numerics.html#convert-ops}{\mathit{cvtop}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}^?}_{|t_1|,|t_2|}(c) \\
 \end{array}\end{split}\]</div>
 <p>Where the underlying operators are partial, the corresponding instruction will <a class="reference internal" href="../intro/overview.html#trap"><span class="std std-ref">trap</span></a> when the result is not defined.
 Where the underlying operators are non-deterministic, because they may return one of multiple possible <a class="reference internal" href="../syntax/values.html#syntax-nan"><span class="std std-ref">NaN</span></a> values, so are the corresponding instructions.</p>
@@ -127,9 +127,9 @@ which maps to the generic <span class="math notranslate nohighlight">\(\href{../
 <ol class="arabic simple">
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-unop"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(t\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-unop}{\mathit{unop}}_t(c_1)\)</span> is defined, then:</p>
+<li><p>If <span class="math notranslate nohighlight">\(\href{../exec/instructions.html#exec-instr-numeric}{\mathit{unop}}_t(c_1)\)</span> is defined, then:</p>
 <ol class="loweralpha simple">
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be a possible result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-unop}{\mathit{unop}}_t(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be a possible result of computing <span class="math notranslate nohighlight">\(\href{../exec/instructions.html#exec-instr-numeric}{\mathit{unop}}_t(c_1)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 </li>
@@ -142,9 +142,9 @@ which maps to the generic <span class="math notranslate nohighlight">\(\href{../
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1)~t\mathsf{.}\href{../syntax/instructions.html#syntax-unop}{\mathit{unop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)
-  &amp; (\mathrel{\mbox{if}} c \in \href{../syntax/instructions.html#syntax-unop}{\mathit{unop}}_t(c_1)) \\
+  &amp; (\mathrel{\mbox{if}} c \in \href{../exec/instructions.html#exec-instr-numeric}{\mathit{unop}}_t(c_1)) \\
 (t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1)~t\mathsf{.}\href{../syntax/instructions.html#syntax-unop}{\mathit{unop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
-  &amp; (\mathrel{\mbox{if}} \href{../syntax/instructions.html#syntax-unop}{\mathit{unop}}_{t}(c_1) = \{\})
+  &amp; (\mathrel{\mbox{if}} \href{../exec/instructions.html#exec-instr-numeric}{\mathit{unop}}_{t}(c_1) = \{\})
 \end{array}\end{split}\]</div>
 </section>
 <section id="t-mathsf-xref-syntax-instructions-syntax-binop-mathit-binop">
@@ -153,9 +153,9 @@ which maps to the generic <span class="math notranslate nohighlight">\(\href{../
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-binop"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(t\)</span> are on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-binop}{\mathit{binop}}_t(c_1, c_2)\)</span> is defined, then:</p>
+<li><p>If <span class="math notranslate nohighlight">\(\href{../exec/instructions.html#exec-instr-numeric}{\mathit{binop}}_t(c_1, c_2)\)</span> is defined, then:</p>
 <ol class="loweralpha simple">
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be a possible result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-binop}{\mathit{binop}}_t(c_1, c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be a possible result of computing <span class="math notranslate nohighlight">\(\href{../exec/instructions.html#exec-instr-numeric}{\mathit{binop}}_t(c_1, c_2)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 </li>
@@ -168,9 +168,9 @@ which maps to the generic <span class="math notranslate nohighlight">\(\href{../
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1)~(t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_2)~t\mathsf{.}\href{../syntax/instructions.html#syntax-binop}{\mathit{binop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)
-  &amp; (\mathrel{\mbox{if}} c \in \href{../syntax/instructions.html#syntax-binop}{\mathit{binop}}_t(c_1,c_2)) \\
+  &amp; (\mathrel{\mbox{if}} c \in \href{../exec/instructions.html#exec-instr-numeric}{\mathit{binop}}_t(c_1,c_2)) \\
 (t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1)~(t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_2)~t\mathsf{.}\href{../syntax/instructions.html#syntax-binop}{\mathit{binop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
-  &amp; (\mathrel{\mbox{if}} \href{../syntax/instructions.html#syntax-binop}{\mathit{binop}}_{t}(c_1,c_2) = \{\})
+  &amp; (\mathrel{\mbox{if}} \href{../exec/instructions.html#exec-instr-numeric}{\mathit{binop}}_{t}(c_1,c_2) = \{\})
 \end{array}\end{split}\]</div>
 </section>
 <section id="t-mathsf-xref-syntax-instructions-syntax-testop-mathit-testop">
@@ -178,13 +178,13 @@ which maps to the generic <span class="math notranslate nohighlight">\(\href{../
 <ol class="arabic simple">
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-testop"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(t\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-testop}{\mathit{testop}}_t(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/instructions.html#exec-instr-numeric}{\mathit{testop}}_t(c_1)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1)~t\mathsf{.}\href{../syntax/instructions.html#syntax-testop}{\mathit{testop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)
-  &amp; (\mathrel{\mbox{if}} c = \href{../syntax/instructions.html#syntax-testop}{\mathit{testop}}_t(c_1)) \\
+  &amp; (\mathrel{\mbox{if}} c = \href{../exec/instructions.html#exec-instr-numeric}{\mathit{testop}}_t(c_1)) \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="t-mathsf-xref-syntax-instructions-syntax-relop-mathit-relop">
@@ -193,13 +193,13 @@ which maps to the generic <span class="math notranslate nohighlight">\(\href{../
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-relop"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(t\)</span> are on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-relop}{\mathit{relop}}_t(c_1, c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/instructions.html#exec-instr-numeric}{\mathit{relop}}_t(c_1, c_2)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1)~(t\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_2)~t\mathsf{.}\href{../syntax/instructions.html#syntax-relop}{\mathit{relop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)
-  &amp; (\mathrel{\mbox{if}} c = \href{../syntax/instructions.html#syntax-relop}{\mathit{relop}}_t(c_1,c_2)) \\
+  &amp; (\mathrel{\mbox{if}} c = \href{../exec/instructions.html#exec-instr-numeric}{\mathit{relop}}_t(c_1,c_2)) \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="t-2-mathsf-xref-syntax-instructions-syntax-cvtop-mathit-cvtop-mathsf-t-1-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx">
@@ -258,9 +258,9 @@ which maps to the generic <span class="math notranslate nohighlight">\(\href{../
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
-\href{../exec/runtime.html#syntax-val}{\mathit{val}}~\href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}is\_null}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~1
+\href{../exec/runtime.html#syntax-val}{\mathit{val}}~\href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}is\_null}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~1)
   &amp; (\mathrel{\mbox{if}} \href{../exec/runtime.html#syntax-val}{\mathit{val}} = \href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}null}}~t) \\
-\href{../exec/runtime.html#syntax-val}{\mathit{val}}~\href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}is\_null}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~0
+\href{../exec/runtime.html#syntax-val}{\mathit{val}}~\href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}is\_null}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~0)
   &amp; (\mathrel{\mbox{otherwise}}) \\
 \end{array}\end{split}\]</div>
 </section>
@@ -274,26 +274,31 @@ which maps to the generic <span class="math notranslate nohighlight">\(\href{../
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
-F; \href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}func}}~x &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; F; \href{../exec/runtime.html#syntax-ref}{\mathsf{ref}}~a
+F; (\href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}func}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; F; (\href{../exec/runtime.html#syntax-ref}{\mathsf{ref}}~a)
   &amp; (\mathrel{\mbox{if}} a = F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{funcaddrs}}[x]) \\
 \end{array}\end{split}\]</div>
 </section>
 </section>
 <section id="vector-instructions">
 <span id="exec-instr-vec"></span><span id="index-3"></span><h2>Vector Instructions<a class="headerlink" href="#vector-instructions" title="Permalink to this heading">¶</a></h2>
-<p>Most vector instructions are defined in terms of generic numeric operators applied lane-wise based on the <a class="reference internal" href="../syntax/instructions.html#syntax-vec-shape"><span class="std std-ref">shape</span></a>.</p>
+<p>Vector instructions that operate bitwise are handled as integer operations of respective width.</p>
 <div class="math notranslate nohighlight">
-\[\begin{array}{lll&#64;{\qquad}l}
+\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+\mathit{op}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{v}N}}(i_1,\dots,i_k) &amp;=&amp; \href{../exec/numerics.html#int-ops}{\mathrm{i}\mathit{op}}_N(i_1,\dots,i_k) \\
+\end{array}\end{split}\]</div>
+<p>Most other vector instructions are defined in terms of numeric operators that are applied lane-wise according to the given <a class="reference internal" href="../syntax/instructions.html#syntax-vec-shape"><span class="std std-ref">shape</span></a>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{llll}
 \mathit{op}_{t\mathsf{x}N}(n_1,\dots,n_k) &amp;=&amp;
-  \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t\mathsf{x}N}(op_t(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(n_1) ~\dots~ \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(n_k))
-\end{array}\]</div>
+  \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t\mathsf{x}N}(\href{../exec/instructions.html#exec-instr-numeric}{\mathit{op}}_t(i_1,\dots,i_k)^\ast) &amp; \qquad(\mathrel{\mbox{if}} i_1^\ast = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(n_1) \land \dots \land i_k^\ast = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(n_k) \\
+\end{array}\end{split}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For example, the result of instruction <span class="math notranslate nohighlight">\(\mathsf{i32x4}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{add}}\)</span> applied to operands <span class="math notranslate nohighlight">\(i_1, i_2\)</span>
-invokes <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{add}}_{\mathsf{i32x4}}(i_1, i_2)\)</span>, which maps to
-<span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\mathsf{i32x4}}(\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{add}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}}(i_1^+, i_2^+))\)</span>,
-where <span class="math notranslate nohighlight">\(i_1^+\)</span> and <span class="math notranslate nohighlight">\(i_2^+\)</span> are sequences resulting from invoking
-<span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\mathsf{i32x4}}(i_1)\)</span> and <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\mathsf{i32x4}}(i_2)\)</span>
+<p>For example, the result of instruction <span class="math notranslate nohighlight">\(\mathsf{i32x4}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{add}}\)</span> applied to operands <span class="math notranslate nohighlight">\(v_1, v_2\)</span>
+invokes <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{add}}_{\mathsf{i32x4}}(v_1, v_2)\)</span>, which maps to
+<span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\mathsf{i32x4}}(\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{add}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}}(i_1, i_2)^\ast)\)</span>,
+where <span class="math notranslate nohighlight">\(i_1^\ast\)</span> and <span class="math notranslate nohighlight">\(i_2^\ast\)</span> are sequences resulting from invoking
+<span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\mathsf{i32x4}}(v_1)\)</span> and <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\mathsf{i32x4}}(v_2)\)</span>
 respectively.</p>
 </div>
 <section id="xref-syntax-types-syntax-valtype-mathsf-v128-mathsf-xref-syntax-instructions-syntax-instr-vec-mathsf-const-c">
@@ -311,13 +316,13 @@ respectively.</p>
 <ol class="arabic simple">
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vvunop"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vvunop}{\mathit{vvunop}}_{\mathsf{i128}}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vvunop}{\mathit{vvunop}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}}(c_1)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-vvunop}{\mathit{vvunop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)
-  &amp; (\mathrel{\mbox{if}} c = \href{../syntax/instructions.html#syntax-vvunop}{\mathit{vvunop}}_{\mathsf{i128}}(c_1)) \\
+  &amp; (\mathrel{\mbox{if}} c = \href{../syntax/instructions.html#syntax-vvunop}{\mathit{vvunop}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}}(c_1)) \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="xref-syntax-types-syntax-valtype-mathsf-v128-mathsf-xref-syntax-instructions-syntax-vvbinop-mathit-vvbinop">
@@ -326,13 +331,13 @@ respectively.</p>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vvbinop"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> are on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vvbinop}{\mathit{vvbinop}}_{\mathsf{i128}}(c_1, c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vvbinop}{\mathit{vvbinop}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}}(c_1, c_2)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2)~\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-vvbinop}{\mathit{vvbinop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)
-  &amp; (\mathrel{\mbox{if}} c = \href{../syntax/instructions.html#syntax-vvbinop}{\mathit{vvbinop}}_{\mathsf{i128}}(c_1, c_2)) \\
+  &amp; (\mathrel{\mbox{if}} c = \href{../syntax/instructions.html#syntax-vvbinop}{\mathit{vvbinop}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}}(c_1, c_2)) \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="xref-syntax-types-syntax-valtype-mathsf-v128-mathsf-xref-syntax-instructions-syntax-vvternop-mathit-vvternop">
@@ -342,13 +347,13 @@ respectively.</p>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_3\)</span> from the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vvternop}{\mathit{vvternop}}_{\mathsf{i128}}(c_1, c_2, c_3)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vvternop}{\mathit{vvternop}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}}(c_1, c_2, c_3)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_3)~\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-vvternop}{\mathit{vvternop}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)
-  &amp; (\mathrel{\mbox{if}} c = \href{../syntax/instructions.html#syntax-vvternop}{\mathit{vvternop}}_{\mathsf{i128}}(c_1, c_2, c_3)) \\
+  &amp; (\mathrel{\mbox{if}} c = \href{../syntax/instructions.html#syntax-vvternop}{\mathit{vvternop}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}}(c_1, c_2, c_3)) \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="xref-syntax-types-syntax-valtype-mathsf-v128-mathsf-xref-syntax-instructions-syntax-instr-vec-mathsf-any-true">
@@ -370,23 +375,23 @@ respectively.</p>
 <ol class="arabic simple">
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vbinop"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> are on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{i8x16}(c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c_2)\)</span>.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{i8x16}(c_1)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c^\ast\)</span> be the concatenation of the two sequences <span class="math notranslate nohighlight">\(j^\ast~0^{240}\)</span></p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c'\)</span> be the result of <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{i8x16}(c^\ast[ i^\ast[0] ] \dots c^\ast[ i^\ast[15] ])\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c^\ast\)</span> be the concatenation of the two sequences <span class="math notranslate nohighlight">\(j^\ast\)</span> and <span class="math notranslate nohighlight">\(0^{240}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c'\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c^\ast[ i^\ast[0] ] \dots c^\ast[ i^\ast[15] ])\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c'\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
-(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2)~\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{swizzle}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c')
+(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2)~\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{swizzle}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c')
 \end{array}
 \\ \qquad
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
-   (\mathrel{\mbox{if}} &amp; i^\ast = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{i8x16}(c_2) \\
-   \wedge &amp; c^\ast = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{i8x16}(c_1)~0^{240} \\
-   \wedge &amp; c' = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{i8x16}(c^\ast[ i^\ast[0] ] \dots c^\ast[ i^\ast[15] ]))
+   (\mathrel{\mbox{if}} &amp; i^\ast = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c_2) \\
+   \wedge &amp; c^\ast = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c_1)~0^{240} \\
+   \wedge &amp; c' = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c^\ast[ i^\ast[0] ] \dots c^\ast[ i^\ast[15] ]))
   \end{array}
 \end{array}\end{split}\]</div>
 </section>
@@ -396,22 +401,22 @@ respectively.</p>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-shuffle"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> are on the top of the stack.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-shuffle"><span class="std std-ref">validation</span></a>, for all <span class="math notranslate nohighlight">\(x_i\)</span> in <span class="math notranslate nohighlight">\(x^\ast\)</span> it holds that <span class="math notranslate nohighlight">\(x_i &lt; 32\)</span>.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i_2^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{i8x16}(c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_2^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c_2)\)</span>.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i_1^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{i8x16}(c_1)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the concatenation of the two sequences <span class="math notranslate nohighlight">\(i_1^\ast~i_2^\ast\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{i8x16}(i^\ast[x^\ast[0]] \dots i^\ast[x^\ast[15]])\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_1^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the concatenation of the two sequences <span class="math notranslate nohighlight">\(i_1^\ast\)</span> and <span class="math notranslate nohighlight">\(i_2^\ast\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(i^\ast[x^\ast[0]] \dots i^\ast[x^\ast[15]])\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
-(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2)~\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{shuffle}}~x^\ast &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)
+(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{shuffle}}~x^\ast) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)
 \end{array}
 \\ \qquad
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
-   (\mathrel{\mbox{if}} &amp; i^\ast = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{i8x16}(c_1)~\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{i8x16}(c_2) \\
-   \wedge &amp; c = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{i8x16}(i^\ast[x^\ast[0]] \dots i^\ast[x^\ast[15]]))
+   (\mathrel{\mbox{if}} &amp; i^\ast = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c_1)~\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(c_2) \\
+   \wedge &amp; c = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i8x16}}}(i^\ast[x^\ast[0]] \dots i^\ast[x^\ast[15]]))
   \end{array}
 \end{array}\end{split}\]</div>
 </section>
@@ -422,7 +427,7 @@ respectively.</p>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-splat"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(t\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(N\)</span> be the integer <span class="math notranslate nohighlight">\(\href{../valid/instructions.html#aux-dim}{\mathrm{dim}}(\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}})\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}}(c_1^N)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}}(c_1^N)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -439,7 +444,7 @@ respectively.</p>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-extract-lane"><span class="std std-ref">validation</span></a>, <span class="math notranslate nohighlight">\(x &lt; N\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-extract-lane"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}N}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}N}(c_1)\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(t_2\)</span> be the type <span class="math notranslate nohighlight">\(\href{../valid/instructions.html#aux-unpacked}{\mathrm{unpacked}}(t_1\mathsf{x}N)\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(c_2\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{sx^?}_{t_1,t_2}(i^\ast[x])\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(t_2.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_2\)</span> to the stack.</p></li>
@@ -447,7 +452,7 @@ respectively.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
-(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~t_1\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{extract\_lane}}~x &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (t_2\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_2)
+(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~(t_1\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{extract\_lane}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (t_2\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_2)
 \end{array}
 \\ \qquad
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
@@ -465,14 +470,14 @@ respectively.</p>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(t_1.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-replace-lane"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}}(c_2)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}}(i^\ast \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} [x] = c_1)\)</span></p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}}(c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}}(i^\ast \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} [x] = c_1)\)</span>.</p></li>
 <li><p>Push <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> on the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
-(t_1\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2)~\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{replace\_lane}}~x &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)
+(t_1\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c_1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2)~(\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{replace\_lane}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)
 \end{array}
 \\ \qquad
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
@@ -527,9 +532,11 @@ respectively.</p>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vrelop"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> are on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c_1)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c_2)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t\mathsf{x}N}(\href{../exec/numerics.html#op-extend-s}{\mathrm{extend}^{\mathsf{s}}}_{1,|t|}(\href{../syntax/instructions.html#syntax-vrelop}{\mathit{vrelop}}_t(i^\ast, j^\ast)))\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_1^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_2^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vrelop}{\mathit{vrelop}}_t(i_1^\ast, i_2^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-s}{\mathrm{extend}^{\mathsf{s}}}_{1,|t|}(i^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t\mathsf{x}N}(j^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -550,8 +557,9 @@ respectively.</p>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~s\)</span> from the stack.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vishiftop"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c_1)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t\mathsf{x}N}(\href{../syntax/instructions.html#syntax-vishiftop}{\mathit{vishiftop}}_{t}(i^\ast, s^N))\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vishiftop}{\mathit{vishiftop}}_{t}(i^\ast, s^N)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t\mathsf{x}N}(j^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -570,15 +578,15 @@ respectively.</p>
 <span id="exec-vec-all-true"></span><span id="exec-vtestop"></span><h3><span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{all\_true}}\)</span><a class="headerlink" href="#xref-syntax-instructions-syntax-shape-mathit-shape-mathsf-xref-syntax-instructions-syntax-instr-vec-mathsf-all-true" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vtestop"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
-<li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i_1^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}}(c_1)\)</span></p></li>
+<li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> from the stack.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_1^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}}(c)\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(i\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-bool}{\mathrm{bool}}(\bigwedge(i_1 \neq 0)^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
-(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{all\_true}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)
+(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)~\href{../syntax/instructions.html#syntax-shape}{\mathit{shape}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{all\_true}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)
 \end{array}
 \\ \qquad
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
@@ -591,17 +599,18 @@ respectively.</p>
 <span id="exec-vec-bitmask"></span><h3><span class="math notranslate nohighlight">\(t\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{bitmask}}\)</span><a class="headerlink" href="#t-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-instr-vec-mathsf-bitmask" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-bitmask"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
-<li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i_1^N\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c)\)</span>.</p></li>
+<li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> from the stack.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_1^N\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c)\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(B\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">bit width</span></a> <span class="math notranslate nohighlight">\(|t|\)</span> of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i_2^N\)</span> be the sequence as a result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-ilt-s}{\mathrm{ilt\_s}}_{B}(i_1^N, 0^N)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the integer <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-ibits}{\mathrm{ibits}}_{32}^{-1}(i_2^N~0^{32-N})\)</span>.</p></li>
-<li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> onto the stack.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_2^N\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-ilt-s}{\mathrm{ilt\_s}}_{B}(i_1^N, 0^N)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the concatenation of the two sequences <span class="math notranslate nohighlight">\(i_2^N\)</span> and <span class="math notranslate nohighlight">\(0^{32-N}\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-ibits}{\mathrm{ibits}}_{32}^{-1}(j^\ast)\)</span>.</p></li>
+<li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
-(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1)~t\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{bitmask}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)
-  &amp; (\mathrel{\mbox{if}} c = \href{../exec/numerics.html#aux-ibits}{\mathrm{ibits}}_{32}^{-1}(\href{../exec/numerics.html#op-ilt-s}{\mathrm{ilt\_s}}_{|t|}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c), 0^N)))
+(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c)~t\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{bitmask}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)
+  &amp; (\mathrel{\mbox{if}} i = \href{../exec/numerics.html#aux-ibits}{\mathrm{ibits}}_{32}^{-1}(\href{../exec/numerics.html#op-ilt-s}{\mathrm{ilt\_s}}_{|t|}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t\mathsf{x}N}(c), 0^N)))
   \\
 \end{array}\end{split}\]</div>
 </section>
@@ -611,10 +620,13 @@ respectively.</p>
 <li><p>Assert: due to <a class="reference internal" href="../syntax/instructions.html#syntax-instr-vec"><span class="std std-ref">syntax</span></a>, <span class="math notranslate nohighlight">\(N = 2\cdot M\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-narrow"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> are on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(d_2^M\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-narrow-u}{\mathrm{narrow}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_2))\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_2^M\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(d_2^M\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-narrow-u}{\mathrm{narrow}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(i_2^M)\)</span>.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(d_1^M\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-narrow-u}{\mathrm{narrow}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1))\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(d_1^M~d_2^M)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_1^M\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(d_1^M\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-narrow-u}{\mathrm{narrow}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(i_1^M)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^N\)</span> be the concatenation of the two sequences <span class="math notranslate nohighlight">\(d_1^M\)</span> and <span class="math notranslate nohighlight">\(d_2^M\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(j^N)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -633,10 +645,12 @@ respectively.</p>
 <section id="t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-vcvtop-mathit-vcvtop-mathsf-t-1-mathsf-x-m-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx">
 <span id="exec-vcvtop"></span><h3><span class="math notranslate nohighlight">\(t_2\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}\mathsf{\_}t_1\mathsf{x}M\mathsf{\_}\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}\)</span><a class="headerlink" href="#t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-vcvtop-mathit-vcvtop-mathsf-t-1-mathsf-x-m-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
+<li><p>Assert: due to <a class="reference internal" href="../syntax/instructions.html#syntax-instr-vec"><span class="std std-ref">syntax</span></a>, <span class="math notranslate nohighlight">\(N = M\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vcvtop"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(i^\ast))\)</span></p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(i^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(j^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -653,20 +667,22 @@ respectively.</p>
 <section id="t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-vcvtop-mathit-vcvtop-mathsf-xref-syntax-instructions-syntax-half-mathit-half-mathsf-t-1-mathsf-x-m-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx">
 <h3><span class="math notranslate nohighlight">\(t_2\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}\mathsf{\_}\href{../syntax/instructions.html#syntax-half}{\mathit{half}}\mathsf{\_}t_1\mathsf{x}M\mathsf{\_}\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}^?\)</span><a class="headerlink" href="#t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-vcvtop-mathit-vcvtop-mathsf-xref-syntax-instructions-syntax-half-mathit-half-mathsf-t-1-mathsf-x-m-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
+<li><p>Assert: due to <a class="reference internal" href="../syntax/instructions.html#syntax-instr-vec"><span class="std std-ref">syntax</span></a>, <span class="math notranslate nohighlight">\(N = M / 2\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vcvtop"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)\)</span>.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-half}{\mathit{half}}\)</span> is <span class="math notranslate nohighlight">\(\mathsf{low}\)</span>, then:</p>
 <ol class="loweralpha simple">
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)[0 \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(i^\ast[0 \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
 </ol>
 </li>
 <li><p>Else:</p>
 <ol class="loweralpha simple">
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)[N \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(i^\ast[N \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
 </ol>
 </li>
-<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}^?}_{|t_1|,|t_2|}(i^\ast)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(j^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}^?}_{|t_1|,|t_2|}(j^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(k^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -689,11 +705,13 @@ respectively.</p>
 <section id="t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-vcvtop-mathit-vcvtop-mathsf-t-1-mathsf-x-m-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx-mathsf-zero">
 <h3><span class="math notranslate nohighlight">\(t_2\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}\mathsf{\_}t_1\mathsf{x}M\mathsf{\_}\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}\mathsf{\_zero}\)</span><a class="headerlink" href="#t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-vcvtop-mathit-vcvtop-mathsf-t-1-mathsf-x-m-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx-mathsf-zero" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
+<li><p>Assert: due to <a class="reference internal" href="../syntax/instructions.html#syntax-instr-vec"><span class="std std-ref">syntax</span></a>, <span class="math notranslate nohighlight">\(N = 2 \cdot M\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vcvtop"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(i^\ast)\)</span> concatenated with the vector <span class="math notranslate nohighlight">\(0^M\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(j^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-vcvtop}{\mathit{vcvtop}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(i^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k^\ast\)</span> be the concatenation of the two sequences <span class="math notranslate nohighlight">\(j^\ast\)</span> and <span class="math notranslate nohighlight">\(0^M\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(k^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -713,9 +731,13 @@ respectively.</p>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-dot"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> are on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\((i_1~i_2)^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-imul}{\mathrm{imul}}_{32}(\href{../exec/numerics.html#op-extend-s}{\mathrm{extend}^{\mathsf{s}}}_{16,32}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i16x8}}}(c_1)), \href{../exec/numerics.html#op-extend-s}{\mathrm{extend}^{\mathsf{s}}}_{16,32}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i16x8}}}(c_2)))\)</span></p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-iadd}{\mathrm{iadd}}_{32}(i_1, i_2)^\ast\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i32x4}}}(j^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_1^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i16x8}}}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j_1^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-s}{\mathrm{extend}^{\mathsf{s}}}_{16,32}(i_1^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_2^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i16x8}}}(c_2)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j_2^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-s}{\mathrm{extend}^{\mathsf{s}}}_{16,32}(i_2^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\((k_1~k_2)^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-imul}{\mathrm{imul}}_{32}(j_1^\ast, j_2^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-iadd}{\mathrm{iadd}}_{32}(k_1, k_2)^\ast\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i32x4}}}(k^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -734,22 +756,28 @@ respectively.</p>
 <section id="t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-instr-vec-mathsf-extmul-mathsf-xref-syntax-instructions-syntax-half-mathit-half-mathsf-t-1-mathsf-x-m-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx">
 <span id="exec-vec-extmul"></span><h3><span class="math notranslate nohighlight">\(t_2\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{extmul}}\mathsf{\_}\href{../syntax/instructions.html#syntax-half}{\mathit{half}}\mathsf{\_}t_1\mathsf{x}M\mathsf{\_}\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}\)</span><a class="headerlink" href="#t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-instr-vec-mathsf-extmul-mathsf-xref-syntax-instructions-syntax-half-mathit-half-mathsf-t-1-mathsf-x-m-mathsf-xref-syntax-instructions-syntax-sx-mathit-sx" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
+<li><p>Assert: due to <a class="reference internal" href="../syntax/instructions.html#syntax-instr-vec"><span class="std std-ref">syntax</span></a>, <span class="math notranslate nohighlight">\(N = M / 2\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-extmul"><span class="std std-ref">validation</span></a>, two values of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> are on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_2\)</span> from the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_1^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i_2^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_2)\)</span>.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-half}{\mathit{half}}\)</span> is <span class="math notranslate nohighlight">\(\mathsf{low}\)</span>, then:</p>
 <ol class="loweralpha simple">
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)[0 \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_2)[0 \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j_1^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(i_1^\ast[0 \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j_2^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(i_2^\ast[0 \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
 </ol>
 </li>
 <li><p>Else:</p>
 <ol class="loweralpha simple">
-<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)[N \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_2)[N \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j_1^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(i_1^\ast[N \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j_2^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(i_2^\ast[N \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N]\)</span>.</p></li>
 </ol>
 </li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(\href{../exec/numerics.html#op-imul}{\mathrm{imul}}_{t_2\mathsf{x}N}(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(i^\ast), \href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(j^\ast)))\)</span></p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k_1^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(j_1^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k_2^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(j_2^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-imul}{\mathrm{imul}}_{t_2\mathsf{x}N}(k_1^\ast, k_2^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(k^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> onto the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -772,11 +800,13 @@ respectively.</p>
 <section id="t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-instr-vec-mathsf-extadd-pairwise-t-1-mathsf-x-m-xref-syntax-instructions-syntax-sx-mathit-sx">
 <span id="exec-vec-extadd-pairwise"></span><h3><span class="math notranslate nohighlight">\(t_2\mathsf{x}N\mathsf{.}\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{extadd\_pairwise}}\_t_1\mathsf{x}M\_\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}\)</span><a class="headerlink" href="#t-2-mathsf-x-n-mathsf-xref-syntax-instructions-syntax-instr-vec-mathsf-extadd-pairwise-t-1-mathsf-x-m-xref-syntax-instructions-syntax-sx-mathit-sx" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
+<li><p>Assert: due to <a class="reference internal" href="../syntax/instructions.html#syntax-instr-vec"><span class="std std-ref">syntax</span></a>, <span class="math notranslate nohighlight">\(N = M / 2\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-vec-extadd-pairwise"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c_1\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\((i_1~i_2)^\ast\)</span> be the sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1))\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-iadd}{\mathrm{iadd}}_{N}(i_1, i_2)^\ast\)</span>.</p></li>
-<li><p>Let <cite>c</cite> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(j^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(i^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{t_1\mathsf{x}M}(c_1)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\((j_1~j_2)^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{|t_1|,|t_2|}(i^\ast)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(k^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-iadd}{\mathrm{iadd}}_{N}(j_1, j_2)^\ast\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{t_2\mathsf{x}N}(k^\ast)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-vec}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -827,9 +857,9 @@ respectively.</p>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
-\href{../exec/runtime.html#syntax-val}{\mathit{val}}_1~\href{../exec/runtime.html#syntax-val}{\mathit{val}}_2~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~\href{../syntax/instructions.html#syntax-instr-parametric}{\mathsf{select}}~t^? &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../exec/runtime.html#syntax-val}{\mathit{val}}_1
+\href{../exec/runtime.html#syntax-val}{\mathit{val}}_1~\href{../exec/runtime.html#syntax-val}{\mathit{val}}_2~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~(\href{../syntax/instructions.html#syntax-instr-parametric}{\mathsf{select}}~t^?) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../exec/runtime.html#syntax-val}{\mathit{val}}_1
   &amp; (\mathrel{\mbox{if}} c \neq 0) \\
-\href{../exec/runtime.html#syntax-val}{\mathit{val}}_1~\href{../exec/runtime.html#syntax-val}{\mathit{val}}_2~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~\href{../syntax/instructions.html#syntax-instr-parametric}{\mathsf{select}}~t^? &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../exec/runtime.html#syntax-val}{\mathit{val}}_2
+\href{../exec/runtime.html#syntax-val}{\mathit{val}}_1~\href{../exec/runtime.html#syntax-val}{\mathit{val}}_2~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~(\href{../syntax/instructions.html#syntax-instr-parametric}{\mathsf{select}}~t^?) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../exec/runtime.html#syntax-val}{\mathit{val}}_2
   &amp; (\mathrel{\mbox{if}} c = 0) \\
 \end{array}\end{split}\]</div>
 <div class="admonition note">
@@ -876,7 +906,7 @@ F; \href{../exec/runtime.html#syntax-val}{\mathit{val}}~(\href{../syntax/instruc
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}\)</span> from the stack.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}\)</span> to the stack.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}\)</span> to the stack.</p></li>
-<li><p><a class="reference internal" href="#exec-local-set"><span class="std std-ref">Execute</span></a> the instruction <span class="math notranslate nohighlight">\((\href{../syntax/instructions.html#syntax-instr-variable}{\mathsf{local.set}}~x)\)</span>.</p></li>
+<li><p><a class="reference internal" href="#exec-local-set"><span class="std std-ref">Execute</span></a> the instruction <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-variable}{\mathsf{local.set}}~x\)</span>.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{array}{lcl&#64;{\qquad}l}
@@ -1012,7 +1042,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; \href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.size}}~x &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{sz})
+S; F; (\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.size}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{sz})
 \end{array}
 \\ \qquad
   (\mathrel{\mbox{if}} |S.\href{../exec/runtime.html#syntax-store}{\mathsf{tables}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{tableaddrs}}[x]].\href{../exec/runtime.html#syntax-tableinst}{\mathsf{elem}}| = \mathit{sz}) \\
@@ -1031,22 +1061,36 @@ S; F; \href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.size}}
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n\)</span> from the stack.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-table-fill"><span class="std std-ref">validation</span></a>, a <a class="reference internal" href="runtime.html#syntax-ref"><span class="std std-ref">reference value</span></a> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}\)</span> from the stack.</p></li>
-<li><p>Either, try <a class="reference internal" href="modules.html#grow-table"><span class="std std-ref">growing</span></a> <span class="math notranslate nohighlight">\(\mathit{table}\)</span> by <span class="math notranslate nohighlight">\(n\)</span> entries with initialization value <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}\)</span>:</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\mathit{err}\)</span> be the <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{i32}}\)</span> value <span class="math notranslate nohighlight">\(2^{32}-1\)</span>, for which <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-signed}{\mathrm{signed}}_{32}(\mathit{err})\)</span> is <span class="math notranslate nohighlight">\(-1\)</span>.</p></li>
+<li><p>Either:</p></li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>If it succeeds, push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{sz}\)</span> to the stack.</p></li>
-<li><p>Else, push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~(-1)\)</span> to the stack.</p></li>
+<li><p>If <a class="reference internal" href="modules.html#grow-table"><span class="std std-ref">growing</span></a> <span class="math notranslate nohighlight">\(\mathit{tab}\)</span> by <span class="math notranslate nohighlight">\(n\)</span> entries with initialization value <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}\)</span> succeeds, then:</p>
+<ol class="lowerroman simple">
+<li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{sz}\)</span> to the stack.</p></li>
+</ol>
+</li>
+<li><p>Else:</p>
+<ol class="lowerroman simple">
+<li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{err}\)</span> to the stack.</p></li>
+</ol>
+</li>
 </ol>
 </div></blockquote>
-<ol class="arabic simple" start="12">
-<li><p>Or, push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~(-1)\)</span> to the stack.</p></li>
+<ol class="arabic simple" start="13">
+<li><p>Or:</p></li>
 </ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{err}\)</span> to the stack.</p></li>
+</ol>
+</div></blockquote>
 <div class="math notranslate nohighlight">
 \[\begin{split}~\\[-1ex]
 \begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; \href{../exec/runtime.html#syntax-val}{\mathit{val}}~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n)~\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.grow}}~x &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S'; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{sz})
+S; F; \href{../exec/runtime.html#syntax-val}{\mathit{val}}~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n)~(\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.grow}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S'; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{sz})
 \end{array}
 \\ \qquad
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
@@ -1056,7 +1100,7 @@ S; F; \href{../exec/runtime.html#syntax-val}{\mathit{val}}~(\href{../syntax/type
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n)~\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.grow}}~x &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~{-1})
+S; F; \href{../exec/runtime.html#syntax-val}{\mathit{val}}~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n)~(\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.grow}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\href{../exec/numerics.html#aux-signed}{\mathrm{signed}}_{32}^{-1}(-1))
 \end{array}
 \end{array}\end{split}\]</div>
 <div class="admonition note">
@@ -1226,7 +1270,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   \quad\href{../exec/conventions.html#formal-notation}{\hookrightarrow}
   \\ \qquad S; F;
     \begin{array}[t]{&#64;{}l&#64;{}}
-    (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d+n-1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~s+n-1)~(\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.get}}~y)~(\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.set}}~x) \\
+    (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d+n)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~s+n)~(\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.get}}~y)~(\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.set}}~x) \\
     (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~s)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n)~(\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{table.copy}}~x~y) \\
     \end{array}
   \\ \qquad
@@ -1306,7 +1350,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-elem-drop"><span class="std std-ref">validation</span></a>, <span class="math notranslate nohighlight">\(F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{elemaddrs}}[x]\)</span> exists.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(a\)</span> be the <a class="reference internal" href="runtime.html#syntax-elemaddr"><span class="std std-ref">element address</span></a> <span class="math notranslate nohighlight">\(F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{elemaddrs}}[x]\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-elem-drop"><span class="std std-ref">validation</span></a>, <span class="math notranslate nohighlight">\(S.\href{../exec/runtime.html#syntax-store}{\mathsf{elems}}[a]\)</span> exists.</p></li>
-<li><p>Replace <span class="math notranslate nohighlight">\(S.\href{../exec/runtime.html#syntax-store}{\mathsf{elems}}[a]\)</span> with the <a class="reference internal" href="runtime.html#syntax-eleminst"><span class="std std-ref">element instance</span></a> <span class="math notranslate nohighlight">\(\{\href{../exec/runtime.html#syntax-eleminst}{\mathsf{elem}}~\epsilon\}\)</span>.</p></li>
+<li><p>Replace <span class="math notranslate nohighlight">\(S.\href{../exec/runtime.html#syntax-store}{\mathsf{elems}}[a].\href{../exec/runtime.html#syntax-eleminst}{\mathsf{elem}}\)</span> with <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}~\\[-1ex]
@@ -1315,7 +1359,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
 S; F; (\href{../syntax/instructions.html#syntax-instr-table}{\mathsf{elem.drop}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S'; F; \epsilon
 \end{array}
 \\ \qquad
-  (\mathrel{\mbox{if}} S' = S \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} \href{../exec/runtime.html#syntax-store}{\mathsf{elems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{elemaddrs}}[x]] = \{ \href{../exec/runtime.html#syntax-eleminst}{\mathsf{elem}}~\epsilon \}) \\
+  (\mathrel{\mbox{if}} S' = S \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} \href{../exec/runtime.html#syntax-store}{\mathsf{elems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{elemaddrs}}[x]].\href{../exec/runtime.html#syntax-eleminst}{\mathsf{elem}} = \epsilon) \\
 \end{array}\end{split}\]</div>
 </section>
 </section>
@@ -1389,7 +1433,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~k)~(t.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}({N}\mathsf{\_}\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}})^?~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
+S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)~(t.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}({N}\mathsf{\_}\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}})^?~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
 \end{array}
 \\ \qquad
   (\mathrel{\mbox{otherwise}}) \\
@@ -1416,8 +1460,8 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
 <li><p>Let <span class="math notranslate nohighlight">\(b^\ast\)</span> be the byte sequence <span class="math notranslate nohighlight">\(\mathit{mem}.\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} M \cdot N /8]\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(m_k\)</span> be the integer for which <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}M}}(m_k) = b^\ast[k \cdot M/8 \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} M/8]\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(W\)</span> be the integer <span class="math notranslate nohighlight">\(M \cdot 2\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(n_k\)</span> be the result of <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{M,W}(m_k)\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\mathit{i}W\mathsf{x}N}(n_0 \dots n_{N-1})\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(n_k\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{M,W}(m_k)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\mathsf{i}W\mathsf{x}N}(n_0 \dots n_{N-1})\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -1433,11 +1477,11 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   \wedge &amp; \mathit{ea} + M \cdot N / 8 \leq |S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}| \\
   \wedge &amp; \href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}M}}(m_k) = S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} + k \cdot M/8 \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} M/8] \\
   \wedge &amp; W = M \cdot 2 \\
-  \wedge &amp; c = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\mathit{i}W\mathsf{x}N}(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{M,W}(m_0) \dots \href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{M,W}(m_{N-1})))
+  \wedge &amp; c = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\mathsf{i}W\mathsf{x}N}(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{M,W}(m_0) \dots \href{../exec/numerics.html#op-extend-u}{\mathrm{extend}}^{\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}}_{M,W}(m_{N-1})))
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~k)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}{M}\mathsf{x}N\mathsf{\_}\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
+S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}{M}\mathsf{x}N\mathsf{\_}\href{../syntax/instructions.html#syntax-sx}{\mathit{sx}}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
 \end{array}
 \\ \qquad
   (\mathrel{\mbox{otherwise}}) \\
@@ -1464,7 +1508,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
 <li><p>Let <span class="math notranslate nohighlight">\(b^\ast\)</span> be the byte sequence <span class="math notranslate nohighlight">\(\mathit{mem}.\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N/8]\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(n\)</span> be the integer for which <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(n) = b^\ast\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be the integer <span class="math notranslate nohighlight">\(128 / N\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}\mathsf{x}L}(n^L)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}\mathsf{x}L}(n^L)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -1478,11 +1522,11 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + \href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{offset}} \\
   \wedge &amp; \mathit{ea} + N/8 \leq |S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}| \\
   \wedge &amp; \href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(n) = S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N/8] \\
-  \wedge &amp; c = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}\mathsf{x}L}(n^L))
+  \wedge &amp; c = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}\mathsf{x}L}(n^L))
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~k)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}{N}\mathsf{\_splat}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
+S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}{N}\mathsf{\_splat}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
 \end{array}
 \\ \qquad
   (\mathrel{\mbox{otherwise}}) \\
@@ -1508,7 +1552,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
 </li>
 <li><p>Let <span class="math notranslate nohighlight">\(b^\ast\)</span> be the byte sequence <span class="math notranslate nohighlight">\(\mathit{mem}.\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N/8]\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(n\)</span> be the integer for which <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(n) = b^\ast\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}^{\mathsf{u}}}_{N,128}(n)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#op-extend-u}{\mathrm{extend}^{\mathsf{u}}}_{N,128}(n)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -1526,7 +1570,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~k)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}{N}\mathsf{\_zero}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
+S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}{N}\mathsf{\_zero}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
 \end{array}
 \\ \qquad
   (\mathrel{\mbox{otherwise}}) \\
@@ -1553,7 +1597,8 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
 <li><p>Let <span class="math notranslate nohighlight">\(b^\ast\)</span> be the byte sequence <span class="math notranslate nohighlight">\(\mathit{mem}.\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N/8]\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(r\)</span> be the constant for which <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(r) = b^\ast\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be <span class="math notranslate nohighlight">\(128 / N\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\mathsf{i}N\mathsf{x}L}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\mathsf{i}N\mathsf{x}L}(v) \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} [x] = r)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}\mathsf{x}L}(v)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(c\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}\mathsf{x}L}(j^\ast \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} [x] = r)\)</span>.</p></li>
 <li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> to the stack.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -1568,11 +1613,11 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   \wedge &amp; \mathit{ea} + N/8 \leq |S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}| \\
   \wedge &amp; \href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(r) = S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N/8] \\
   \wedge &amp; L = 128/N \\
-  \wedge &amp; c = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\mathsf{i}N\mathsf{x}L}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\mathsf{i}N\mathsf{x}L}(v) \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} [x] = r))
+  \wedge &amp; c = \href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}^{-1}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}\mathsf{x}L}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}\mathsf{x}L}(v) \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} [x] = r))
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~k)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~v)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}{N}\mathsf{\_lane}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
+S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~v)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}{N}\mathsf{\_lane}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
 \end{array}
 \\ \qquad
   (\mathrel{\mbox{otherwise}}) \\
@@ -1638,7 +1683,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~k)~(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~(t.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{store}}{N}^?~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
+S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)~(t.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~(t.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{store}}{N}^?~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
 \end{array}
 \\ \qquad
   (\mathrel{\mbox{otherwise}}) \\
@@ -1663,7 +1708,8 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
 </ol>
 </li>
 <li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be <span class="math notranslate nohighlight">\(128/N\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(b^\ast\)</span> be the byte sequence <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\mathsf{i}N\mathsf{x}L}(c)[x])\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(j^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}\mathsf{x}L}(c)\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(b^\ast\)</span> be the result of computing <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(j^\ast[x])\)</span>.</p></li>
 <li><p>Replace the bytes <span class="math notranslate nohighlight">\(\mathit{mem}.\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N/8]\)</span> with <span class="math notranslate nohighlight">\(b^\ast\)</span>.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -1677,11 +1723,11 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + \href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{offset}} \\
   \wedge &amp; \mathit{ea} + N \leq |S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}| \\
   \wedge &amp; L = 128/N \\
-  \wedge &amp; S' = S \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} \href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N/8] = \href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\mathsf{i}N\mathsf{x}L}(c)[x]))
+  \wedge &amp; S' = S \href{../syntax/conventions.html#notation-replace}{\mathrel{\mbox{with}}} \href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}[\mathit{ea} \href{../syntax/conventions.html#notation-slice}{\mathrel{\mathbf{:}}} N/8] = \href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(\href{../exec/numerics.html#aux-lanes}{\mathrm{lanes}}_{\href{../syntax/types.html#syntax-valtype}{\mathsf{i}N}\mathsf{x}L}(c)[x]))
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~k)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{store}}{N}\mathsf{\_lane}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
+S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{v128}}.\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{store}}{N}\mathsf{\_lane}~\href{../syntax/instructions.html#syntax-memarg}{\mathit{memarg}}~x) &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
 \end{array}
 \\ \qquad
   (\mathrel{\mbox{otherwise}}) \\
@@ -1719,17 +1765,30 @@ S; F; \href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{memory.size
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-memory-grow"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n\)</span> from the stack.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(\mathit{err}\)</span> be the <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{i32}}\)</span> value <span class="math notranslate nohighlight">\(2^{32}-1\)</span>, for which <span class="math notranslate nohighlight">\(\href{../exec/numerics.html#aux-signed}{\mathrm{signed}}_{32}(\mathit{err})\)</span> is <span class="math notranslate nohighlight">\(-1\)</span>.</p></li>
-<li><p>Either, try <a class="reference internal" href="modules.html#grow-mem"><span class="std std-ref">growing</span></a> <span class="math notranslate nohighlight">\(\mathit{mem}\)</span> by <span class="math notranslate nohighlight">\(n\)</span> <a class="reference internal" href="runtime.html#page-size"><span class="std std-ref">pages</span></a>:</p></li>
+<li><p>Either:</p></li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>If it succeeds, push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{sz}\)</span> to the stack.</p></li>
-<li><p>Else, push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{err}\)</span> to the stack.</p></li>
+<li><p>If <a class="reference internal" href="modules.html#grow-mem"><span class="std std-ref">growing</span></a> <span class="math notranslate nohighlight">\(\mathit{mem}\)</span> by <span class="math notranslate nohighlight">\(n\)</span> <a class="reference internal" href="runtime.html#page-size"><span class="std std-ref">pages</span></a> succeeds, then:</p>
+<ol class="lowerroman simple">
+<li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{sz}\)</span> to the stack.</p></li>
+</ol>
+</li>
+<li><p>Else:</p>
+<ol class="lowerroman simple">
+<li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{err}\)</span> to the stack.</p></li>
+</ol>
+</li>
 </ol>
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Or, push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{err}\)</span> to the stack.</p></li>
+<li><p>Or:</p></li>
 </ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Push the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~\mathit{err}\)</span> to the stack.</p></li>
+</ol>
+</div></blockquote>
 <div class="math notranslate nohighlight">
 \[\begin{split}~\\[-1ex]
 \begin{array}{l}
@@ -1796,7 +1855,7 @@ In practice, the choice depends on the <a class="reference internal" href="../ap
 S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d)~\href{../exec/runtime.html#syntax-val}{\mathit{val}}~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n)~\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{memory.fill}}
   \quad\href{../exec/conventions.html#formal-notation}{\hookrightarrow}\quad S; F; \href{../exec/runtime.html#syntax-trap}{\mathsf{trap}}
   \\ \qquad
-  (\mathrel{\mbox{if}} d + n &gt; |S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[x]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}|)
+  (\mathrel{\mbox{if}} d + n &gt; |S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}|)
 \\[1ex]
 S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d)~\href{../exec/runtime.html#syntax-val}{\mathit{val}}~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~0)~\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{memory.fill}}
   \quad\href{../exec/conventions.html#formal-notation}{\hookrightarrow}\quad S; F; \epsilon
@@ -1906,8 +1965,8 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   \quad\href{../exec/conventions.html#formal-notation}{\hookrightarrow}
   \\ \qquad S; F;
     \begin{array}[t]{&#64;{}l&#64;{}}
-    (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d+n-1) \\
-    (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~s+n-1)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}\mathsf{8\_u}~\{ \href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{offset}}~0, \href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{align}}~0 \}) \\
+    (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d+n) \\
+    (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~s+n)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{load}}\mathsf{8\_u}~\{ \href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{offset}}~0, \href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{align}}~0 \}) \\
     (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\mathsf{.}\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{store}}\mathsf{8}~\{ \href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{offset}}~0, \href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{align}}~0 \}) \\
     (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~s)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~n)~\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{memory.copy}} \\
     \end{array}
@@ -1962,7 +2021,7 @@ S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/
   \\ \qquad
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
   (\mathrel{\mbox{if}} &amp; s + n &gt; |S.\href{../exec/runtime.html#syntax-store}{\mathsf{datas}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{dataaddrs}}[x]].\href{../exec/runtime.html#syntax-datainst}{\mathsf{data}}| \\
-   \vee &amp; d + n &gt; |S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[x]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}|) \\[1ex]
+   \vee &amp; d + n &gt; |S.\href{../exec/runtime.html#syntax-store}{\mathsf{mems}}[F.\href{../exec/runtime.html#syntax-frame}{\mathsf{module}}.\href{../exec/runtime.html#syntax-moduleinst}{\mathsf{memaddrs}}[0]].\href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}|) \\[1ex]
   \end{array}
 \\[1ex]
 S; F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~d)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~s)~(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~0)~(\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{memory.init}}~x)
@@ -2026,6 +2085,7 @@ S; F; (\href{../syntax/instructions.html#syntax-instr-memory}{\mathsf{data.drop}
 <section id="xref-syntax-instructions-syntax-instr-control-mathsf-block-xref-syntax-instructions-syntax-blocktype-mathit-blocktype-xref-syntax-instructions-syntax-instr-mathit-instr-ast-xref-syntax-instructions-syntax-instr-control-mathsf-end">
 <span id="exec-block"></span><h3><span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\href{../syntax/instructions.html#syntax-blocktype}{\mathit{blocktype}}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}\)</span><a class="headerlink" href="#xref-syntax-instructions-syntax-instr-control-mathsf-block-xref-syntax-instructions-syntax-blocktype-mathit-blocktype-xref-syntax-instructions-syntax-instr-mathit-instr-ast-xref-syntax-instructions-syntax-instr-control-mathsf-end" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
+<li><p>Let <span class="math notranslate nohighlight">\(F\)</span> be the <a class="reference internal" href="conventions.html#exec-notation-textual"><span class="std std-ref">current</span></a> <a class="reference internal" href="runtime.html#syntax-frame"><span class="std std-ref">frame</span></a>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/types.html#valid-blocktype"><span class="std std-ref">validation</span></a>, <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#exec-expand}{\mathrm{expand}}_F(\href{../syntax/instructions.html#syntax-blocktype}{\mathit{blocktype}})\)</span> is defined.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\([t_1^m] \href{../syntax/types.html#syntax-functype}{\rightarrow} [t_2^n]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#exec-expand}{\mathrm{expand}}_F(\href{../syntax/instructions.html#syntax-blocktype}{\mathit{blocktype}})\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be the label whose arity is <span class="math notranslate nohighlight">\(n\)</span> and whose continuation is the end of the block.</p></li>
@@ -2044,6 +2104,7 @@ F; \href{../exec/runtime.html#syntax-val}{\mathit{val}}^m~\href{../syntax/instru
 <section id="xref-syntax-instructions-syntax-instr-control-mathsf-loop-xref-syntax-instructions-syntax-blocktype-mathit-blocktype-xref-syntax-instructions-syntax-instr-mathit-instr-ast-xref-syntax-instructions-syntax-instr-control-mathsf-end">
 <span id="exec-loop"></span><h3><span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{loop}}~\href{../syntax/instructions.html#syntax-blocktype}{\mathit{blocktype}}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}\)</span><a class="headerlink" href="#xref-syntax-instructions-syntax-instr-control-mathsf-loop-xref-syntax-instructions-syntax-blocktype-mathit-blocktype-xref-syntax-instructions-syntax-instr-mathit-instr-ast-xref-syntax-instructions-syntax-instr-control-mathsf-end" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
+<li><p>Let <span class="math notranslate nohighlight">\(F\)</span> be the <a class="reference internal" href="conventions.html#exec-notation-textual"><span class="std std-ref">current</span></a> <a class="reference internal" href="runtime.html#syntax-frame"><span class="std std-ref">frame</span></a>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/types.html#valid-blocktype"><span class="std std-ref">validation</span></a>, <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#exec-expand}{\mathrm{expand}}_F(\href{../syntax/instructions.html#syntax-blocktype}{\mathit{blocktype}})\)</span> is defined.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\([t_1^m] \href{../syntax/types.html#syntax-functype}{\rightarrow} [t_2^n]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#exec-expand}{\mathrm{expand}}_F(\href{../syntax/instructions.html#syntax-blocktype}{\mathit{blocktype}})\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be the label whose arity is <span class="math notranslate nohighlight">\(m\)</span> and whose continuation is the start of the loop.</p></li>
@@ -2066,23 +2127,23 @@ F; \href{../exec/runtime.html#syntax-val}{\mathit{val}}^m~\href{../syntax/instru
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> from the stack.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(c\)</span> is non-zero, then:</p>
 <ol class="loweralpha simple">
-<li><p>Execute the block instruction <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_1^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}\)</span>.</p></li>
+<li><p>Execute the block instruction <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\href{../syntax/instructions.html#syntax-blocktype}{\mathit{blocktype}}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_1^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}\)</span>.</p></li>
 </ol>
 </li>
 <li><p>Else:</p>
 <ol class="loweralpha simple">
-<li><p>Execute the block instruction <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_2^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}\)</span>.</p></li>
+<li><p>Execute the block instruction <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\href{../syntax/instructions.html#syntax-blocktype}{\mathit{blocktype}}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_2^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}\)</span>.</p></li>
 </ol>
 </li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}~\\[-1ex]
 \begin{array}{lcl}
-F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{if}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_1^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{else}}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_2^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp;
-  F; \href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_1^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}
+(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{if}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_1^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{else}}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_2^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp;
+  \href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_1^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}
   \\&amp;&amp;\quad (\mathrel{\mbox{if}} c \neq 0) \\
-F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{if}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_1^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{else}}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_2^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp;
-  F; \href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_2^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}
+(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c)~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{if}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_1^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{else}}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_2^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp;
+  \href{../syntax/instructions.html#syntax-instr-control}{\mathsf{block}}~\mathit{bt}~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}_2^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}
   \\&amp;&amp;\quad (\mathrel{\mbox{if}} c = 0) \\
 \end{array}\end{split}\]</div>
 </section>
@@ -2121,7 +2182,7 @@ F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/ins
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~c\)</span> from the stack.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(c\)</span> is non-zero, then:</p>
 <ol class="loweralpha simple">
-<li><p><a class="reference internal" href="#exec-br"><span class="std std-ref">Execute</span></a> the instruction <span class="math notranslate nohighlight">\((\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{br}}~l)\)</span>.</p></li>
+<li><p><a class="reference internal" href="#exec-br"><span class="std std-ref">Execute</span></a> the instruction <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{br}}~l\)</span>.</p></li>
 </ol>
 </li>
 <li><p>Else:</p>
@@ -2142,17 +2203,17 @@ F; (\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/ins
 <section id="xref-syntax-instructions-syntax-instr-control-mathsf-br-table-l-ast-l-n">
 <span id="exec-br-table"></span><h3><span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{br\_table}}~l^\ast~l_N\)</span><a class="headerlink" href="#xref-syntax-instructions-syntax-instr-control-mathsf-br-table-l-ast-l-n" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-if"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\)</span> is on the top of the stack.</p></li>
+<li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-br-table"><span class="std std-ref">validation</span></a>, a value of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\)</span> is on the top of the stack.</p></li>
 <li><p>Pop the value <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}.\href{../syntax/instructions.html#syntax-instr-numeric}{\mathsf{const}}~i\)</span> from the stack.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(i\)</span> is smaller than the length of <span class="math notranslate nohighlight">\(l^\ast\)</span>, then:</p>
 <ol class="loweralpha simple">
 <li><p>Let <span class="math notranslate nohighlight">\(l_i\)</span> be the label <span class="math notranslate nohighlight">\(l^\ast[i]\)</span>.</p></li>
-<li><p><a class="reference internal" href="#exec-br"><span class="std std-ref">Execute</span></a> the instruction <span class="math notranslate nohighlight">\((\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{br}}~l_i)\)</span>.</p></li>
+<li><p><a class="reference internal" href="#exec-br"><span class="std std-ref">Execute</span></a> the instruction <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{br}}~l_i\)</span>.</p></li>
 </ol>
 </li>
 <li><p>Else:</p>
 <ol class="loweralpha simple">
-<li><p><a class="reference internal" href="#exec-br"><span class="std std-ref">Execute</span></a> the instruction <span class="math notranslate nohighlight">\((\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{br}}~l_N)\)</span>.</p></li>
+<li><p><a class="reference internal" href="#exec-br"><span class="std std-ref">Execute</span></a> the instruction <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{br}}~l_N\)</span>.</p></li>
 </ol>
 </li>
 </ol>
@@ -2279,17 +2340,16 @@ because the label <span class="math notranslate nohighlight">\(L\)</span> is emb
 <span id="exec-instr-seq-exit"></span><h3>Exiting <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast\)</span> with label <span class="math notranslate nohighlight">\(L\)</span><a class="headerlink" href="#exiting-xref-syntax-instructions-syntax-instr-mathit-instr-ast-with-label-l" title="Permalink to this heading">¶</a></h3>
 <p>When the end of a block is reached without a jump or trap aborting it, then the following steps are performed.</p>
 <ol class="arabic simple">
-<li><p>Let <span class="math notranslate nohighlight">\(m\)</span> be the number of values on the top of the stack.</p></li>
-<li><p>Pop the values <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}^m\)</span> from the stack.</p></li>
+<li><p>Pop all values <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}^\ast\)</span> from the top of the stack.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-instr-seq"><span class="std std-ref">validation</span></a>, the label <span class="math notranslate nohighlight">\(L\)</span> is now on the top of the stack.</p></li>
 <li><p>Pop the label from the stack.</p></li>
-<li><p>Push <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}^m\)</span> back to the stack.</p></li>
+<li><p>Push <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}^\ast\)</span> back to the stack.</p></li>
 <li><p>Jump to the position after the <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}\)</span> of the <a class="reference internal" href="../syntax/instructions.html#syntax-instr-control"><span class="std std-ref">structured control instruction</span></a> associated with the label <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}~\\[-1ex]
 \begin{array}{lcl&#64;{\qquad}l}
-\href{../exec/runtime.html#syntax-label}{\mathsf{label}}_n\{\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast\}~\href{../exec/runtime.html#syntax-val}{\mathit{val}}^m~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../exec/runtime.html#syntax-val}{\mathit{val}}^m
+\href{../exec/runtime.html#syntax-label}{\mathsf{label}}_n\{\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast\}~\href{../exec/runtime.html#syntax-val}{\mathit{val}}^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} &amp;\href{../exec/conventions.html#formal-notation}{\hookrightarrow}&amp; \href{../exec/runtime.html#syntax-val}{\mathit{val}}^\ast
 \end{array}\end{split}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -2313,7 +2373,6 @@ and returning from it.</p>
 <li><p>Let <span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}}\)</span> be the <a class="reference internal" href="../syntax/instructions.html#syntax-expr"><span class="std std-ref">expression</span></a> <span class="math notranslate nohighlight">\(f.\href{../exec/runtime.html#syntax-funcinst}{\mathsf{code}}.\href{../syntax/modules.html#syntax-func}{\mathsf{body}}\)</span>.</p></li>
 <li><p>Assert: due to <a class="reference internal" href="../valid/instructions.html#valid-call"><span class="std std-ref">validation</span></a>, <span class="math notranslate nohighlight">\(n\)</span> values are on the top of the stack.</p></li>
 <li><p>Pop the values <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}^n\)</span> from the stack.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(\href{../exec/runtime.html#syntax-val}{\mathit{val}}_0^\ast\)</span> be the list of zero values of types <span class="math notranslate nohighlight">\(t^\ast\)</span>.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(F\)</span> be the <a class="reference internal" href="runtime.html#syntax-frame"><span class="std std-ref">frame</span></a> <span class="math notranslate nohighlight">\(\{ \href{../exec/runtime.html#syntax-frame}{\mathsf{module}}~f.\href{../exec/runtime.html#syntax-funcinst}{\mathsf{module}}, \href{../exec/runtime.html#syntax-frame}{\mathsf{locals}}~\href{../exec/runtime.html#syntax-val}{\mathit{val}}^n~(\href{../exec/runtime.html#default-val}{\mathrm{default}}_t)^\ast \}\)</span>.</p></li>
 <li><p>Push the activation of <span class="math notranslate nohighlight">\(F\)</span> with arity <span class="math notranslate nohighlight">\(m\)</span> to the stack.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be the <a class="reference internal" href="runtime.html#syntax-label"><span class="std std-ref">label</span></a> whose arity is <span class="math notranslate nohighlight">\(m\)</span> and whose continuation is the end of the function.</p></li>

@@ -88,9 +88,9 @@
 <p><a class="reference internal" href="../syntax/instructions.html#syntax-instr"><span class="std std-ref">Instructions</span></a> are classified by <em>stack types</em> <span class="math notranslate nohighlight">\([t_1^\ast] \href{../syntax/types.html#syntax-functype}{\rightarrow} [t_2^\ast]\)</span> that describe how instructions manipulate the <a class="reference internal" href="../exec/runtime.html#stack"><span class="std std-ref">operand stack</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
-\def\mathdef4072#1{{}}\mathdef4072{stack type} &amp; \href{../syntax/types.html#syntax-stacktype}{\mathit{stacktype}} &amp;::=&amp;
+\def\mathdef4075#1{{}}\mathdef4075{stack type} &amp; \href{../syntax/types.html#syntax-stacktype}{\mathit{stacktype}} &amp;::=&amp;
   [\href{../syntax/types.html#syntax-opdtype}{\mathit{opdtype}}^\ast] \href{../syntax/types.html#syntax-functype}{\rightarrow} [\href{../syntax/types.html#syntax-opdtype}{\mathit{opdtype}}^\ast] \\
-\def\mathdef4072#1{{}}\mathdef4072{operand type} &amp; \href{../syntax/types.html#syntax-opdtype}{\mathit{opdtype}} &amp;::=&amp;
+\def\mathdef4075#1{{}}\mathdef4075{operand type} &amp; \href{../syntax/types.html#syntax-opdtype}{\mathit{opdtype}} &amp;::=&amp;
   \href{../syntax/types.html#syntax-valtype}{\mathit{valtype}} ~|~ \bot \\
 \end{array}\end{split}\]</div>
 <p>The types describe the required input stack with <em>operand types</em> <span class="math notranslate nohighlight">\(t_1^\ast\)</span> that an instruction pops off
@@ -1148,14 +1148,19 @@ the instruction sequence <span class="math notranslate nohighlight">\(\href{../s
 <section id="xref-syntax-instructions-syntax-instr-control-mathsf-br-table-l-ast-l-n">
 <span id="valid-br-table"></span><h3><span class="math notranslate nohighlight">\(\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{br\_table}}~l^\ast~l_N\)</span><a class="headerlink" href="#xref-syntax-instructions-syntax-instr-control-mathsf-br-table-l-ast-l-n" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>The label <span class="math notranslate nohighlight">\(C.\href{../valid/conventions.html#context}{\mathsf{labels}}[l_N]\)</span> must be defined in the context.</p></li>
-<li><p>For all <span class="math notranslate nohighlight">\(l_i\)</span> in <span class="math notranslate nohighlight">\(l^\ast\)</span>,
+<li><p>The <a class="reference internal" href="../exec/runtime.html#syntax-label"><span class="std std-ref">label</span></a> <span class="math notranslate nohighlight">\(C.\href{../valid/conventions.html#context}{\mathsf{labels}}[l_N]\)</span> must be defined in the context.</p></li>
+<li><p>For each <a class="reference internal" href="../exec/runtime.html#syntax-label"><span class="std std-ref">label</span></a> <span class="math notranslate nohighlight">\(l_i\)</span> in <span class="math notranslate nohighlight">\(l^\ast\)</span>,
 the label <span class="math notranslate nohighlight">\(C.\href{../valid/conventions.html#context}{\mathsf{labels}}[l_i]\)</span> must be defined in the context.</p></li>
 <li><p>There must be a sequence <span class="math notranslate nohighlight">\(t^\ast\)</span> of <a class="reference internal" href="#syntax-opdtype"><span class="std std-ref">operand types</span></a>, such that:</p>
 <ul>
+<li><p>The length of the sequence <span class="math notranslate nohighlight">\(t^\ast\)</span> is the same as the length of the sequence <span class="math notranslate nohighlight">\(C.\href{../valid/conventions.html#context}{\mathsf{labels}}[l_N]\)</span>.</p></li>
 <li><p>For each <a class="reference internal" href="#syntax-opdtype"><span class="std std-ref">operand type</span></a> <span class="math notranslate nohighlight">\(t_j\)</span> in <span class="math notranslate nohighlight">\(t^\ast\)</span> and corresponding type <span class="math notranslate nohighlight">\(t'_{Nj}\)</span> in <span class="math notranslate nohighlight">\(C.\href{../valid/conventions.html#context}{\mathsf{labels}}[l_N]\)</span>, <span class="math notranslate nohighlight">\(t_j\)</span> <a class="reference internal" href="#match-opdtype"><span class="std std-ref">matches</span></a> <span class="math notranslate nohighlight">\(t'_{Nj}\)</span>.</p></li>
-<li><p>For all <span class="math notranslate nohighlight">\(l_i\)</span> in <span class="math notranslate nohighlight">\(l^\ast\)</span>,
-and for each <a class="reference internal" href="#syntax-opdtype"><span class="std std-ref">operand type</span></a> <span class="math notranslate nohighlight">\(t_j\)</span> in <span class="math notranslate nohighlight">\(t^\ast\)</span> and corresponding type <span class="math notranslate nohighlight">\(t'_{ij}\)</span> in <span class="math notranslate nohighlight">\(C.\href{../valid/conventions.html#context}{\mathsf{labels}}[l_i]\)</span>, <span class="math notranslate nohighlight">\(t_j\)</span> <a class="reference internal" href="#match-opdtype"><span class="std std-ref">matches</span></a> <span class="math notranslate nohighlight">\(t'_{ij}\)</span>.</p></li>
+<li><p>For each <a class="reference internal" href="../exec/runtime.html#syntax-label"><span class="std std-ref">label</span></a> <span class="math notranslate nohighlight">\(l_i\)</span> in <span class="math notranslate nohighlight">\(l^\ast\)</span>:</p>
+<ul>
+<li><p>The length of the sequence <span class="math notranslate nohighlight">\(t^\ast\)</span> is the same as the length of the sequence <span class="math notranslate nohighlight">\(C.\href{../valid/conventions.html#context}{\mathsf{labels}}[l_i]\)</span>.</p></li>
+<li><p>For each <a class="reference internal" href="#syntax-opdtype"><span class="std std-ref">operand type</span></a> <span class="math notranslate nohighlight">\(t_j\)</span> in <span class="math notranslate nohighlight">\(t^\ast\)</span> and corresponding type <span class="math notranslate nohighlight">\(t'_{ij}\)</span> in <span class="math notranslate nohighlight">\(C.\href{../valid/conventions.html#context}{\mathsf{labels}}[l_i]\)</span>, <span class="math notranslate nohighlight">\(t_j\)</span> <a class="reference internal" href="#match-opdtype"><span class="std std-ref">matches</span></a> <span class="math notranslate nohighlight">\(t'_{ij}\)</span>.</p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>Then the instruction is valid with type <span class="math notranslate nohighlight">\([t_1^\ast~t^\ast~\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}] \href{../syntax/types.html#syntax-functype}{\rightarrow} [t_2^\ast]\)</span>, for any sequences of <a class="reference internal" href="#syntax-opdtype"><span class="std std-ref">operand types</span></a> <span class="math notranslate nohighlight">\(t_1^\ast\)</span> and <span class="math notranslate nohighlight">\(t_2^\ast\)</span>.</p></li>
@@ -1313,7 +1318,7 @@ such that <span class="math notranslate nohighlight">\(t_2^\ast = t_0^\ast~{t'}^
 \qquad
 \frac{
 }{
-  C \href{../valid/instructions.html#valid-constant}{\vdash} \href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}null}} \href{../valid/instructions.html#valid-constant}{\mathrel{\mbox{const}}}
+  C \href{../valid/instructions.html#valid-constant}{\vdash} \href{../syntax/instructions.html#syntax-instr-ref}{\mathsf{ref{.}null}}~t \href{../valid/instructions.html#valid-constant}{\mathrel{\mbox{const}}}
 }
 \qquad
 \frac{
