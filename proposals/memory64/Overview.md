@@ -263,7 +263,7 @@ have to support 32-bit memory addresses in their ABI.
     ```
 
 * Bounds checking is required to be the same as for 32-bit memories, that is,
-  the index + offset (a `u65`) of a load or store operation is required to be
+  the index + offset (a `u64`) of a load or store operation is required to be
   checked against the current memory size and trap if out of range.
 
   It is expected that the cost of this check remains low, if an implementation
