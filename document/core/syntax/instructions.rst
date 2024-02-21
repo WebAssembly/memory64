@@ -548,7 +548,7 @@ Instructions in this group are concerned with linear :ref:`memory <syntax-mem>`.
 .. math::
    \begin{array}{llcl}
    \production{index type} & \X{it} &::=&
-     u32 ~|~ u64 \\
+     \idxtype \\
    \production{memory immediate} & \memarg &::=&
      \{ \OFFSET~\X{it}, \ALIGN~\u32 \} \\
    \production{lane width} & \X{ww} &::=&
