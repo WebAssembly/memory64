@@ -180,6 +180,7 @@ If no maximum is given, the respective storage can grow to any size.
    pair: abstract syntax; memory type
    pair: memory; type
    pair: memory; limits
+.. _syntax-indextype:
 .. _syntax-memtype:
 
 Memory Types
@@ -189,6 +190,8 @@ Memory Types
 
 .. math::
    \begin{array}{llll}
+   \production{index type} & \indextype &::=&
+     \u32 ~|~ \u64 \\
    \production{memory type} & \memtype &::=&
      \limits \\
    \end{array}
