@@ -50,11 +50,6 @@ let type_of mem =
 let index_of mem =
   let (MemoryType (_, it)) = type_of mem in it
 
-let value_of_address it x =
-  match it with
-  | I64IndexType -> Num (I64 x)
-  | I32IndexType -> Num (I32 (Int64.to_int32 x))
-
 let address_of_num x =
   match x with
   | I64 i -> i

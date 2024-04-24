@@ -24,17 +24,17 @@
   "size minimum must not be greater than maximum"
 )
 
-(assert_malformed
+(assert_invalid
   (module quote "(table 0x1_0000_0000 funcref)")
-  "i32 constant out of range"
+  "table size must be at most 2^32-1"
 )
-(assert_malformed
+(assert_invalid
   (module quote "(table 0x1_0000_0000 0x1_0000_0000 funcref)")
-  "i32 constant out of range"
+  "table size must be at most 2^32-1"
 )
-(assert_malformed
+(assert_invalid
   (module quote "(table 0 0x1_0000_0000 funcref)")
-  "i32 constant out of range"
+  "table size must be at most 2^32-1"
 )
 
 
