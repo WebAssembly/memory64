@@ -7,9 +7,8 @@ This page describes a proposal to support linear memory of sizes larger than
 currently existing instructions to allow 64-bit indexes.
 
 In addition, in order to support source languages with 64-bit pointer width,
-this proposal also extends indirect function tables to allow 64-bit indexes.
-This addition was made during phase 3 of the proposal and we refer to this
-addition as table64.
+this proposal also extends tables to allow 64-bit indexes.  This addition was
+made during phase 3 of the proposal and we refer to this addition as "table64".
 
 ### Implementation Status
 
