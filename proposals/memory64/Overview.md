@@ -187,7 +187,7 @@ have to support 32-bit memory addresses in their ABI.
     - ```
         C.tables[x] = it limits t
       ------------------------------
-      C ⊦ table.size x : [it] → [it]
+      C ⊦ table.size x : [] → [it]
       ```
   - table.grow x
     - ```
