@@ -24,13 +24,13 @@ let valid_index it i =
   | I32IndexType -> I64.le_u i 0xffff_ffffL
   | I64IndexType -> true
 
-let create size it r =
+let create size r =
   try Lib.Array64.make size r
   with Out_of_memory | Invalid_argument _ -> raise OutOfMemory
 
 let alloc (TableType (lim, it, _) as ty) r =
   if not (valid_limits lim) then raise Type;
-  {ty; content = create lim.min it r}
+  {ty; content = create lim.min r}
 
 let size tab =
   Lib.Array64.length tab.content
@@ -38,7 +38,7 @@ let size tab =
 let type_of tab =
   tab.ty
 
-let index_of tab =
+let index_type_of tab =
   let (TableType (_, it, _)) = type_of tab in it
 
 let index_of_num x =
@@ -56,7 +56,7 @@ let grow tab delta r =
   let lim' = {lim with min = new_size} in
   if not (valid_index it new_size) then raise SizeOverflow else
   if not (valid_limits lim') then raise SizeLimit else
-  let after = create new_size it r in
+  let after = create new_size r in
   Array.blit tab.content 0 after 0 (Array.length tab.content);
   tab.ty <- TableType (lim', it, t);
   tab.content <- after

@@ -534,7 +534,7 @@ let func f =
 
 let table off i tab =
   let {ttype = TableType (lim, it, t)} = tab.it in
-  Node ("table $" ^ nat (off + i) ^  " " ^ index_type it ^  " " ^
+  Node ("table $" ^ nat (off + i) ^ " " ^ index_type it ^ " " ^
         limits nat64 lim, [atom ref_type t]
   )
 
