@@ -42,11 +42,6 @@ let numeric_error at = function
   | exn -> raise exn
 
 
-let value_of_index it x =
-  match it with
-  | I64IndexType -> Num (I64 x)
-  | I32IndexType -> Num (I32 (Int64.to_int32 x))
-
 (* Administrative Expressions & Configurations *)
 
 type 'a stack = 'a list
