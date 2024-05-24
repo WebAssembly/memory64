@@ -106,6 +106,10 @@ let match_extern_type et1 et2 =
   | ExternGlobalType gt1, ExternGlobalType gt2 -> match_global_type gt1 gt2
   | _, _ -> false
 
+let min_index_type it1 it2 =
+  match it1, it2 with
+  | I64IndexType, I64IndexType -> I64IndexType
+  | _, _ -> I32IndexType
 
 (* String conversion *)
 
