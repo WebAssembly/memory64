@@ -482,6 +482,11 @@ enum ImportExportKind {
   "global"
 };
 
+enum IndexType {
+  "i32",
+  "i64",
+};
+
 dictionary ModuleExportDescriptor {
   required USVString name;
   required ImportExportKind kind;
@@ -584,15 +589,10 @@ Note: The use of this synchronous API is discouraged, as some implementations so
 <h3 id="memories">Memories</h3>
 
 <pre class="idl">
-enum MemoryIndexType {
-  "i32",
-  "i64",
-};
-
 dictionary MemoryDescriptor {
   required [EnforceRange] unsigned long initial;
   [EnforceRange] unsigned long maximum;
-  MemoryIndexType index;
+  IndexType index;
 };
 
 [LegacyNamespace=WebAssembly, Exposed=*]
@@ -779,16 +779,11 @@ enum TableKind {
   // e.g., typed function references, typed GC references
 };
 
-enum TableIndexType {
-  "i32",
-  "i64",
-};
-
 dictionary TableDescriptor {
   required TableKind element;
   required [EnforceRange] unsigned long initial;
   [EnforceRange] unsigned long maximum;
-  TableIndexType index;
+  IndexType index;
 };
 
 [LegacyNamespace=WebAssembly, Exposed=*]
