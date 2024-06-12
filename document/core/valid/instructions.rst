@@ -1753,15 +1753,17 @@ Memory Instructions
 
 * The memory :math:`C.\CMEMS[y]` must be defined in the context.
 
-* Then the instruction is valid with type :math:`[\I32~\I32~\I32] \to []`.
+* Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`C.\CMEMS[0]`.
+
+* Then the instruction is valid with type :math:`[it~it~it] \to []`.
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it1}~\limits1
      \qquad
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[y] = \X{it2}~\limits2
    }{
-     C \vdashinstr \MEMORYCOPY~x~y : [\I32~\I32~\I32] \to []
+     C \vdashinstr \MEMORYCOPY~x~y : [\X{it}~\X{it}~\X{it}] \to []
    }
 
 

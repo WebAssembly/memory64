@@ -3682,31 +3682,37 @@ Memory Instructions
 
 9. Let :math:`\X{mem}_s` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[\X{sa}]`.
 
-10. Assert: due to :ref:`validation <valid-memory.copy>`, a value of :ref:`value type <syntax-valtype>` |I32| is on the top of the stack.
+10. Let :math:`\X{it}_d~\limits` be the :math:`\X{mem}_d.\MITYPE`.
 
-11. Pop the value :math:`\I32.\CONST~n` from the stack.
+11. Let :math:`\X{it}_s~\limits` be the :math:`\X{mem}_s.\MITYPE`.
 
-12. Assert: due to :ref:`validation <valid-memory.copy>`, a value of :ref:`value type <syntax-valtype>` |I32| is on the top of the stack.
+12. Let :math:`\X{it}_{min}` be ....?
 
-13. Pop the value :math:`\I32.\CONST~s` from the stack.
+13. Assert: due to :ref:`validation <valid-memory.copy>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}_{min}` is on the top of the stack.
 
-14. Assert: due to :ref:`validation <valid-memory.copy>`, a value of :ref:`value type <syntax-valtype>` |I32| is on the top of the stack.
+14. Pop the value :math:`\X{it}_{min}.\CONST~n` from the stack.
 
-15. Pop the value :math:`\I32.\CONST~d` from the stack.
+15. Assert: due to :ref:`validation <valid-memory.copy>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}_s` is on the top of the stack.
 
-16. If :math:`s + n` is larger than the length of :math:`\X{mem}_s.\MIDATA` or :math:`d + n` is larger than the length of :math:`\X{mem}_d.\MIDATA`, then:
+16. Pop the value :math:`\X{it}_s.\CONST~s` from the stack.
+
+17. Assert: due to :ref:`validation <valid-memory.copy>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}_d` is on the top of the stack.
+
+18. Pop the value :math:`\X{it}_d.\CONST~d` from the stack.
+
+19. If :math:`s + n` is larger than the length of :math:`\X{mem}_s.\MIDATA` or :math:`d + n` is larger than the length of :math:`\X{mem}_d.\MIDATA`, then:
 
     a. Trap.
 
-17. If :math:`n = 0`, then:
+20. If :math:`n = 0`, then:
 
    a. Return.
 
-18. If :math:`d \leq s`, then:
+21. If :math:`d \leq s`, then:
 
-   a. Push the value :math:`\I32.\CONST~d` to the stack.
+   a. Push the value :math:`\X{it}.\CONST~d` to the stack.
 
-   b. Push the value :math:`\I32.\CONST~s` to the stack.
+   b. Push the value :math:`\X{it}.\CONST~s` to the stack.
 
    c. Execute the instruction :math:`\I32\K{.}\LOAD\K{8\_u}~y~\{ \OFFSET~0, \ALIGN~0 \}`.
 
@@ -3714,33 +3720,33 @@ Memory Instructions
 
    e. Assert: due to the earlier check against the memory size, :math:`d+1 < 2^{32}`.
 
-   f. Push the value :math:`\I32.\CONST~(d+1)` to the stack.
+   f. Push the value :math:`\X{it}.\CONST~(d+1)` to the stack.
 
    g. Assert: due to the earlier check against the memory size, :math:`s+1 < 2^{32}`.
 
-   h. Push the value :math:`\I32.\CONST~(s+1)` to the stack.
+   h. Push the value :math:`\X{it}.\CONST~(s+1)` to the stack.
 
-19. Else:
+22. Else:
 
    a. Assert: due to the earlier check against the memory size, :math:`d+n-1 < 2^{32}`.
 
-   b. Push the value :math:`\I32.\CONST~(d+n-1)` to the stack.
+   b. Push the value :math:`\X{it}.\CONST~(d+n-1)` to the stack.
 
    c. Assert: due to the earlier check against the memory size, :math:`s+n-1 < 2^{32}`.
 
-   d. Push the value :math:`\I32.\CONST~(s+n-1)` to the stack.
+   d. Push the value :math:`\X{it}.\CONST~(s+n-1)` to the stack.
 
    e. Execute the instruction :math:`\I32\K{.}\LOAD\K{8\_u}~y~\{ \OFFSET~0, \ALIGN~0 \}`.
 
    f. Execute the instruction :math:`\I32\K{.}\STORE\K{8}~x~\{ \OFFSET~0, \ALIGN~0 \}`.
 
-   g. Push the value :math:`\I32.\CONST~d` to the stack.
+   g. Push the value :math:`\X{it}.\CONST~d` to the stack.
 
-   h. Push the value :math:`\I32.\CONST~s` to the stack.
+   h. Push the value :math:`\X{it}.\CONST~s` to the stack.
 
-20. Push the value :math:`\I32.\CONST~(n-1)` to the stack.
+23. Push the value :math:`\X{it}_{min}.\CONST~(n-1)` to the stack.
 
-21. Execute the instruction :math:`\MEMORYCOPY~x~y`.
+24. Execute the instruction :math:`\MEMORYCOPY~x~y`.
 
 .. math::
    ~\\[-1ex]
