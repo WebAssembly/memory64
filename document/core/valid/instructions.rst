@@ -1753,17 +1753,21 @@ Memory Instructions
 
 * The memory :math:`C.\CMEMS[y]` must be defined in the context.
 
-* Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`C.\CMEMS[0]`.
+* Let :math:`\X{it}_x~\limits_x` be the :ref:`memory type <syntax-memtype>` :math:`C.\CMEMS[x]`.
 
-* Then the instruction is valid with type :math:`[it~it~it] \to []`.
+* Let :math:`\X{it}_y~\limits_y` be the :ref:`memory type <syntax-memtype>` :math:`C.\CMEMS[y]`.
+
+* Let :math:`\X{it}` be the :ref:`minimum <aux-idxtype-min>` of :math:`\X{it}_x` and :math:`\X{it}_y`
+
+* Then the instruction is valid with type :math:`[\X{it}_x~\X{it}_y~\X{it}] \to []`.
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \X{it1}~\limits1
+     C.\CMEMS[x] = \X{it}_x~\limits_y
      \qquad
-     C.\CMEMS[y] = \X{it2}~\limits2
+     C.\CMEMS[y] = \X{it}_y~\limits_y
    }{
-     C \vdashinstr \MEMORYCOPY~x~y : [\X{it}~\X{it}~\X{it}] \to []
+     C \vdashinstr \MEMORYCOPY~x~y : [\X{it}_x~\X{it}_y~\X{it}] \to []
    }
 
 

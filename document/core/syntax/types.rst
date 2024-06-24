@@ -367,6 +367,10 @@ Index Type
      \I32 ~|~ \I64 \\
    \end{array}
 
+.. _aux-idxtype-min:
+
+The minimum of two index types is defined as |I32| if either of the types are
+|I32| and |I64| otherwise.
 
 .. index:: ! limits, memory type, table type
    pair: abstract syntax; limits
