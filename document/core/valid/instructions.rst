@@ -1431,7 +1431,7 @@ Table Instructions
 
 * The :ref:`reference type <syntax-reftype>` :math:`t_2` must :ref:`match <match-reftype>` :math:`t_1`.
 
-* Then the instruction is valid with type :math:`[\X{it}_1~\X{it}_2~\X{it}] \to []`.
+* Then the instruction is valid with type :math:`[\X{it}_1~\X{it}_2~\itmin(\X{it}_1, \X{it}_2)] \to []`.
 
 .. math::
    \frac{
@@ -1441,7 +1441,7 @@ Table Instructions
      \qquad
      C \vdashreftypematch t_2 \matchesvaltype t_1
    }{
-     C \vdashinstr \TABLECOPY~x~y : [\X{it}_1~\X{it}_2~\X{it}] \to []
+     C \vdashinstr \TABLECOPY~x~y : [\X{it}_1~\X{it}_2~\itmin(\X{it}_1, \X{it}_2)] \to []
    }
 
 
@@ -1782,7 +1782,7 @@ Memory Instructions
 
 * Let :math:`\X{it}` be the :ref:`minimum <aux-idxtype-min>` of :math:`\X{it}_x` and :math:`\X{it}_y`
 
-* Then the instruction is valid with type :math:`[\X{it}_x~\X{it}_y~\X{it}] \to []`.
+* Then the instruction is valid with type :math:`[\X{it}_x~\X{it}_y~\itmin(\X{it}_x, \X{it}_y)] \to []`.
 
 .. math::
    \frac{
@@ -1790,7 +1790,7 @@ Memory Instructions
      \qquad
      C.\CMEMS[y] = \X{it}_y~\limits_y
    }{
-     C \vdashinstr \MEMORYCOPY~x~y : [\X{it}_x~\X{it}_y~\X{it}] \to []
+     C \vdashinstr \MEMORYCOPY~x~y : [\X{it}_x~\X{it}_y~\itmin(\X{it}_x, \X{it}_y)] \to []
    }
 
 

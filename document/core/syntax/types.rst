@@ -369,8 +369,18 @@ Index Type
 
 .. _aux-idxtype-min:
 
-The minimum of two index types is defined as |I32| if either of the types are
-|I32| and |I64| otherwise.
+Conventions
+...........
+
+The *minimum* of two index types is defined as |I32| if either of the types are
+|I32|, and |I64| otherwise.
+
+.. math::
+   \begin{array}{llll}
+   \itmin(\I64, \I64) &=& \I64 \\
+   \itmin(\X{it}_1, \X{it}_2) &=& \I32 & (\otherwise) \\
+   \end{array}
+
 
 .. index:: ! limits, memory type, table type
    pair: abstract syntax; limits

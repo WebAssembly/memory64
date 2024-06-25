@@ -3744,7 +3744,7 @@ Memory Instructions
 
    h. Push the value :math:`\X{it}_s.\CONST~s` to the stack.
 
-23. Push the value :math:`\X{it}.\CONST~(n-1)` to the stack.
+23. Push the value :math:`\X{it}_n.\CONST~(n-1)` to the stack.
 
 24. Execute the instruction :math:`\MEMORYCOPY~x~y`.
 

@@ -293,6 +293,7 @@
 .. |unrollht| mathdef:: \xref{appendix/properties}{aux-unroll-heaptype}{\F{unroll}}
 
 .. |unpacktype| mathdef:: \xref{syntax/types}{aux-unpacktype}{\F{unpack}}
+.. |itmin| mathdef:: \xref{syntax/types}{aux-idxtype-min}{\F{itmin}}
 
 .. |etfuncs| mathdef:: \xref{syntax/types}{syntax-externtype}{\F{funcs}}
 .. |ettables| mathdef:: \xref{syntax/types}{syntax-externtype}{\F{tables}}
