@@ -3751,12 +3751,15 @@ Memory Instructions
 .. math::
    ~\\[-1ex]
    \begin{array}{l}
-   S; F; (\I32.\CONST~d)~(\I32.\CONST~s)~(\I32.\CONST~n)~\MEMORYCOPY~x~y
+   S; F; (\X{it}_x.\CONST~d)~(\X{it}_y.\CONST~s)~(\X{it}.\CONST~n)~\MEMORYCOPY~x~y
      \quad\stepto\quad S; F; \TRAP
      \\ \qquad
      \begin{array}[t]{@{}r@{~}l@{}}
-     (\iff & d + n > |S.\SMEMS[F.\AMODULE.\MIMEMS[x]].\MIDATA| \\
-      \vee & s + n > |S.\SMEMS[F.\AMODULE.\MIMEMS[y]].\MIDATA|) \\[1ex]
+     (\iff & (d + n > |S.\SMEMS[F.\AMODULE.\MIMEMS[x]].\MIDATA| \\
+      \vee & s + n > |S.\SMEMS[F.\AMODULE.\MIMEMS[y]].\MIDATA|) \\
+      \land & \X{it}_x~\limits_x = S.\SMEMS[F.\AMODULE.\MIMEMS[x]].\MITYPE \\[1ex]
+      \land & \X{it}_y~\limits_y = S.\SMEMS[F.\AMODULE.\MIMEMS[y]].\MITYPE \\[1ex]
+      \land & \X{it} = \itmin(\X{it}_x,\X{it}_y))
      \end{array}
    \\[1ex]
    S; F; (\I32.\CONST~d)~(\I32.\CONST~s)~(\I32.\CONST~0)~\MEMORYCOPY~x~y
