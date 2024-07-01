@@ -2541,7 +2541,7 @@ Table Instructions
 
 5. Let :math:`\X{tab}` be the :ref:`table instance <syntax-tableinst>` :math:`S.\STABLES[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{tab}.\TITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`table type <syntax-tabletype>` :math:`\X{tab}.\TITYPE`.
 
 7. Assert: due to :ref:`validation <valid-table.get>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}` is on the top of the stack.
 
@@ -2586,7 +2586,7 @@ Table Instructions
 
 5. Let :math:`\X{tab}` be the :ref:`table instance <syntax-tableinst>` :math:`S.\STABLES[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{tab}.\TITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`table type <syntax-tabletype>` :math:`\X{tab}.\TITYPE`.
 
 7. Assert: due to :ref:`validation <valid-table.set>`, a :ref:`reference value <syntax-ref>` is on the top of the stack.
 
@@ -2633,7 +2633,7 @@ Table Instructions
 
 5. Let :math:`\X{tab}` be the :ref:`table instance <syntax-tableinst>` :math:`S.\STABLES[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{tab}.\TITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`table type <syntax-tabletype>` :math:`\X{tab}.\TITYPE`.
 
 7. Let :math:`\X{sz}` be the length of :math:`\X{tab}.\TIELEM`.
 
@@ -2664,7 +2664,7 @@ Table Instructions
 
 5. Let :math:`\X{tab}` be the :ref:`table instance <syntax-tableinst>` :math:`S.\STABLES[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{tab}.\TITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`table type <syntax-tabletype>` :math:`\X{tab}.\TITYPE`.
 
 7. Let :math:`\X{sz}` be the length of :math:`S.\STABLES[a]`.
 
@@ -2734,7 +2734,7 @@ Table Instructions
 
 5. Let :math:`\X{tab}` be the :ref:`table instance <syntax-tableinst>` :math:`S.\STABLES[\X{ta}]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{tab}.\TITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`table type <syntax-tabletype>` :math:`\X{tab}.\TITYPE`.
 
 7. Assert: due to :ref:`validation <valid-table.fill>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}` is on the top of the stack.
 
@@ -2819,9 +2819,9 @@ Table Instructions
 
 9. Let :math:`\X{tab}_y` be the :ref:`table instance <syntax-tableinst>` :math:`S.\STABLES[\X{ta}_y]`.
 
-10. Let :math:`\X{it}_x~\limits_x` be the :math:`\X{tab}_x.\TITYPE`.
+10. Let :math:`\X{it}_x~\limits_x` be the :ref:`table type <syntax-tabletype>` :math:`\X{tab}_x.\TITYPE`.
 
-11. Let :math:`\X{it}_y~\limits_y` be the :math:`\X{tab}_y.\TITYPE`.
+11. Let :math:`\X{it}_y~\limits_y` be the :ref:`table type <syntax-tabletype>` :math:`\X{tab}_y.\TITYPE`.
 
 12. Let :math:`\X{it}_n` be the :ref:`minimum <aux-idxtype-min>` of :math:`\X{it}_s` and :math:`\X{it}_d`.
 
@@ -2938,7 +2938,7 @@ Table Instructions
 
 5. Let :math:`\X{tab}` be the :ref:`table instance <syntax-tableinst>` :math:`S.\STABLES[\X{ta}]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{tab}.\TITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`table type <syntax-tabletype>` :math:`\X{tab}.\TITYPE`.
 
 7. Assert: due to :ref:`validation <valid-table.init>`, :math:`F.\AMODULE.\MIELEMS[y]` exists.
 
@@ -3075,7 +3075,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-loadn>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}` is on the top of the stack.
 
@@ -3152,7 +3152,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-load-extend>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}` is on the top of the stack.
 
@@ -3215,7 +3215,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-load-extend>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}` is on the top of the stack.
 
@@ -3274,7 +3274,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-load-extend>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}` is on the top of the stack.
 
@@ -3331,7 +3331,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-load-extend>`, a value of :ref:`value type <syntax-valtype>` |V128| is on the top of the stack.
 
@@ -3398,7 +3398,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-storen>`, a value of :ref:`value type <syntax-valtype>` :math:`t` is on the top of the stack.
 
@@ -3476,7 +3476,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-storen>`, a value of :ref:`value type <syntax-valtype>` :math:`\V128` is on the top of the stack.
 
@@ -3537,7 +3537,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Let :math:`\X{sz}` be the length of :math:`\X{mem}.\MIDATA` divided by the :ref:`page size <page-size>`.
 
@@ -3568,7 +3568,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[a]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Let :math:`\X{sz}` be the length of :math:`S.\SMEMS[a]` divided by the :ref:`page size <page-size>`.
 
@@ -3634,7 +3634,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[\X{ma}]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-memory.fill>`, a value of :ref:`value type <syntax-valtype>` :math:`\X{it}` is on the top of the stack.
 
@@ -3720,9 +3720,9 @@ Memory Instructions
 
 9. Let :math:`\X{mem}_s` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[\X{sa}]`.
 
-10. Let :math:`\X{it}_d~\limits_d` be the :math:`\X{mem}_d.\MITYPE`.
+10. Let :math:`\X{it}_d~\limits_d` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}_d.\MITYPE`.
 
-11. Let :math:`\X{it}_s~\limits_s` be the :math:`\X{mem}_s.\MITYPE`.
+11. Let :math:`\X{it}_s~\limits_s` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}_s.\MITYPE`.
 
 12. Let :math:`\X{it}_n` be the :ref:`minimum <aux-idxtype-min>` of :math:`\X{it}_s` and :math:`\X{it}_d`.
 
@@ -3843,7 +3843,7 @@ Memory Instructions
 
 5. Let :math:`\X{mem}` be the :ref:`memory instance <syntax-meminst>` :math:`S.\SMEMS[\X{ma}]`.
 
-6. Let :math:`\X{it}~\limits` be the :math:`\X{mem}.\MITYPE`.
+6. Let :math:`\X{it}~\limits` be the :ref:`memory type <syntax-memtype>` :math:`\X{mem}.\MITYPE`.
 
 7. Assert: due to :ref:`validation <valid-memory.init>`, :math:`F.\AMODULE.\MIDATAS[y]` exists.
 

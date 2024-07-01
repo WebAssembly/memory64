@@ -1538,7 +1538,7 @@ Memory Instructions
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it}~\limits
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
    }{
@@ -1559,7 +1559,7 @@ Memory Instructions
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it}~\limits
      \qquad
      2^{\memarg.\ALIGN} \leq |t|/8
    }{
@@ -1580,7 +1580,7 @@ Memory Instructions
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it}~\limits
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
    }{
@@ -1603,7 +1603,7 @@ Memory Instructions
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it}~\limits
      \qquad
      2^{\memarg.\ALIGN} \leq N/8 \cdot M
    }{
@@ -1626,7 +1626,7 @@ Memory Instructions
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it}~\limits
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
    }{
@@ -1649,7 +1649,7 @@ Memory Instructions
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it}~\limits
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
    }{
@@ -1674,7 +1674,7 @@ Memory Instructions
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it}~\limits
      \qquad
      2^{\memarg.\ALIGN} < N/8
      \qquad
@@ -1700,7 +1700,7 @@ Memory Instructions
 
 .. math::
    \frac{
-     C.\CMEMS[x] = \memtype
+     C.\CMEMS[x] = \X{it}~\limits
      \qquad
      2^{\memarg.\ALIGN} < N/8
      \qquad
