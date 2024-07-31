@@ -123,11 +123,9 @@ Vectors
 
 *Vectors* are bounded sequences of the form :math:`A^n` (or :math:`A^\ast`),
 where the :math:`A` can either be values or complex constructions.
-A vector can have at most :math:`2^{32}-1` elements.
 
 .. math::
    \begin{array}{lllll}
    \production{vector} & \vec(A) &::=&
-     A^n
-     & (\iff n < 2^{32})\\
+     A^n\\
    \end{array}
