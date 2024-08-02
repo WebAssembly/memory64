@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Text Format &#8212; WebAssembly 2.0 (Draft 2024-08-01)</title>
+    <title>Text Format &#8212; WebAssembly 3.0 (Draft 2024-08-02)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -102,6 +102,7 @@
 <li class="toctree-l2"><a class="reference internal" href="lexical.html#tokens">Tokens</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lexical.html#white-space">White Space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lexical.html#comments">Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lexical.html#annotations">Annotations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="values.html">Values</a><ul>
@@ -115,9 +116,14 @@
 <li class="toctree-l1"><a class="reference internal" href="types.html">Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="types.html#number-types">Number Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#vector-types">Vector Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#heap-types">Heap Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#reference-types">Reference Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#value-types">Value Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#function-types">Function Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#aggregate-types">Aggregate Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#composite-types">Composite Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#recursive-types">Recursive Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#index-type">Index Type</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#limits">Limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#memory-types">Memory Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#table-types">Table Types</a></li>
@@ -140,13 +146,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#indices">Indices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules.html#types">Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#type-uses">Type Uses</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#imports">Imports</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#tables">Tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#memories">Memories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#globals">Globals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#tags">Tags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#exports">Exports</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#start-function">Start Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#element-segments">Element Segments</a></li>
@@ -166,7 +172,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &#169;2022, WebAssembly Community Group.
+      &#169;2017-2024, WebAssembly Community Group.
       
     </div>
 
