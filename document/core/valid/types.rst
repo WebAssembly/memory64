@@ -504,7 +504,7 @@ Table Types
 :math:`\idxtype~\limits~\reftype`
 .................................
 
-* The limits :math:`\limits` must be :ref:`valid <valid-limits>` within range :math:`2^{|\idxtype|}`.
+* The limits :math:`\limits` must be :ref:`valid <valid-limits>` within range :math:`2^{|\idxtype|}-1`.
 
 * The reference type :math:`\reftype` must be :ref:`valid <valid-reftype>`.
 
@@ -512,7 +512,7 @@ Table Types
 
 .. math::
    \frac{
-     C \vdashlimits \limits : 2^{|\idxtype|}
+     C \vdashlimits \limits : 2^{|\idxtype|}-1
      \qquad
      C \vdashreftype \reftype \ok
    }{
