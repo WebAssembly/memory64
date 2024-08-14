@@ -1366,6 +1366,8 @@ Table Instructions
 
 * The table :math:`C.\CTABLES[x]` must be defined in the context.
 
+* Let :math:`\X{it}~\limits~t` be the :ref:`table type <syntax-tabletype>` :math:`C.\CTABLES[x]`.
+
 * Then the instruction is valid with type :math:`[] \to [\X{it}]`.
 
 .. math::
