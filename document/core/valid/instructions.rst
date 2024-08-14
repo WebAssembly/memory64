@@ -2374,7 +2374,7 @@ Control Instructions
 
 * The :ref:`expansion <aux-expand-deftype>` of :math:`C.\CTYPES[y]` must be a :ref:`function type <syntax-functype>` :math:`\TFUNC~[t_1^\ast] \toF [t_2^\ast]`.
 
-* Then the instruction is valid with type :math:`[t_1^\ast~\I32] \to [t_2^\ast]`.
+* Then the instruction is valid with type :math:`[t_1^\ast~\X{it}] \to [t_2^\ast]`.
 
 .. math::
    \frac{
@@ -2465,7 +2465,7 @@ Control Instructions
 
 * The :ref:`result type <syntax-resulttype>` :math:`[t_2^\ast]` must :ref:`match <match-resulttype>` :math:`C.\CRETURN`.
 
-* Then the instruction is valid with type :math:`[t_3^\ast~t_1^\ast~\I32] \to [t_4^\ast]`, for any sequences of :ref:`value types <syntax-valtype>` :math:`t_3^\ast` and :math:`t_4^\ast`.
+* Then the instruction is valid with type :math:`[t_3^\ast~t_1^\ast~\X{it}] \to [t_4^\ast]`, for any sequences of :ref:`value types <syntax-valtype>` :math:`t_3^\ast` and :math:`t_4^\ast`.
 
 .. math::
    \frac{
@@ -2479,7 +2479,7 @@ Control Instructions
      \qquad
      C \vdashinstrtype [t_3^\ast~t_1^\ast~\I32] \to [t_4^\ast] \ok
    }{
-     C \vdashinstr \RETURNCALLINDIRECT~x~y : [t_3^\ast~t_1^\ast~\I32] \to [t_4^\ast]
+     C \vdashinstr \RETURNCALLINDIRECT~x~y : [t_3^\ast~t_1^\ast~\X{it}] \to [t_4^\ast]
    }
 
 .. note::
