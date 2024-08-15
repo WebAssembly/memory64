@@ -556,7 +556,7 @@ where :math:`\val_1 \gg^+_S \val_2` denotes the transitive closure of the follow
 
 .. math::
    \frac{
-     \vdashmemtype \idxtype~\limits \ok \\
+     \vdashmemtype \idxtype~\limits \ok
      \qquad
      n = \limits.\LMIN \cdot 64\,\F{Ki}
    }{
