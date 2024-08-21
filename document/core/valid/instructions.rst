@@ -1519,7 +1519,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq |t|/8
    }{
@@ -1546,7 +1546,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
    }{
@@ -1571,7 +1571,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq |t|/8
    }{
@@ -1598,7 +1598,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
    }{
@@ -1625,7 +1625,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq N/8 \cdot M
    }{
@@ -1652,7 +1652,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
    }{
@@ -1679,7 +1679,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
    }{
@@ -1708,7 +1708,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
      \qquad
@@ -1739,7 +1739,7 @@ Memory Instructions
    \frac{
      C.\CMEMS[x] = \X{it}~\limits
      \qquad
-     \memarg.\OFFSET \lt 2^{|\X{it}|}
+     \memarg.\OFFSET < 2^{|\X{it}|}
      \qquad
      2^{\memarg.\ALIGN} \leq N/8
      \qquad
