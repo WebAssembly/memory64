@@ -325,26 +325,26 @@ However, the <a class="reference internal" href="../intro/overview.html#embedder
 <section id="table-instances">
 <span id="syntax-tableinst"></span><span id="index-7"></span><h2>Table Instances<a class="headerlink" href="#table-instances" title="Permalink to this heading">¶</a></h2>
 <p>A <em>table instance</em> is the runtime representation of a <a class="reference internal" href="../syntax/modules.html#syntax-table"><span class="std std-ref">table</span></a>.
-It records its <a class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">type</span></a> and holds a vector of <a class="reference internal" href="#syntax-ref"><span class="std std-ref">reference values</span></a>.</p>
+It records its <a class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">type</span></a> and holds a sequence of <a class="reference internal" href="#syntax-ref"><span class="std std-ref">reference values</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
 \def\mathdef2506#1{{}}\mathdef2506{table instance} &amp; \href{../exec/runtime.html#syntax-tableinst}{\mathit{tableinst}} &amp;::=&amp;
-  \{ \href{../exec/runtime.html#syntax-tableinst}{\mathsf{type}}~\href{../syntax/types.html#syntax-tabletype}{\mathit{tabletype}}, \href{../exec/runtime.html#syntax-tableinst}{\mathsf{elem}}~\href{../syntax/conventions.html#syntax-vec}{\mathit{vec}}(\href{../exec/runtime.html#syntax-ref}{\mathit{ref}}) \} \\
+  \{ \href{../exec/runtime.html#syntax-tableinst}{\mathsf{type}}~\href{../syntax/types.html#syntax-tabletype}{\mathit{tabletype}}, \href{../exec/runtime.html#syntax-tableinst}{\mathsf{elem}}~\href{../exec/runtime.html#syntax-ref}{\mathit{ref}}^\ast \} \\
 \end{array}\end{split}\]</div>
 <p>Table elements can be mutated through <a class="reference internal" href="../syntax/instructions.html#syntax-instr-table"><span class="std std-ref">table instructions</span></a>, the execution of an active <a class="reference internal" href="../syntax/modules.html#syntax-elem"><span class="std std-ref">element segment</span></a>, or by external means provided by the <a class="reference internal" href="../intro/overview.html#embedder"><span class="std std-ref">embedder</span></a>.</p>
 <p>It is an invariant of the semantics that all table elements have a type <a class="reference internal" href="../valid/matching.html#match-reftype"><span class="std std-ref">matching</span></a> the element type of <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-tabletype}{\mathit{tabletype}}\)</span>.
-It also is an invariant that the length of the element vector never exceeds the maximum size of <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-tabletype}{\mathit{tabletype}}\)</span>, if present.</p>
+It also is an invariant that the length of the element sequence never exceeds the maximum size of <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-tabletype}{\mathit{tabletype}}\)</span>, if present.</p>
 </section>
 <section id="memory-instances">
 <span id="syntax-meminst"></span><span id="page-size"></span><span id="index-8"></span><h2>Memory Instances<a class="headerlink" href="#memory-instances" title="Permalink to this heading">¶</a></h2>
 <p>A <em>memory instance</em> is the runtime representation of a linear <a class="reference internal" href="../syntax/modules.html#syntax-mem"><span class="std std-ref">memory</span></a>.
-It records its <a class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">type</span></a> and holds a vector of <a class="reference internal" href="../syntax/values.html#syntax-byte"><span class="std std-ref">bytes</span></a>.</p>
+It records its <a class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">type</span></a> and holds a sequence of <a class="reference internal" href="../syntax/values.html#syntax-byte"><span class="std std-ref">bytes</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
 \def\mathdef2506#1{{}}\mathdef2506{memory instance} &amp; \href{../exec/runtime.html#syntax-meminst}{\mathit{meminst}} &amp;::=&amp;
-  \{ \href{../exec/runtime.html#syntax-meminst}{\mathsf{type}}~\href{../syntax/types.html#syntax-memtype}{\mathit{memtype}}, \href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}~\href{../syntax/conventions.html#syntax-vec}{\mathit{vec}}(\href{../syntax/values.html#syntax-byte}{\mathit{byte}}) \} \\
+  \{ \href{../exec/runtime.html#syntax-meminst}{\mathsf{type}}~\href{../syntax/types.html#syntax-memtype}{\mathit{memtype}}, \href{../exec/runtime.html#syntax-meminst}{\mathsf{data}}~\href{../syntax/values.html#syntax-byte}{\mathit{byte}}^\ast \} \\
 \end{array}\end{split}\]</div>
-<p>The length of the vector always is a multiple of the WebAssembly <em>page size</em>, which is defined to be the constant <span class="math notranslate nohighlight">\(65536\)</span> – abbreviated <span class="math notranslate nohighlight">\(64\,\mathrm{Ki}\)</span>.</p>
+<p>The length of the sequence always is a multiple of the WebAssembly <em>page size</em>, which is defined to be the constant <span class="math notranslate nohighlight">\(65536\)</span> – abbreviated <span class="math notranslate nohighlight">\(64\,\mathrm{Ki}\)</span>.</p>
 <p>The bytes can be mutated through <a class="reference internal" href="../syntax/instructions.html#syntax-instr-memory"><span class="std std-ref">memory instructions</span></a>, the execution of an active <a class="reference internal" href="../syntax/modules.html#syntax-data"><span class="std std-ref">data segment</span></a>, or by external means provided by the <a class="reference internal" href="../intro/overview.html#embedder"><span class="std std-ref">embedder</span></a>.</p>
 <p>It is an invariant of the semantics that the length of the byte vector, divided by page size, never exceeds the maximum size of <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-memtype}{\mathit{memtype}}\)</span>, if present.</p>
 </section>

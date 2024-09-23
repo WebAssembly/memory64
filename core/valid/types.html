@@ -440,34 +440,34 @@ preventing cyclic subtype hierarchies.</p>
 </section>
 <section id="table-types">
 <span id="valid-tabletype"></span><span id="index-14"></span><h2>Table Types<a class="headerlink" href="#table-types" title="Permalink to this heading">¶</a></h2>
-<section id="xref-syntax-types-syntax-limits-mathit-limits-xref-syntax-types-syntax-reftype-mathit-reftype">
-<h3><span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-limits}{\mathit{limits}}~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}\)</span><a class="headerlink" href="#xref-syntax-types-syntax-limits-mathit-limits-xref-syntax-types-syntax-reftype-mathit-reftype" title="Permalink to this heading">¶</a></h3>
+<section id="xref-syntax-types-syntax-idxtype-mathit-idxtype-xref-syntax-types-syntax-limits-mathit-limits-xref-syntax-types-syntax-reftype-mathit-reftype">
+<h3><span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-idxtype}{\mathit{idxtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}\)</span><a class="headerlink" href="#xref-syntax-types-syntax-idxtype-mathit-idxtype-xref-syntax-types-syntax-limits-mathit-limits-xref-syntax-types-syntax-reftype-mathit-reftype" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>The limits <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-limits}{\mathit{limits}}\)</span> must be <a class="reference internal" href="#valid-limits"><span class="std std-ref">valid</span></a> within range <span class="math notranslate nohighlight">\(2^{32}-1\)</span>.</p></li>
+<li><p>The limits <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-limits}{\mathit{limits}}\)</span> must be <a class="reference internal" href="#valid-limits"><span class="std std-ref">valid</span></a> within range <span class="math notranslate nohighlight">\(2^{|\href{../syntax/types.html#syntax-idxtype}{\mathit{idxtype}}|}-1\)</span>.</p></li>
 <li><p>The reference type <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}\)</span> must be <a class="reference internal" href="#valid-reftype"><span class="std std-ref">valid</span></a>.</p></li>
 <li><p>Then the table type is valid.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\frac{
-  C \href{../valid/types.html#valid-limits}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}} : 2^{32} - 1
+  C \href{../valid/types.html#valid-limits}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}} : 2^{|\href{../syntax/types.html#syntax-idxtype}{\mathit{idxtype}}|}-1
   \qquad
   C \href{../valid/types.html#valid-reftype}{\vdash} \href{../syntax/types.html#syntax-reftype}{\mathit{reftype}} \mathrel{\mbox{ok}}
 }{
-  C \href{../valid/types.html#valid-tabletype}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}}~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}} \mathrel{\mbox{ok}}
+  C \href{../valid/types.html#valid-tabletype}{\vdash} \href{../syntax/types.html#syntax-idxtype}{\mathit{idxtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}} \mathrel{\mbox{ok}}
 }\]</div>
 </section>
 </section>
 <section id="memory-types">
 <span id="valid-memtype"></span><span id="index-15"></span><h2>Memory Types<a class="headerlink" href="#memory-types" title="Permalink to this heading">¶</a></h2>
-<section id="xref-syntax-types-syntax-limits-mathit-limits">
-<h3><span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-limits}{\mathit{limits}}\)</span><a class="headerlink" href="#xref-syntax-types-syntax-limits-mathit-limits" title="Permalink to this heading">¶</a></h3>
+<section id="xref-syntax-types-syntax-idxtype-mathit-idxtype-xref-syntax-types-syntax-limits-mathit-limits">
+<h3><span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-idxtype}{\mathit{idxtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}\)</span><a class="headerlink" href="#xref-syntax-types-syntax-idxtype-mathit-idxtype-xref-syntax-types-syntax-limits-mathit-limits" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>The limits <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-limits}{\mathit{limits}}\)</span> must be <a class="reference internal" href="#valid-limits"><span class="std std-ref">valid</span></a> within range <span class="math notranslate nohighlight">\(2^{16}\)</span>.</p></li>
+<li><p>The limits <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-limits}{\mathit{limits}}\)</span> must be <a class="reference internal" href="#valid-limits"><span class="std std-ref">valid</span></a> within range <span class="math notranslate nohighlight">\(2^{|\href{../syntax/types.html#syntax-idxtype}{\mathit{idxtype}}|-16}\)</span>.</p></li>
 <li><p>Then the memory type is valid.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\frac{
-  C \href{../valid/types.html#valid-limits}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}} : 2^{16}
+  C \href{../valid/types.html#valid-limits}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}} : 2^{|\href{../syntax/types.html#syntax-idxtype}{\mathit{idxtype}}|-16}
 }{
   C \href{../valid/types.html#valid-memtype}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}} \mathrel{\mbox{ok}}
 }\]</div>
