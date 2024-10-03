@@ -1365,9 +1365,9 @@ The algorithm <dfn>IndexValueToU64</dfn>(|v|, |indextype|) converts a JavaScript
 
         Note: This is equivalent to the [=js-unsigned-long|JS conversion rules=] for [=[EnforceRange]=] [=unsigned long=].
     1. Return [=ℝ=](|n|) as a WebAssembly [=u64=].
-1. Else if |indextype| is "i64",
+1. If |indextype| is "i64",
     1. Let |n| be [=?=] [$ToBigInt$](|v|).
-    1. If |n| is not equal to [=!=] [$ToBigUint64$](|n|), [=throw=] a {{TypeError}}.
+    1. If |n| &lt; 0 or |n| &gt; 2<sup>64</sup> &minus; 1, [=throw=] a {{TypeError}}.
 
         Note: This operation is designed to emulate [=[EnforceRange]=].
     1. Return [=ℝ=](|n|) as a WebAssembly [=u64=].
