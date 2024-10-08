@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Type Soundness &#8212; WebAssembly 3.0 (Draft 2024-10-03)</title>
+    <title>Type Soundness &#8212; WebAssembly 3.0 (Draft 2024-10-08)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -44,6 +44,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../text/index.html">Text Format</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Appendix</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="embedding.html">Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles.html">Profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html">Implementation Limitations</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Type Soundness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#type-system-properties">Type System Properties</a></li>
@@ -109,7 +110,7 @@ In order to state and prove soundness precisely, the typing rules must be extend
 the <a class="reference internal" href="../valid/conventions.html#context"><span class="std std-ref">context</span></a> is locally extended with an additional component that records the <a class="reference internal" href="../syntax/types.html#syntax-subtype"><span class="std std-ref">sub type</span></a> corresponding to each <a class="reference internal" href="../valid/conventions.html#syntax-rectypeidx"><span class="std std-ref">recursive type index</span></a> within the current <a class="reference internal" href="../syntax/types.html#syntax-rectype"><span class="std std-ref">recursive type</span></a>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
-\def\mathdef1428#1{{}}\mathdef1428{context} &amp; C &amp;::=&amp;
+\def\mathdef1543#1{{}}\mathdef1543{context} &amp; C &amp;::=&amp;
   \{~ \dots, \href{../appendix/properties.html#context-ext}{\mathsf{recs}} ~ \href{../syntax/types.html#syntax-subtype}{\mathit{subtype}}^\ast ~\} \\
 \end{array}\end{split}\]</div>
 </section>
@@ -1252,15 +1253,15 @@ but it does not need to perform backtracking or record any non-syntactic constra
 <p>Technically, the <a class="reference internal" href="../syntax/types.html#syntax-type"><span class="std std-ref">syntax</span></a> of <a class="reference internal" href="../syntax/types.html#syntax-heaptype"><span class="std std-ref">heap</span></a>, <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value</span></a>, and <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result</span></a> types can be enriched with type variables as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
-\def\mathdef1428#1{{}}\mathdef1428{nullability} &amp; \mathit{null} &amp;::=&amp;
+\def\mathdef1543#1{{}}\mathdef1543{nullability} &amp; \mathit{null} &amp;::=&amp;
   \href{../syntax/types.html#syntax-reftype}{\mathsf{null}}^? ~|~ \alpha_{\mathit{null}} \\
-\def\mathdef1428#1{{}}\mathdef1428{heap type} &amp; \href{../syntax/types.html#syntax-heaptype}{\mathit{heaptype}} &amp;::=&amp;
+\def\mathdef1543#1{{}}\mathdef1543{heap type} &amp; \href{../syntax/types.html#syntax-heaptype}{\mathit{heaptype}} &amp;::=&amp;
   \dots ~|~ \alpha_{\href{../syntax/types.html#syntax-heaptype}{\mathit{heaptype}}} \\
-\def\mathdef1428#1{{}}\mathdef1428{reference type} &amp; \href{../syntax/types.html#syntax-reftype}{\mathit{reftype}} &amp;::=&amp;
+\def\mathdef1543#1{{}}\mathdef1543{reference type} &amp; \href{../syntax/types.html#syntax-reftype}{\mathit{reftype}} &amp;::=&amp;
   \href{../syntax/types.html#syntax-reftype}{\mathsf{ref}}~\mathit{null}~\href{../syntax/types.html#syntax-heaptype}{\mathit{heaptype}} \\
-\def\mathdef1428#1{{}}\mathdef1428{value type} &amp; \href{../syntax/types.html#syntax-valtype}{\mathit{valtype}} &amp;::=&amp;
+\def\mathdef1543#1{{}}\mathdef1543{value type} &amp; \href{../syntax/types.html#syntax-valtype}{\mathit{valtype}} &amp;::=&amp;
   \dots ~|~ \alpha_{\href{../syntax/types.html#syntax-valtype}{\mathit{valtype}}} ~|~ \alpha_{\mathit{numvectype}} \\
-\def\mathdef1428#1{{}}\mathdef1428{result type} &amp; \href{../syntax/types.html#syntax-resulttype}{\mathit{resulttype}} &amp;::=&amp;
+\def\mathdef1543#1{{}}\mathdef1543{result type} &amp; \href{../syntax/types.html#syntax-resulttype}{\mathit{resulttype}} &amp;::=&amp;
   [\alpha_{\href{../syntax/types.html#syntax-valtype}{\mathit{valtype}}^\ast}^?~\href{../syntax/types.html#syntax-valtype}{\mathit{valtype}}^\ast] \\
 \end{array}\end{split}\]</div>
 <p>where each <span class="math notranslate nohighlight">\(\alpha_{\mathit{xyz}}\)</span> ranges over a set of type variables for syntactic class <span class="math notranslate nohighlight">\(\mathit{xyz}\)</span>, respectively.

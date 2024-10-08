@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Embedding &#8212; WebAssembly 3.0 (Draft 2024-10-03)</title>
+    <title>Embedding &#8212; WebAssembly 3.0 (Draft 2024-10-08)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -18,7 +18,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Implementation Limitations" href="implementation.html" />
+    <link rel="next" title="Profiles" href="profiles.html" />
     <link rel="prev" title="Appendix" href="index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -44,6 +44,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../text/index.html">Text Format</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Appendix</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles.html">Profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation.html">Implementation Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="properties.html">Type Soundness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="properties.html#type-system-properties">Type System Properties</a></li>
@@ -113,7 +114,7 @@ Hence, these syntactic classes can also be interpreted as types.</p>
 <p>Interface operation that are predicates return Boolean values:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
-\def\mathdef162#1{{}}\mathdef162{Boolean} &amp; \href{../appendix/embedding.html#embed-bool}{\mathit{bool}} &amp;::=&amp; \href{../appendix/embedding.html#embed-bool}{\mathit{false}} ~|~ \href{../appendix/embedding.html#embed-bool}{\mathit{true}} \\
+\def\mathdef165#1{{}}\mathdef165{Boolean} &amp; \href{../appendix/embedding.html#embed-bool}{\mathit{bool}} &amp;::=&amp; \href{../appendix/embedding.html#embed-bool}{\mathit{false}} ~|~ \href{../appendix/embedding.html#embed-bool}{\mathit{true}} \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="exceptions-and-errors">
@@ -121,13 +122,13 @@ Hence, these syntactic classes can also be interpreted as types.</p>
 <p>Invoking an exported function may throw or propagate exceptions, expressed by an auxiliary syntactic class:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
-\def\mathdef162#1{{}}\mathdef162{exception} &amp; \href{../appendix/embedding.html#embed-error}{\mathit{exception}} &amp;::=&amp; \href{../appendix/embedding.html#embed-error}{\mathsf{THROW}} ~ \href{../exec/runtime.html#syntax-exnaddr}{\mathit{exnaddr}} \\
+\def\mathdef165#1{{}}\mathdef165{exception} &amp; \href{../appendix/embedding.html#embed-error}{\mathit{exception}} &amp;::=&amp; \href{../appendix/embedding.html#embed-error}{\mathsf{THROW}} ~ \href{../exec/runtime.html#syntax-exnaddr}{\mathit{exnaddr}} \\
 \end{array}\end{split}\]</div>
 <p>The exception address <span class="math notranslate nohighlight">\(exnaddr\)</span> identifies the exception thrown.</p>
 <p>Failure of an interface operation is also indicated by an auxiliary syntactic class:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
-\def\mathdef162#1{{}}\mathdef162{error} &amp; \href{../appendix/embedding.html#embed-error}{\mathit{error}} &amp;::=&amp; \href{../appendix/embedding.html#embed-error}{\mathsf{error}} \\
+\def\mathdef165#1{{}}\mathdef165{error} &amp; \href{../appendix/embedding.html#embed-error}{\mathit{error}} &amp;::=&amp; \href{../appendix/embedding.html#embed-error}{\mathsf{error}} \\
 \end{array}\end{split}\]</div>
 <p>In addition to the error conditions specified explicitly in this section, such as invalid arguments or <a class="reference internal" href="../syntax/instructions.html#exception"><span class="std std-ref">exceptions</span></a> and <a class="reference internal" href="../intro/overview.html#trap"><span class="std std-ref">traps</span></a> resulting from <a class="reference internal" href="../exec/index.html#exec"><span class="std std-ref">execution</span></a>, implementations may also return errors when specific <a class="reference internal" href="implementation.html#impl"><span class="std std-ref">implementation limitations</span></a> are reached.</p>
 <div class="admonition note">

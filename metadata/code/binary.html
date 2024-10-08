@@ -81,12 +81,12 @@ section of format <em>T</em>.</p>
 \def\mathdef1#1{{}}\mathdef1{code metadata section} &amp; \href{binary.html#binary-codemetadata}{\mathtt{codemetadatasec}}(\mathtt{T}) &amp;::=&amp;
   \href{../../core/binary/modules.html#binary-section}{\mathtt{section}}_0(\href{binary.html#binary-codemetadata}{\mathtt{codemetadata}}(\mathtt{T})) \\
 \def\mathdef1#1{{}}\mathdef1{code metadata} &amp; \href{binary.html#binary-codemetadata}{\mathtt{codemetadata}}(\mathtt{T}) &amp;::=&amp;
-  n{:}\href{../../core/binary/values.html#binary-name}{\mathtt{name}} &amp; (\mathrel{\mbox{if}} n = \def\mathdef40#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef40{metadata.code.T}) \\ &amp;&amp;&amp;
+  n{:}\href{../../core/binary/values.html#binary-name}{\mathtt{name}} &amp; (\mathrel{\mbox{if}} n = \def\mathdef41#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef41{metadata.code.T}) \\ &amp;&amp;&amp;
   \href{../../core/binary/conventions.html#binary-vec}{\mathtt{vec}}(\href{binary.html#binary-codemetadata}{\mathtt{codemetadatafunc}}(\mathtt{T})) \\
 \def\mathdef1#1{{}}\mathdef1{code metadata function} &amp; \href{binary.html#binary-codemetadata}{\mathtt{codemetadatafunc}}(\mathtt{T}) &amp;::=&amp;
   x{:}\href{../../core/binary/modules.html#binary-funcidx}{\mathtt{funcidx}}~\href{../../core/binary/conventions.html#binary-vec}{\mathtt{vec}}(\href{binary.html#binary-codemetadata}{\mathtt{codemetadataitem}}(\mathtt{T})) \\
 \def\mathdef1#1{{}}\mathdef1{code metadata item} &amp; \href{binary.html#binary-codemetadata}{\mathtt{codemetadataitem}}(\mathtt{T}) &amp;::=&amp;
-  \mathit{off}{:}\href{../../core/binary/values.html#binary-int}{\def\mathdef6#1{{\mathtt{u}#1}}\mathdef6{\mathtt{32}}} ~~ \mathit{size}{:}\href{../../core/binary/values.html#binary-int}{\def\mathdef6#1{{\mathtt{u}#1}}\mathdef6{\mathtt{32}}} &amp; (\mathrel{\mbox{if}} \mathit{size} = ||\mathtt{T}||) \\ &amp;&amp;&amp;
+  \mathit{off}{:}\href{../../core/binary/values.html#binary-int}{\def\mathdef7#1{{\mathtt{u}#1}}\mathdef7{\mathtt{32}}} ~~ \mathit{size}{:}\href{../../core/binary/values.html#binary-int}{\def\mathdef7#1{{\mathtt{u}#1}}\mathdef7{\mathtt{32}}} &amp; (\mathrel{\mbox{if}} \mathit{size} = ||\mathtt{T}||) \\ &amp;&amp;&amp;
    \mathit{data}{:}\mathtt{T} \\
 \end{array}\end{split}\]</div>
 <p id="index-0">Where <span class="math notranslate nohighlight">\(\mathit{off}\)</span> is the byte offset of the attached instruction, relative to the beginning of the <span class="math notranslate nohighlight">\(\href{../../core/binary/modules.html#binary-func}{\mathtt{func}}\)</span> declaration, and <span class="math notranslate nohighlight">\(\mathit{data}\)</span> is a further payload, whose content depends on the format <span class="math notranslate nohighlight">\(T\)</span>.</p>
@@ -106,9 +106,9 @@ with name <em>‘metadata.code.branch_hint’</em>.</p>
   \href{binary.html#binary-branchhints}{\mathtt{unlikely}} \\ &amp;&amp;|&amp;
   \href{binary.html#binary-branchhints}{\mathtt{likely}} \\
 \def\mathdef1#1{{}}\mathdef1{unlikely} &amp; \href{binary.html#binary-branchhints}{\mathtt{unlikely}} &amp;::=&amp;
-  \def\mathdef41#1{\mathtt{0x#1}}\mathdef41{00} \\
+  \def\mathdef42#1{\mathtt{0x#1}}\mathdef42{00} \\
 \def\mathdef1#1{{}}\mathdef1{likely} &amp; \href{binary.html#binary-branchhints}{\mathtt{likely}} &amp;::=&amp;
-  \def\mathdef42#1{\mathtt{0x#1}}\mathdef42{01} \\
+  \def\mathdef43#1{\mathtt{0x#1}}\mathdef43{01} \\
 \end{array}\end{split}\]</div>
 <p id="index-1">A value of <span class="math notranslate nohighlight">\(\href{binary.html#binary-branchhints}{\mathtt{likely}}\)</span> means that the branch is likely to be taken, while a
 value of <span class="math notranslate nohighlight">\(\href{binary.html#binary-branchhints}{\mathtt{unlikely}}\)</span> means the opposite. A branch with no hints is considered
