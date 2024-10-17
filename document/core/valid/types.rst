@@ -502,7 +502,7 @@ Table Types
 ~~~~~~~~~~~
 
 :math:`\addrtype~\limits~\reftype`
-.................................
+..................................
 
 * The limits :math:`\limits` must be :ref:`valid <valid-limits>` within range :math:`2^{|\addrtype|}-1`.
 
@@ -529,7 +529,7 @@ Memory Types
 ~~~~~~~~~~~~
 
 :math:`\addrtype~\limits`
-........................
+.........................
 
 * The limits :math:`\limits` must be :ref:`valid <valid-limits>` within range :math:`2^{|\addrtype|-16}`.
 

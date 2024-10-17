@@ -514,7 +514,7 @@ where :math:`\val_1 \gg^+_S \val_2` denotes the transitive closure of the follow
 .. _valid-tableinst:
 
 :ref:`Table Instances <syntax-tableinst>` :math:`\{ \TITYPE~\addrtype~\limits~t, \TIELEM~\reff^\ast \}`
-......................................................................................................
+.......................................................................................................
 
 * The :ref:`table type <syntax-tabletype>` :math:`\addrtype~\limits~t` must be :ref:`valid <valid-tabletype>` under the empty :ref:`context <context>`.
 
@@ -546,7 +546,7 @@ where :math:`\val_1 \gg^+_S \val_2` denotes the transitive closure of the follow
 .. _valid-meminst:
 
 :ref:`Memory Instances <syntax-meminst>` :math:`\{ \MITYPE~\addrtype~\limits, \MIDATA~b^\ast \}`
-...............................................................................................
+................................................................................................
 
 * The :ref:`memory type <syntax-memtype>` :math:`\addrtype~\limits` must be :ref:`valid <valid-memtype>` under the empty :ref:`context <context>`.
 
