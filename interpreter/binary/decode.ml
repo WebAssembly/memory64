@@ -289,11 +289,11 @@ let limits uN s =
 let table_type s =
   let t = ref_type s in
   let lim, is64 = limits u64 s in
-  TableT (lim, (if is64 then I64AddressType else I32AddressType), t)
+  TableT (lim, (if is64 then I64AddrType else I32AddrType), t)
 
 let memory_type s =
   let lim, is64 = limits u64 s in
-  MemoryT (lim, if is64 then I64AddressType else I32AddressType)
+  MemoryT (lim, if is64 then I64AddrType else I32AddrType)
 
 let global_type s =
   let t = val_type s in

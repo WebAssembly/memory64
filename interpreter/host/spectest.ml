@@ -20,15 +20,15 @@ let global (GlobalT (_, t) as gt) =
   in ExternGlobal (Global.alloc gt v)
 
 let table =
-  let tt = TableT ({min = 10L; max = Some 20L}, I32AddressType, (Null, FuncHT)) in
+  let tt = TableT ({min = 10L; max = Some 20L}, I32AddrType, (Null, FuncHT)) in
   ExternTable (Table.alloc tt (NullRef FuncHT))
 
 let table64 =
-  let tt = TableT ({min = 10L; max = Some 20L}, I64AddressType, (Null, FuncHT)) in
+  let tt = TableT ({min = 10L; max = Some 20L}, I64AddrType, (Null, FuncHT)) in
   ExternTable (Table.alloc tt (NullRef FuncHT))
 
 let memory =
-  let mt = MemoryT ({min = 1L; max = Some 2L}, I32AddressType) in
+  let mt = MemoryT ({min = 1L; max = Some 2L}, I32AddrType) in
   ExternMemory (Memory.alloc mt)
 
 let func f ft =

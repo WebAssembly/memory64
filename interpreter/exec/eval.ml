@@ -157,7 +157,7 @@ let split n (vs : 'a stack) at = take n vs at, drop n vs at
  *   c : config
  *)
 
-let inc_address i loc =
+let inc_addr i loc =
   match i with
   | I32 x -> (I32 (I32.add x 1l) @@ loc)
   | I64 x -> (I64 (I64.add x 1L) @@ loc)
@@ -385,7 +385,7 @@ let rec step (c : config) : config =
 
       | TableSize x, vs ->
         let tab = table c.frame.inst x in
-        value_of_address (Table.address_type_of tab) (Table.size (table c.frame.inst x)) :: vs, []
+        value_of_addr (Table.addr_type_of tab) (Table.size (table c.frame.inst x)) :: vs, []
 
       | TableGrow x, Num delta :: Ref r :: vs' ->
         let tab = table c.frame.inst x in
@@ -393,7 +393,7 @@ let rec step (c : config) : config =
         let result =
           try Table.grow tab (Table.index_of_num delta) r; old_size
           with Table.SizeOverflow | Table.SizeLimit | Table.OutOfMemory -> -1L
-        in (value_of_address (Table.address_type_of tab) result) :: vs', []
+        in (value_of_addr (Table.addr_type_of tab) result) :: vs', []
 
       | TableFill x, Num n :: Ref r :: Num i :: vs' ->
         let n_64 = Table.index_of_num n in
@@ -552,7 +552,7 @@ let rec step (c : config) : config =
 
       | MemorySize x, vs ->
         let mem = memory c.frame.inst x in
-        value_of_address (Memory.address_type_of mem) (Memory.size mem) :: vs, []
+        value_of_addr (Memory.addr_type_of mem) (Memory.size mem) :: vs, []
 
       | MemoryGrow x, Num delta :: vs' ->
         let mem = memory c.frame.inst x in
@@ -560,7 +560,7 @@ let rec step (c : config) : config =
         let result =
           try Memory.grow mem (Memory.address_of_num delta); old_size
           with Memory.SizeOverflow | Memory.SizeLimit | Memory.OutOfMemory -> -1L
-        in (value_of_address (Memory.address_type_of mem) result) :: vs', []
+        in (value_of_addr (Memory.addr_type_of mem) result) :: vs', []
 
       | MemoryFill x, Num n :: Num k :: Num i :: vs' ->
         let n_64 = Memory.address_of_num n in
@@ -574,7 +574,7 @@ let rec step (c : config) : config =
             Plain (Const (k @@ e.at));
             Plain (Store
               (x, {ty = I32T; align = 0; offset = 0L; pack = Some Pack8}));
-            Plain (Const (inc_address i e.at));
+            Plain (Const (inc_addr i e.at));
             Plain (Const (k @@ e.at));
             Plain (Const (I64 (I64.sub n_64 1L) @@ e.at));
             Plain (MemoryFill x);

@@ -19,10 +19,10 @@ let valid_limits {min; max} =
   | None -> true
   | Some m -> I64.le_u min m
 
-let valid_index at i =
+let valid_addr at i =
   match at with
-  | I32AddressType -> I64.le_u i 0xffff_ffffL
-  | I64AddressType -> true
+  | I32AddrType -> I64.le_u i 0xffff_ffffL
+  | I64AddrType -> true
 
 let create size r =
   try Lib.Array64.make size r
@@ -39,7 +39,7 @@ let size tab =
 let type_of tab =
   tab.ty
 
-let address_type_of tab =
+let addr_type_of tab =
   let (TableT (_, at, _)) = type_of tab in at
 
 let index_of_num x =
@@ -55,7 +55,7 @@ let grow tab delta r =
   let new_size = Int64.add old_size delta in
   if I64.gt_u old_size new_size then raise SizeOverflow else
   let lim' = {lim with min = new_size} in
-  if not (valid_index at new_size) then raise SizeOverflow else
+  if not (valid_addr at new_size) then raise SizeOverflow else
   if not (valid_limits lim') then raise SizeLimit else
   let after = create new_size r in
   Array.blit tab.content 0 after 0 (Array.length tab.content);

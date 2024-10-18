@@ -195,7 +195,7 @@ struct
     | RecT sts -> s7 (-0x32); vec sub_type sts
 
   let limits vu {min; max} at =
-    let flags = flag (max <> None) 0 + flag (at = I64AddressType) 2 in
+    let flags = flag (max <> None) 0 + flag (at = I64AddrType) 2 in
     byte flags; vu min; opt vu max
 
   let table_type = function

@@ -26,7 +26,7 @@ let valid_limits {min; max} =
   | Some m -> I64.le_u min m
 
 let create n at =
-  if I64.gt_u n 0x10000L && at = I32AddressType then raise SizeOverflow else
+  if I64.gt_u n 0x10000L && at = I32AddrType then raise SizeOverflow else
   try
     let size = Int64.(mul n page_size) in
     let mem = Array1_64.create Int8_unsigned C_layout size in
@@ -48,7 +48,7 @@ let size mem =
 let type_of mem =
   mem.ty
 
-let address_type_of mem =
+let addr_type_of mem =
   let (MemoryT (_, at)) = type_of mem in at
 
 let address_of_num x =
@@ -70,7 +70,7 @@ let grow mem delta =
   if I64.gt_u old_size new_size then raise SizeOverflow else
   let lim' = {lim with min = new_size} in
   if not (valid_limits lim') then raise SizeLimit else
-  let after = create new_size (address_type_of mem) in
+  let after = create new_size (addr_type_of mem) in
   let dim = Array1_64.dim mem.content in
   Array1.blit (Array1_64.sub mem.content 0L dim) (Array1_64.sub after 0L dim);
   mem.ty <- MemoryT (lim', at);
