@@ -157,7 +157,7 @@ let split n (vs : 'a stack) at = take n vs at, drop n vs at
  *   c : config
  *)
 
-let inc_addr i loc =
+let inc_address i loc =
   match i with
   | I32 x -> (I32 (I32.add x 1l) @@ loc)
   | I64 x -> (I64 (I64.add x 1L) @@ loc)
@@ -574,7 +574,7 @@ let rec step (c : config) : config =
             Plain (Const (k @@ e.at));
             Plain (Store
               (x, {ty = I32T; align = 0; offset = 0L; pack = Some Pack8}));
-            Plain (Const (inc_addr i e.at));
+            Plain (Const (inc_address i e.at));
             Plain (Const (k @@ e.at));
             Plain (Const (I64 (I64.sub n_64 1L) @@ e.at));
             Plain (MemoryFill x);
