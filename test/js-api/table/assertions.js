@@ -22,8 +22,7 @@ function assert_Table(actual, expected, index = "i32") {
   assert_true(Object.isExtensible(actual), "extensible");
 
   assert_equals(actual.length, expected.length, "length");
-  for (let i = 0; i < expected.length; ++i) {
-    const idx = index === "i64" ? BigInt(i) : i;
-    assert_equals(actual.get(idx), null, `actual.get(${idx})`);
+  for (let i = index === "i64" ? 0n : 0; i < expected.length; ++i) {
+    assert_equals(actual.get(i), null, `actual.get(${i})`);
   }
 }
