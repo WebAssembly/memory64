@@ -4,9 +4,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>WebAssembly JavaScript Interface</title>
   <meta content="ED" name="w3c-status">
-  <meta content="Bikeshed version 6270e4735, updated Tue Aug 6 12:12:30 2024 -0700" name="generator">
+  <meta content="Bikeshed version 3febb7930, updated Tue Oct 15 11:33:47 2024 -0700" name="generator">
   <link href="https://www.w3.org/TR/wasm-js-api-2/" rel="canonical">
-  <meta content="aa4ff1141511c8ffc4bcadf1502957f3f6784e50" name="revision">
+  <meta content="4056ff9582da36059c794ee54b3e825f76828bb1" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>
 emu-const {
@@ -743,7 +743,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">WebAssembly JavaScript Interface</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-10-08">8 October 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-10-18">18 October 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1372,12 +1372,12 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
   <dfn class="dfn-paneled idl-code" data-dfn-for="ImportExportKind" data-dfn-type="enum-value" data-export id="dom-importexportkind-tag"><code><c- s>"tag"</c-></code></dfn>
 };
 
-<c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-indextype"><code><c- g>IndexType</c-></code></dfn> {
-  <dfn class="dfn-paneled idl-code" data-dfn-for="IndexType" data-dfn-type="enum-value" data-export id="dom-indextype-i32"><code><c- s>"i32"</c-></code></dfn>,
-  <dfn class="dfn-paneled idl-code" data-dfn-for="IndexType" data-dfn-type="enum-value" data-export id="dom-indextype-i64"><code><c- s>"i64"</c-></code></dfn>,
+<c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-addresstype"><code><c- g>AddressType</c-></code></dfn> {
+  <dfn class="dfn-paneled idl-code" data-dfn-for="AddressType" data-dfn-type="enum-value" data-export id="dom-addresstype-i32"><code><c- s>"i32"</c-></code></dfn>,
+  <dfn class="dfn-paneled idl-code" data-dfn-for="AddressType" data-dfn-type="enum-value" data-export id="dom-addresstype-i64"><code><c- s>"i64"</c-></code></dfn>,
 };
 
-<c- b>typedef</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any"><c- b>any</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export id="typedefdef-indexvalue"><code><c- g>IndexValue</c-></code></dfn>;
+<c- b>typedef</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any"><c- b>any</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export id="typedefdef-addressvalue"><code><c- g>AddressValue</c-></code></dfn>;
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-moduleexportdescriptor"><code><c- g>ModuleExportDescriptor</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="ModuleExportDescriptor" data-dfn-type="dict-member" data-export data-type="USVString" id="dom-moduleexportdescriptor-name"><code><c- g>name</c-></code></dfn>;
@@ -1521,15 +1521,15 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
    <div class="algorithm" data-algorithm="exports" data-algorithm-for="Instance"> The getter of the <dfn class="dfn-paneled idl-code" data-dfn-for="Instance" data-dfn-type="attribute" data-export id="dom-instance-exports"><code>exports</code></dfn> attribute of <code class="idl"><a data-link-type="idl" href="#instance" id="ref-for-instance③">Instance</a></code> returns <strong>this</strong>.[[Exports]]. </div>
    <h3 class="heading settled" data-level="4.3" id="memories"><span class="secno">4.3. </span><span class="content">Memories</span><a class="self-link" href="#memories"></a></h3>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-memorydescriptor"><code><c- g>MemoryDescriptor</c-></code></dfn> {
-  <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue"><c- n>IndexValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="IndexValue" id="dom-memorydescriptor-initial"><code><c- g>initial</c-></code></dfn>;
-  <a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue①"><c- n>IndexValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="IndexValue" id="dom-memorydescriptor-maximum"><code><c- g>maximum</c-></code></dfn>;
-  <a data-link-type="idl-name" href="#enumdef-indextype" id="ref-for-enumdef-indextype"><c- n>IndexType</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="IndexType" id="dom-memorydescriptor-index"><code><c- g>index</c-></code></dfn>;
+  <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="AddressValue" id="dom-memorydescriptor-initial"><code><c- g>initial</c-></code></dfn>;
+  <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue①"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="AddressValue" id="dom-memorydescriptor-maximum"><code><c- g>maximum</c-></code></dfn>;
+  <a data-link-type="idl-name" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype"><c- n>AddressType</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="AddressType" id="dom-memorydescriptor-addresstype"><code><c- g>addressType</c-></code></dfn>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#LegacyNamespace" id="ref-for-LegacyNamespace②"><c- g>LegacyNamespace</c-></a>=<a data-link-type="idl-name" href="#namespacedef-webassembly" id="ref-for-namespacedef-webassembly③"><c- n>WebAssembly</c-></a>, Exposed=*]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="memory"><code><c- g>Memory</c-></code></dfn> {
   <a class="idl-code" data-link-type="constructor" href="#dom-memory-memory" id="ref-for-dom-memory-memory"><c- g>constructor</c-></a>(<a data-link-type="idl-name" href="#dictdef-memorydescriptor" id="ref-for-dictdef-memorydescriptor"><c- n>MemoryDescriptor</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Memory/Memory(descriptor), Memory/constructor(descriptor)" data-dfn-type="argument" data-export id="dom-memory-memory-descriptor-descriptor"><code><c- g>descriptor</c-></code></dfn>);
-  <a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue②"><c- n>IndexValue</c-></a> <a class="idl-code" data-link-type="method" href="#dom-memory-grow" id="ref-for-dom-memory-grow"><c- g>grow</c-></a>(<a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue③"><c- n>IndexValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Memory/grow(delta)" data-dfn-type="argument" data-export id="dom-memory-grow-delta-delta"><code><c- g>delta</c-></code></dfn>);
+  <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue②"><c- n>AddressValue</c-></a> <a class="idl-code" data-link-type="method" href="#dom-memory-grow" id="ref-for-dom-memory-grow"><c- g>grow</c-></a>(<a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue③"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Memory/grow(delta)" data-dfn-type="argument" data-export id="dom-memory-grow-delta-delta"><code><c- g>delta</c-></code></dfn>);
   <a class="idl-code" data-link-type="interface" href="https://tc39.github.io/ecma262/#sec-arraybuffer-objects" id="ref-for-sec-arraybuffer-objects②"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dom-memory-tofixedlengthbuffer" id="ref-for-dom-memory-tofixedlengthbuffer"><c- g>toFixedLengthBuffer</c-></a>();
   <a class="idl-code" data-link-type="interface" href="https://tc39.github.io/ecma262/#sec-arraybuffer-objects" id="ref-for-sec-arraybuffer-objects③"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dom-memory-toresizablebuffer" id="ref-for-dom-memory-toresizablebuffer"><c- g>toResizableBuffer</c-></a>();
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://tc39.github.io/ecma262/#sec-arraybuffer-objects" id="ref-for-sec-arraybuffer-objects④"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="ArrayBuffer" href="#dom-memory-buffer" id="ref-for-dom-memory-buffer"><c- g>buffer</c-></a>;
@@ -1626,15 +1626,15 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
      The <dfn class="dfn-paneled idl-code" data-dfn-for="Memory" data-dfn-type="constructor" data-export data-lt="Memory(descriptor)|constructor(descriptor)" id="dom-memory-memory"><code>Memory(<var>descriptor</var>)</code></dfn> constructor, when invoked, performs the following steps: 
     <ol>
      <li data-md>
-      <p>If <var>descriptor</var>["index"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists②">exists</a>, let <var>indextype</var> be <var>descriptor</var>["index"]; otherwise, let <var>indextype</var> be "i32".</p>
+      <p>If <var>descriptor</var>["addressType"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists②">exists</a>, let <var>addrtype</var> be <var>descriptor</var>["addressType"]; otherwise, let <var>addrtype</var> be "i32".</p>
      <li data-md>
-      <p>Let <var>initial</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑤">?</a> <a data-link-type="dfn" href="#indexvaluetou64" id="ref-for-indexvaluetou64">IndexValueToU64</a>(<var>descriptor</var>["initial"], <var>indextype</var>).</p>
+      <p>Let <var>initial</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑤">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64">AddressValueToU64</a>(<var>descriptor</var>["initial"], <var>addrtype</var>).</p>
      <li data-md>
-      <p>If <var>descriptor</var>["maximum"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists③">exists</a>, let <var>maximum</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑥">?</a> <a data-link-type="dfn" href="#indexvaluetou64" id="ref-for-indexvaluetou64①">IndexValueToU64</a>(<var>descriptor</var>["maximum"], <var>indextype</var>); otherwise, let <var>maximum</var> be empty.</p>
+      <p>If <var>descriptor</var>["maximum"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists③">exists</a>, let <var>maximum</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑥">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64①">AddressValueToU64</a>(<var>descriptor</var>["maximum"], <var>addrtype</var>); otherwise, let <var>maximum</var> be empty.</p>
      <li data-md>
       <p>If <var>maximum</var> is not empty and <var>maximum</var> &lt; <var>initial</var>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-rangeerror" id="ref-for-sec-native-error-types-used-in-this-standard-rangeerror①">RangeError</a></code> exception.</p>
      <li data-md>
-      <p>Let <var>memtype</var> be <var>indextype</var> { <strong>min</strong> <var>initial</var>, <strong>max</strong> <var>maximum</var> }.</p>
+      <p>Let <var>memtype</var> be <var>addrtype</var> { <strong>min</strong> <var>initial</var>, <strong>max</strong> <var>maximum</var> }.</p>
      <li data-md>
       <p>Let <var>store</var> be the <a data-link-type="dfn" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#surrounding-agent" id="ref-for-surrounding-agent⑥">surrounding agent</a>'s <a data-link-type="dfn" href="#associated-store" id="ref-for-associated-store④">associated store</a>.</p>
      <li data-md>
@@ -1705,13 +1705,13 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
      <li data-md>
       <p>Let <var>store</var> be the <a data-link-type="dfn" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#surrounding-agent" id="ref-for-surrounding-agent①①">surrounding agent</a>'s <a data-link-type="dfn" href="#associated-store" id="ref-for-associated-store⑧">associated store</a>.</p>
      <li data-md>
-      <p>Let <var>indextype</var> be the <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-idxtype" id="ref-for-syntax-idxtype">index type</a> in <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-mem-type" id="ref-for-embed-mem-type">mem_type</a>(<var>store</var>, <var>memaddr</var>).</p>
+      <p>Let <var>addrtype</var> be the <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-addrtype" id="ref-for-syntax-addrtype">address type</a> in <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-mem-type" id="ref-for-embed-mem-type">mem_type</a>(<var>store</var>, <var>memaddr</var>).</p>
      <li data-md>
-      <p>Let <var>delta64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑧">?</a> <a data-link-type="dfn" href="#indexvaluetou64" id="ref-for-indexvaluetou64②">IndexValueToU64</a>(<var>delta</var>, <var>indextype</var>).</p>
+      <p>Let <var>delta64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑧">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64②">AddressValueToU64</a>(<var>delta</var>, <var>addrtype</var>).</p>
      <li data-md>
       <p>Let <var>ret</var> be the result of <a data-link-type="dfn" href="#grow-the-memory-buffer" id="ref-for-grow-the-memory-buffer">growing the memory buffer</a> associated with <var>memaddr</var> by <var>delta64</var>.</p>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="#u64toindexvalue" id="ref-for-u64toindexvalue">U64ToIndexValue</a>(<var>ret</var>, <var>indextype</var>).</p>
+      <p>Return <a data-link-type="dfn" href="#u64toaddressvalue" id="ref-for-u64toaddressvalue">U64ToAddressValue</a>(<var>ret</var>, <var>addrtype</var>).</p>
     </ol>
    </div>
    <p>Immediately after a WebAssembly <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/exec/instructions.html#exec-memory-grow" id="ref-for-exec-memory-grow">memory.grow</a> instruction executes, perform the following steps:</p>
@@ -1836,18 +1836,18 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-tabledescriptor"><code><c- g>TableDescriptor</c-></code></dfn> {
   <c- b>required</c-> <a data-link-type="idl-name" href="#enumdef-tablekind" id="ref-for-enumdef-tablekind"><c- n>TableKind</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="TableKind" id="dom-tabledescriptor-element"><code><c- g>element</c-></code></dfn>;
-  <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue④"><c- n>IndexValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="IndexValue" id="dom-tabledescriptor-initial"><code><c- g>initial</c-></code></dfn>;
-  <a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue⑤"><c- n>IndexValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="IndexValue" id="dom-tabledescriptor-maximum"><code><c- g>maximum</c-></code></dfn>;
-  <a data-link-type="idl-name" href="#enumdef-indextype" id="ref-for-enumdef-indextype①"><c- n>IndexType</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="IndexType" id="dom-tabledescriptor-index"><code><c- g>index</c-></code></dfn>;
+  <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue④"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="AddressValue" id="dom-tabledescriptor-initial"><code><c- g>initial</c-></code></dfn>;
+  <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue⑤"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="AddressValue" id="dom-tabledescriptor-maximum"><code><c- g>maximum</c-></code></dfn>;
+  <a data-link-type="idl-name" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype①"><c- n>AddressType</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="AddressType" id="dom-tabledescriptor-addresstype"><code><c- g>addressType</c-></code></dfn>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#LegacyNamespace" id="ref-for-LegacyNamespace③"><c- g>LegacyNamespace</c-></a>=<a data-link-type="idl-name" href="#namespacedef-webassembly" id="ref-for-namespacedef-webassembly④"><c- n>WebAssembly</c-></a>, Exposed=*]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="table"><code><c- g>Table</c-></code></dfn> {
   <a class="idl-code" data-link-type="constructor" href="#dom-table-table" id="ref-for-dom-table-table"><c- g>constructor</c-></a>(<a data-link-type="idl-name" href="#dictdef-tabledescriptor" id="ref-for-dictdef-tabledescriptor"><c- n>TableDescriptor</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/Table(descriptor, value), Table/constructor(descriptor, value), Table/Table(descriptor), Table/constructor(descriptor)" data-dfn-type="argument" data-export id="dom-table-table-descriptor-value-descriptor"><code><c- g>descriptor</c-></code></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any①"><c- b>any</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/Table(descriptor, value), Table/constructor(descriptor, value), Table/Table(descriptor), Table/constructor(descriptor)" data-dfn-type="argument" data-export id="dom-table-table-descriptor-value-value"><code><c- g>value</c-></code></dfn>);
-  <a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue⑥"><c- n>IndexValue</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-grow" id="ref-for-dom-table-grow"><c- g>grow</c-></a>(<a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue⑦"><c- n>IndexValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/grow(delta, value), Table/grow(delta)" data-dfn-type="argument" data-export id="dom-table-grow-delta-value-delta"><code><c- g>delta</c-></code></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any②"><c- b>any</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/grow(delta, value), Table/grow(delta)" data-dfn-type="argument" data-export id="dom-table-grow-delta-value-value"><code><c- g>value</c-></code></dfn>);
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any③"><c- b>any</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-get" id="ref-for-dom-table-get"><c- g>get</c-></a>(<a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue⑧"><c- n>IndexValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/get(index)" data-dfn-type="argument" data-export id="dom-table-get-index-index"><code><c- g>index</c-></code></dfn>);
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-set" id="ref-for-dom-table-set"><c- g>set</c-></a>(<a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue⑨"><c- n>IndexValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/set(index, value), Table/set(index)" data-dfn-type="argument" data-export id="dom-table-set-index-value-index"><code><c- g>index</c-></code></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any④"><c- b>any</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/set(index, value), Table/set(index)" data-dfn-type="argument" data-export id="dom-table-set-index-value-value"><code><c- g>value</c-></code></dfn>);
-  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue①⓪"><c- n>IndexValue</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="IndexValue" href="#dom-table-length" id="ref-for-dom-table-length"><c- g>length</c-></a>;
+  <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue⑥"><c- n>AddressValue</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-grow" id="ref-for-dom-table-grow"><c- g>grow</c-></a>(<a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue⑦"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/grow(delta, value), Table/grow(delta)" data-dfn-type="argument" data-export id="dom-table-grow-delta-value-delta"><code><c- g>delta</c-></code></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any②"><c- b>any</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/grow(delta, value), Table/grow(delta)" data-dfn-type="argument" data-export id="dom-table-grow-delta-value-value"><code><c- g>value</c-></code></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any③"><c- b>any</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-get" id="ref-for-dom-table-get"><c- g>get</c-></a>(<a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue⑧"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/get(index)" data-dfn-type="argument" data-export id="dom-table-get-index-index"><code><c- g>index</c-></code></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-set" id="ref-for-dom-table-set"><c- g>set</c-></a>(<a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue⑨"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/set(index, value), Table/set(index)" data-dfn-type="argument" data-export id="dom-table-set-index-value-index"><code><c- g>index</c-></code></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any" id="ref-for-idl-any④"><c- b>any</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Table/set(index, value), Table/set(index)" data-dfn-type="argument" data-export id="dom-table-set-index-value-value"><code><c- g>value</c-></code></dfn>);
+  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue①⓪"><c- n>AddressValue</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="AddressValue" href="#dom-table-length" id="ref-for-dom-table-length"><c- g>length</c-></a>;
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table②">Table</a></code> object represents a single <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/exec/runtime.html#table-instances" id="ref-for-table-instances">table instance</a> which can be simultaneously referenced by
@@ -1897,11 +1897,11 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
         <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw">Throw</a> a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror③">TypeError</a></code> exception.</p>
       </ol>
      <li data-md>
-      <p>If <var>descriptor</var>["index"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists⑦">exists</a>, let <var>indextype</var> be <var>descriptor</var>["index"]; otherwise, let <var>indextype</var> be "i32".</p>
+      <p>If <var>descriptor</var>["addressType"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists⑦">exists</a>, let <var>addrtype</var> be <var>descriptor</var>["addressType"]; otherwise, let <var>addrtype</var> be "i32".</p>
      <li data-md>
-      <p>Let <var>initial</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①①">?</a> <a data-link-type="dfn" href="#indexvaluetou64" id="ref-for-indexvaluetou64③">IndexValueToU64</a>(<var>descriptor</var>["initial"], <var>indextype</var>).</p>
+      <p>Let <var>initial</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①①">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64③">AddressValueToU64</a>(<var>descriptor</var>["initial"], <var>addrtype</var>).</p>
      <li data-md>
-      <p>If <var>descriptor</var>["maximum"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists⑧">exists</a>, let <var>maximum</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①②">?</a> <a data-link-type="dfn" href="#indexvaluetou64" id="ref-for-indexvaluetou64④">IndexValueToU64</a>(<var>descriptor</var>["maximum"], <var>indextype</var>); otherwise, let <var>maximum</var> be empty.</p>
+      <p>If <var>descriptor</var>["maximum"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists⑧">exists</a>, let <var>maximum</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①②">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64④">AddressValueToU64</a>(<var>descriptor</var>["maximum"], <var>addrtype</var>); otherwise, let <var>maximum</var> be empty.</p>
      <li data-md>
       <p>If <var>maximum</var> is not empty and <var>maximum</var> &lt; <var>initial</var>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-rangeerror" id="ref-for-sec-native-error-types-used-in-this-standard-rangeerror⑤">RangeError</a></code> exception.</p>
      <li data-md>
@@ -1919,7 +1919,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
         <p>Let <var>ref</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①③">?</a> <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue①">ToWebAssemblyValue</a>(<var>value</var>, <var>elementtype</var>).</p>
       </ol>
      <li data-md>
-      <p>Let <var>type</var> be the <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype" id="ref-for-syntax-tabletype">table type</a> (<var>indextype</var>, { <strong>min</strong> <var>initial</var>, <strong>max</strong> <var>maximum</var> }, <var>elementtype</var>).</p>
+      <p>Let <var>type</var> be the <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype" id="ref-for-syntax-tabletype">table type</a> (<var>addrtype</var>, { <strong>min</strong> <var>initial</var>, <strong>max</strong> <var>maximum</var> }, <var>elementtype</var>).</p>
      <li data-md>
       <p>Let <var>store</var> be the <a data-link-type="dfn" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#surrounding-agent" id="ref-for-surrounding-agent①⑥">surrounding agent</a>'s <a data-link-type="dfn" href="#associated-store" id="ref-for-associated-store①⓪">associated store</a>.</p>
      <li data-md>
@@ -1940,9 +1940,9 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
      <li data-md>
       <p>Let <var>initialSize</var> be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-size" id="ref-for-embed-table-size">table_size</a>(<var>store</var>, <var>tableaddr</var>).</p>
      <li data-md>
-      <p>Let (<var>indextype</var>, <var>limits</var>, <var>elementtype</var>) be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type" id="ref-for-embed-table-type">table_type</a>(<var>store</var>, <var>tableaddr</var>).</p>
+      <p>Let (<var>addrtype</var>, <var>limits</var>, <var>elementtype</var>) be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type" id="ref-for-embed-table-type">table_type</a>(<var>store</var>, <var>tableaddr</var>).</p>
      <li data-md>
-      <p>Let <var>delta64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①④">?</a> <a data-link-type="dfn" href="#indexvaluetou64" id="ref-for-indexvaluetou64⑤">IndexValueToU64</a>(<var>delta</var>, <var>indextype</var>).</p>
+      <p>Let <var>delta64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①④">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64⑤">AddressValueToU64</a>(<var>delta</var>, <var>addrtype</var>).</p>
      <li data-md>
       <p>If <var>value</var> is missing,</p>
       <ol>
@@ -1976,11 +1976,11 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
      <li data-md>
       <p>Let <var>store</var> be the <a data-link-type="dfn" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#surrounding-agent" id="ref-for-surrounding-agent②⓪">surrounding agent</a>'s <a data-link-type="dfn" href="#associated-store" id="ref-for-associated-store①④">associated store</a>.</p>
      <li data-md>
-      <p>Let <var>indextype</var> be the <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-idxtype" id="ref-for-syntax-idxtype①">index type</a> in <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type" id="ref-for-embed-table-type①">table_type</a>(<var>store</var>, <var>tableaddr</var>).</p>
+      <p>Let <var>addrtype</var> be the <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-addrtype" id="ref-for-syntax-addrtype①">address type</a> in <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type" id="ref-for-embed-table-type①">table_type</a>(<var>store</var>, <var>tableaddr</var>).</p>
      <li data-md>
       <p>Let <var>length64</var> be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-size" id="ref-for-embed-table-size①">table_size</a>(<var>store</var>, <var>tableaddr</var>).</p>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="#u64toindexvalue" id="ref-for-u64toindexvalue①">U64ToIndexValue</a>(<var>length64</var>, <var>indextype</var>).</p>
+      <p>Return <a data-link-type="dfn" href="#u64toaddressvalue" id="ref-for-u64toaddressvalue①">U64ToAddressValue</a>(<var>length64</var>, <var>addrtype</var>).</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="get(index)" data-algorithm-for="Table">
@@ -1991,7 +1991,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
      <li data-md>
       <p>Let <var>store</var> be the <a data-link-type="dfn" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#surrounding-agent" id="ref-for-surrounding-agent②①">surrounding agent</a>'s <a data-link-type="dfn" href="#associated-store" id="ref-for-associated-store①⑤">associated store</a>.</p>
      <li data-md>
-      <p>Let (<var>indextype</var>, <var>limits</var>, <var>elementtype</var>) be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type" id="ref-for-embed-table-type②">table_type</a>(<var>store</var>, <var>tableaddr</var>).</p>
+      <p>Let (<var>addrtype</var>, <var>limits</var>, <var>elementtype</var>) be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type" id="ref-for-embed-table-type②">table_type</a>(<var>store</var>, <var>tableaddr</var>).</p>
      <li data-md>
       <p>If <var>elementtype</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-reftype" id="ref-for-syntax-reftype①">exnref</a>,</p>
       <ol>
@@ -1999,7 +1999,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
         <p>Throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑤">TypeError</a></code> exception.</p>
       </ol>
      <li data-md>
-      <p>Let <var>index64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑥">?</a> <a data-link-type="dfn" href="#indexvaluetou64" id="ref-for-indexvaluetou64⑥">IndexValueToU64</a>(<var>index</var>, <var>indextype</var>).</p>
+      <p>Let <var>index64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑥">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64⑥">AddressValueToU64</a>(<var>index</var>, <var>addrtype</var>).</p>
      <li data-md>
       <p>Let <var>result</var> be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-read" id="ref-for-embed-table-read">table_read</a>(<var>store</var>, <var>tableaddr</var>, <var>index64</var>).</p>
      <li data-md>
@@ -2016,7 +2016,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
      <li data-md>
       <p>Let <var>store</var> be the <a data-link-type="dfn" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#surrounding-agent" id="ref-for-surrounding-agent②②">surrounding agent</a>'s <a data-link-type="dfn" href="#associated-store" id="ref-for-associated-store①⑥">associated store</a>.</p>
      <li data-md>
-      <p>Let (<var>indextype</var>, <var>limits</var>, <var>elementtype</var>) be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type" id="ref-for-embed-table-type③">table_type</a>(<var>store</var>, <var>tableaddr</var>).</p>
+      <p>Let (<var>addrtype</var>, <var>limits</var>, <var>elementtype</var>) be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type" id="ref-for-embed-table-type③">table_type</a>(<var>store</var>, <var>tableaddr</var>).</p>
      <li data-md>
       <p>If <var>elementtype</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-reftype" id="ref-for-syntax-reftype②">exnref</a>,</p>
       <ol>
@@ -2024,7 +2024,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
         <p>Throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑥">TypeError</a></code> exception.</p>
       </ol>
      <li data-md>
-      <p>Let <var>index64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑦">?</a> <a data-link-type="dfn" href="#indexvaluetou64" id="ref-for-indexvaluetou64⑦">IndexValueToU64</a>(<var>index</var>, <var>indextype</var>).</p>
+      <p>Let <var>index64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑦">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64⑦">AddressValueToU64</a>(<var>index</var>, <var>addrtype</var>).</p>
      <li data-md>
       <p>If <var>value</var> is missing,</p>
       <ol>
@@ -2729,11 +2729,11 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
       <p class="assertion">Assert: This step is not reached.</p>
     </ol>
    </div>
-   <div class="algorithm" data-algorithm="IndexValueToU64">
-     The algorithm <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="indexvaluetou64">IndexValueToU64</dfn>(<var>v</var>, <var>indextype</var>) converts a JavaScript value to a WebAssembly <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/values.html#syntax-int" id="ref-for-syntax-int">u64</a> for use in embedding operations. It is designed to act like <a data-link-type="dfn" href="https://heycam.github.io/webidl/#EnforceRange" id="ref-for-EnforceRange">[EnforceRange]</a> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long">unsigned long</a> for <code class="idl"><a data-link-type="idl" href="#enumdef-indextype" id="ref-for-enumdef-indextype②">IndexType</a></code> "i32", and to extend these semantics to <code class="idl"><a data-link-type="idl" href="#enumdef-indextype" id="ref-for-enumdef-indextype③">IndexType</a></code> "i64", by performing the following steps: 
+   <div class="algorithm" data-algorithm="AddressValueToU64">
+     The algorithm <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="addressvaluetou64">AddressValueToU64</dfn>(<var>v</var>, <var>addrtype</var>) converts a JavaScript value to a WebAssembly <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/values.html#syntax-int" id="ref-for-syntax-int">u64</a> for use in embedding operations. It is designed to act like <a data-link-type="dfn" href="https://heycam.github.io/webidl/#EnforceRange" id="ref-for-EnforceRange">[EnforceRange]</a> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long">unsigned long</a> for <code class="idl"><a data-link-type="idl" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype②">AddressType</a></code> "i32", and to extend these semantics to <code class="idl"><a data-link-type="idl" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype③">AddressType</a></code> "i64", by performing the following steps: 
     <ol>
      <li data-md>
-      <p>If <var>indextype</var> is "i32",</p>
+      <p>If <var>addrtype</var> is "i32",</p>
       <ol>
        <li data-md>
         <p>Let <var>n</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands③④">?</a> <a data-link-type="abstract-op" href="https://webidl.spec.whatwg.org/#abstract-opdef-converttoint" id="ref-for-abstract-opdef-converttoint">ConvertToInt</a>(<var>v</var>, 32, "unsigned"), where the destination type is associated with <a data-link-type="dfn" href="https://heycam.github.io/webidl/#EnforceRange" id="ref-for-EnforceRange①">[EnforceRange]</a>.</p>
@@ -2742,7 +2742,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
         <p>Return <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#ℝ" id="ref-for-ℝ②">ℝ</a>(<var>n</var>) as a WebAssembly <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/values.html#syntax-int" id="ref-for-syntax-int①">u64</a>.</p>
       </ol>
      <li data-md>
-      <p>If <var>indextype</var> is "i64",</p>
+      <p>If <var>addrtype</var> is "i64",</p>
       <ol>
        <li data-md>
         <p>Let <var>n</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands③⑤">?</a> <a data-link-type="abstract-op" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-tobigint" id="ref-for-sec-tobigint">ToBigInt</a>(<var>v</var>).</p>
@@ -2756,13 +2756,13 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
       <p class="assertion">Assert: This step is not reached.</p>
     </ol>
    </div>
-   <div class="algorithm" data-algorithm="U64ToIndexValue">
-     The algorithm <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="u64toindexvalue">U64ToIndexValue</dfn>(<var>v</var>, <var>indextype</var>) converts a <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/values.html#syntax-int" id="ref-for-syntax-int③">u64</a> value from a WebAssembly embedding operation to the correct variant of <code class="idl"><a data-link-type="idl" href="#typedefdef-indexvalue" id="ref-for-typedefdef-indexvalue①①">IndexValue</a></code> for an <code class="idl"><a data-link-type="idl" href="#enumdef-indextype" id="ref-for-enumdef-indextype④">IndexType</a></code>, by performing the following steps: 
+   <div class="algorithm" data-algorithm="U64ToAddressValue">
+     The algorithm <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="u64toaddressvalue">U64ToAddressValue</dfn>(<var>v</var>, <var>addrtype</var>) converts a <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/values.html#syntax-int" id="ref-for-syntax-int③">u64</a> value from a WebAssembly embedding operation to the correct variant of <code class="idl"><a data-link-type="idl" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue①①">AddressValue</a></code> for an <code class="idl"><a data-link-type="idl" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype④">AddressType</a></code>, by performing the following steps: 
     <ol>
      <li data-md>
-      <p>If <var>indextype</var> is "i32", return <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#𝔽" id="ref-for-𝔽④">𝔽</a>(<var>v</var> interpreted as a <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#mathematical-value" id="ref-for-mathematical-value④">mathematical value</a>).</p>
+      <p>If <var>addrtype</var> is "i32", return <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#𝔽" id="ref-for-𝔽④">𝔽</a>(<var>v</var> interpreted as a <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#mathematical-value" id="ref-for-mathematical-value④">mathematical value</a>).</p>
      <li data-md>
-      <p>Else if <var>indextype</var> is "i64", return <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#ℤ" id="ref-for-ℤ①">ℤ</a>(<var>v</var> interpreted as a <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#mathematical-value" id="ref-for-mathematical-value⑤">mathematical value</a>).</p>
+      <p>Else if <var>addrtype</var> is "i64", return <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#ℤ" id="ref-for-ℤ①">ℤ</a>(<var>v</var> interpreted as a <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#mathematical-value" id="ref-for-mathematical-value⑤">mathematical value</a>).</p>
      <li data-md>
       <p class="assertion">Assert: This step is not reached.</p>
     </ol>
@@ -3291,6 +3291,15 @@ In practice, an implementation may run out of resources for valid modules below 
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#HostResizeArrayBuffer">abstract operation HostResizeArrayBuffer</a><span>, in § 4.3</span>
+   <li><a href="#enumdef-addresstype">AddressType</a><span>, in § 4.1</span>
+   <li>
+    addressType
+    <ul>
+     <li><a href="#dom-memorydescriptor-addresstype">dict-member for MemoryDescriptor</a><span>, in § 4.3</span>
+     <li><a href="#dom-tabledescriptor-addresstype">dict-member for TableDescriptor</a><span>, in § 4.4</span>
+    </ul>
+   <li><a href="#typedefdef-addressvalue">AddressValue</a><span>, in § 4.1</span>
+   <li><a href="#addressvaluetou64">AddressValueToU64</a><span>, in § 4.6</span>
    <li><a href="#a-new-exported-function">a new Exported Function</a><span>, in § 4.6</span>
    <li><a href="#a-new-exported-gc-object">a new Exported GC Object</a><span>, in § 4.8</span>
    <li>
@@ -3383,28 +3392,19 @@ In practice, an implementation may run out of resources for valid modules below 
    <li>
     "i32"
     <ul>
-     <li><a href="#dom-indextype-i32">enum-value for IndexType</a><span>, in § 4.1</span>
+     <li><a href="#dom-addresstype-i32">enum-value for AddressType</a><span>, in § 4.1</span>
      <li><a href="#dom-valuetype-i32">enum-value for ValueType</a><span>, in § 4.5</span>
     </ul>
    <li>
     "i64"
     <ul>
-     <li><a href="#dom-indextype-i64">enum-value for IndexType</a><span>, in § 4.1</span>
+     <li><a href="#dom-addresstype-i64">enum-value for AddressType</a><span>, in § 4.1</span>
      <li><a href="#dom-valuetype-i64">enum-value for ValueType</a><span>, in § 4.5</span>
     </ul>
    <li><a href="#identified-with">identified with</a><span>, in § 3.1</span>
    <li><a href="#enumdef-importexportkind">ImportExportKind</a><span>, in § 4.1</span>
    <li><a href="#dom-module-imports">imports(moduleObject)</a><span>, in § 4.1</span>
-   <li>
-    index
-    <ul>
-     <li><a href="#dom-memorydescriptor-index">dict-member for MemoryDescriptor</a><span>, in § 4.3</span>
-     <li><a href="#dom-tabledescriptor-index">dict-member for TableDescriptor</a><span>, in § 4.4</span>
-    </ul>
    <li><a href="#index-of-the-host-function">index of the host function</a><span>, in § 4</span>
-   <li><a href="#enumdef-indextype">IndexType</a><span>, in § 4.1</span>
-   <li><a href="#typedefdef-indexvalue">IndexValue</a><span>, in § 4.1</span>
-   <li><a href="#indexvaluetou64">IndexValueToU64</a><span>, in § 4.6</span>
    <li>
     initial
     <ul>
@@ -3501,7 +3501,7 @@ In practice, an implementation may run out of resources for valid modules below 
    <li><a href="#tovaluetype">ToValueType</a><span>, in § 4.5</span>
    <li><a href="#towebassemblyvalue">ToWebAssemblyValue</a><span>, in § 4.6</span>
    <li><a href="#dom-exceptionoptions-tracestack">traceStack</a><span>, in § 4.9</span>
-   <li><a href="#u64toindexvalue">U64ToIndexValue</a><span>, in § 4.6</span>
+   <li><a href="#u64toaddressvalue">U64ToAddressValue</a><span>, in § 4.6</span>
    <li><a href="#dom-valuetype-v128">"v128"</a><span>, in § 4.5</span>
    <li><a href="#dom-webassembly-validate">validate(bytes)</a><span>, in § 4</span>
    <li>
@@ -3603,6 +3603,7 @@ In practice, an implementation may run out of resources for valid modules below 
     <ul>
      <li><span class="dfn-paneled" id="0656fbb6">+∞</span>
      <li><span class="dfn-paneled" id="048283eb">address</span>
+     <li><span class="dfn-paneled" id="815c3a81">address type</span>
      <li><span class="dfn-paneled" id="190fb93b">any</span>
      <li><span class="dfn-paneled" id="a7f74307">array address</span>
      <li><span class="dfn-paneled" id="2ad7bc40">canon</span>
@@ -3646,7 +3647,6 @@ In practice, an implementation may run out of resources for valid modules below 
      <li><span class="dfn-paneled" id="93d2e53d">i64.const</span>
      <li><span class="dfn-paneled" id="f0c8810c">import</span>
      <li><span class="dfn-paneled" id="f56c24ad">imports</span>
-     <li><span class="dfn-paneled" id="b111a5f8">index type</span>
      <li><span class="dfn-paneled" id="3952ef8f">instance_export</span>
      <li><span class="dfn-paneled" id="9233088d">match_valtype</span>
      <li><span class="dfn-paneled" id="297c7b14">mem</span>
@@ -3797,12 +3797,12 @@ In practice, an implementation may run out of resources for valid modules below 
   <a href="#dom-importexportkind-tag"><code><c- s>"tag"</c-></code></a>
 };
 
-<c- b>enum</c-> <a href="#enumdef-indextype"><code><c- g>IndexType</c-></code></a> {
-  <a href="#dom-indextype-i32"><code><c- s>"i32"</c-></code></a>,
-  <a href="#dom-indextype-i64"><code><c- s>"i64"</c-></code></a>,
+<c- b>enum</c-> <a href="#enumdef-addresstype"><code><c- g>AddressType</c-></code></a> {
+  <a href="#dom-addresstype-i32"><code><c- s>"i32"</c-></code></a>,
+  <a href="#dom-addresstype-i64"><code><c- s>"i64"</c-></code></a>,
 };
 
-<c- b>typedef</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a href="#typedefdef-indexvalue"><code><c- g>IndexValue</c-></code></a>;
+<c- b>typedef</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a href="#typedefdef-addressvalue"><code><c- g>AddressValue</c-></code></a>;
 
 <c- b>dictionary</c-> <a href="#dictdef-moduleexportdescriptor"><code><c- g>ModuleExportDescriptor</c-></code></a> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a data-type="USVString" href="#dom-moduleexportdescriptor-name"><code><c- g>name</c-></code></a>;
@@ -3831,15 +3831,15 @@ In practice, an implementation may run out of resources for valid modules below 
 };
 
 <c- b>dictionary</c-> <a href="#dictdef-memorydescriptor"><code><c- g>MemoryDescriptor</c-></code></a> {
-  <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a data-type="IndexValue" href="#dom-memorydescriptor-initial"><code><c- g>initial</c-></code></a>;
-  <a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a data-type="IndexValue" href="#dom-memorydescriptor-maximum"><code><c- g>maximum</c-></code></a>;
-  <a data-link-type="idl-name" href="#enumdef-indextype"><c- n>IndexType</c-></a> <a data-type="IndexType" href="#dom-memorydescriptor-index"><code><c- g>index</c-></code></a>;
+  <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a data-type="AddressValue" href="#dom-memorydescriptor-initial"><code><c- g>initial</c-></code></a>;
+  <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a data-type="AddressValue" href="#dom-memorydescriptor-maximum"><code><c- g>maximum</c-></code></a>;
+  <a data-link-type="idl-name" href="#enumdef-addresstype"><c- n>AddressType</c-></a> <a data-type="AddressType" href="#dom-memorydescriptor-addresstype"><code><c- g>addressType</c-></code></a>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#LegacyNamespace"><c- g>LegacyNamespace</c-></a>=<a data-link-type="idl-name" href="#namespacedef-webassembly"><c- n>WebAssembly</c-></a>, Exposed=*]
 <c- b>interface</c-> <a href="#memory"><code><c- g>Memory</c-></code></a> {
   <a class="idl-code" data-link-type="constructor" href="#dom-memory-memory"><c- g>constructor</c-></a>(<a data-link-type="idl-name" href="#dictdef-memorydescriptor"><c- n>MemoryDescriptor</c-></a> <a href="#dom-memory-memory-descriptor-descriptor"><code><c- g>descriptor</c-></code></a>);
-  <a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a class="idl-code" data-link-type="method" href="#dom-memory-grow"><c- g>grow</c-></a>(<a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a href="#dom-memory-grow-delta-delta"><code><c- g>delta</c-></code></a>);
+  <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a class="idl-code" data-link-type="method" href="#dom-memory-grow"><c- g>grow</c-></a>(<a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a href="#dom-memory-grow-delta-delta"><code><c- g>delta</c-></code></a>);
   <a class="idl-code" data-link-type="interface" href="https://tc39.github.io/ecma262/#sec-arraybuffer-objects"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dom-memory-tofixedlengthbuffer"><c- g>toFixedLengthBuffer</c-></a>();
   <a class="idl-code" data-link-type="interface" href="https://tc39.github.io/ecma262/#sec-arraybuffer-objects"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dom-memory-toresizablebuffer"><c- g>toResizableBuffer</c-></a>();
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://tc39.github.io/ecma262/#sec-arraybuffer-objects"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="ArrayBuffer" href="#dom-memory-buffer"><c- g>buffer</c-></a>;
@@ -3854,18 +3854,18 @@ In practice, an implementation may run out of resources for valid modules below 
 
 <c- b>dictionary</c-> <a href="#dictdef-tabledescriptor"><code><c- g>TableDescriptor</c-></code></a> {
   <c- b>required</c-> <a data-link-type="idl-name" href="#enumdef-tablekind"><c- n>TableKind</c-></a> <a data-type="TableKind" href="#dom-tabledescriptor-element"><code><c- g>element</c-></code></a>;
-  <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a data-type="IndexValue" href="#dom-tabledescriptor-initial"><code><c- g>initial</c-></code></a>;
-  <a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a data-type="IndexValue" href="#dom-tabledescriptor-maximum"><code><c- g>maximum</c-></code></a>;
-  <a data-link-type="idl-name" href="#enumdef-indextype"><c- n>IndexType</c-></a> <a data-type="IndexType" href="#dom-tabledescriptor-index"><code><c- g>index</c-></code></a>;
+  <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a data-type="AddressValue" href="#dom-tabledescriptor-initial"><code><c- g>initial</c-></code></a>;
+  <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a data-type="AddressValue" href="#dom-tabledescriptor-maximum"><code><c- g>maximum</c-></code></a>;
+  <a data-link-type="idl-name" href="#enumdef-addresstype"><c- n>AddressType</c-></a> <a data-type="AddressType" href="#dom-tabledescriptor-addresstype"><code><c- g>addressType</c-></code></a>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#LegacyNamespace"><c- g>LegacyNamespace</c-></a>=<a data-link-type="idl-name" href="#namespacedef-webassembly"><c- n>WebAssembly</c-></a>, Exposed=*]
 <c- b>interface</c-> <a href="#table"><code><c- g>Table</c-></code></a> {
   <a class="idl-code" data-link-type="constructor" href="#dom-table-table"><c- g>constructor</c-></a>(<a data-link-type="idl-name" href="#dictdef-tabledescriptor"><c- n>TableDescriptor</c-></a> <a href="#dom-table-table-descriptor-value-descriptor"><code><c- g>descriptor</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a href="#dom-table-table-descriptor-value-value"><code><c- g>value</c-></code></a>);
-  <a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-grow"><c- g>grow</c-></a>(<a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a href="#dom-table-grow-delta-value-delta"><code><c- g>delta</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a href="#dom-table-grow-delta-value-value"><code><c- g>value</c-></code></a>);
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-get"><c- g>get</c-></a>(<a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a href="#dom-table-get-index-index"><code><c- g>index</c-></code></a>);
-  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-set"><c- g>set</c-></a>(<a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a href="#dom-table-set-index-value-index"><code><c- g>index</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a href="#dom-table-set-index-value-value"><code><c- g>value</c-></code></a>);
-  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="#typedefdef-indexvalue"><c- n>IndexValue</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="IndexValue" href="#dom-table-length"><c- g>length</c-></a>;
+  <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-grow"><c- g>grow</c-></a>(<a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a href="#dom-table-grow-delta-value-delta"><code><c- g>delta</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a href="#dom-table-grow-delta-value-value"><code><c- g>value</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-get"><c- g>get</c-></a>(<a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a href="#dom-table-get-index-index"><code><c- g>index</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-table-set"><c- g>set</c-></a>(<a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a href="#dom-table-set-index-value-index"><code><c- g>index</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-any"><c- b>any</c-></a> <a href="#dom-table-set-index-value-value"><code><c- g>value</c-></code></a>);
+  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="AddressValue" href="#dom-table-length"><c- g>length</c-></a>;
 };
 
 <c- b>enum</c-> <a href="#enumdef-valuetype"><code><c- g>ValueType</c-></code></a> {
@@ -4218,6 +4218,7 @@ let dfnPanelData = {
 "8047ff82": {"dfnID":"8047ff82","dfnText":"nan","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-float"},{"id":"ref-for-syntax-float\u2460"},{"id":"ref-for-syntax-float\u2461"},{"id":"ref-for-syntax-float\u2462"},{"id":"ref-for-syntax-float\u2463"},{"id":"ref-for-syntax-float\u2464"},{"id":"ref-for-syntax-float\u2465"},{"id":"ref-for-syntax-float\u2466"},{"id":"ref-for-syntax-float\u2467"},{"id":"ref-for-syntax-float\u2468"},{"id":"ref-for-syntax-float\u2460\u24ea"},{"id":"ref-for-syntax-float\u2460\u2460"}],"title":"4.6. Exported Functions"}],"url":"https://webassembly.github.io/spec/core/syntax/values.html#syntax-float"},
 "806927f3": {"dfnID":"806927f3","dfnText":"reftype","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-reftype"},{"id":"ref-for-syntax-reftype\u2460"},{"id":"ref-for-syntax-reftype\u2461"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-syntax-reftype\u2462"},{"id":"ref-for-syntax-reftype\u2463"},{"id":"ref-for-syntax-reftype\u2464"},{"id":"ref-for-syntax-reftype\u2465"},{"id":"ref-for-syntax-reftype\u2466"},{"id":"ref-for-syntax-reftype\u2467"}],"title":"4.5. Globals"},{"refs":[{"id":"ref-for-syntax-reftype\u2468"},{"id":"ref-for-syntax-reftype\u2460\u24ea"},{"id":"ref-for-syntax-reftype\u2460\u2460"},{"id":"ref-for-syntax-reftype\u2460\u2461"},{"id":"ref-for-syntax-reftype\u2460\u2462"},{"id":"ref-for-syntax-reftype\u2460\u2463"},{"id":"ref-for-syntax-reftype\u2460\u2464"},{"id":"ref-for-syntax-reftype\u2460\u2465"}],"title":"4.6. Exported Functions"},{"refs":[{"id":"ref-for-syntax-reftype\u2460\u2466"},{"id":"ref-for-syntax-reftype\u2460\u2467"}],"title":"4.9. Exceptions"},{"refs":[{"id":"ref-for-syntax-reftype\u2460\u2468"},{"id":"ref-for-syntax-reftype\u2461\u24ea"}],"title":"4.9.1. JavaScript exceptions"}],"url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-reftype"},
 "81131be0": {"dfnID":"81131be0","dfnText":"Call","external":true,"refSections":[{"refs":[{"id":"ref-for-sec-call"}],"title":"4.6. Exported Functions"}],"url":"https://tc39.es/ecma262/multipage/abstract-operations.html#sec-call"},
+"815c3a81": {"dfnID":"815c3a81","dfnText":"address type","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-addrtype"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-syntax-addrtype\u2460"}],"title":"4.4. Tables"}],"url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-addrtype"},
 "84b454ff": {"dfnID":"84b454ff","dfnText":"ordered map","external":true,"refSections":[{"refs":[{"id":"ref-for-ordered-map"}],"title":"3.2. WebAssembly JS Object Caches"}],"url":"https://infra.spec.whatwg.org/#ordered-map"},
 "84eac0df": {"dfnID":"84eac0df","dfnText":"mem_grow","external":true,"refSections":[{"refs":[{"id":"ref-for-embed-mem-grow"}],"title":"4.3. Memories"}],"url":"https://webassembly.github.io/spec/core/appendix/embedding.html#embed-mem-grow"},
 "868a40c2": {"dfnID":"868a40c2","dfnText":"table type","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-tabletype"}],"title":"4.4. Tables"}],"url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype"},
@@ -4260,13 +4261,13 @@ let dfnPanelData = {
 "ab79fc0f": {"dfnID":"ab79fc0f","dfnText":"table_type","external":true,"refSections":[{"refs":[{"id":"ref-for-embed-table-type"},{"id":"ref-for-embed-table-type\u2460"},{"id":"ref-for-embed-table-type\u2461"},{"id":"ref-for-embed-table-type\u2462"}],"title":"4.4. Tables"}],"url":"https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-type"},
 "abf85593": {"dfnID":"abf85593","dfnText":"Get","external":true,"refSections":[{"refs":[{"id":"ref-for-sec-get-o-p"},{"id":"ref-for-sec-get-o-p\u2460"}],"title":"4. The WebAssembly Namespace"}],"url":"https://tc39.es/ecma262/multipage/abstract-operations.html#sec-get-o-p"},
 "acea0ba2": {"dfnID":"acea0ba2","dfnText":"tag (for external value)","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-externval"},{"id":"ref-for-syntax-externval\u2460"},{"id":"ref-for-syntax-externval\u2461"},{"id":"ref-for-syntax-externval\u2462"},{"id":"ref-for-syntax-externval\u2463"},{"id":"ref-for-syntax-externval\u2464"},{"id":"ref-for-syntax-externval\u2465"},{"id":"ref-for-syntax-externval\u2466"},{"id":"ref-for-syntax-externval\u2467"},{"id":"ref-for-syntax-externval\u2468"},{"id":"ref-for-syntax-externval\u2460\u24ea"},{"id":"ref-for-syntax-externval\u2460\u2460"},{"id":"ref-for-syntax-externval\u2460\u2461"},{"id":"ref-for-syntax-externval\u2460\u2462"},{"id":"ref-for-syntax-externval\u2460\u2463"},{"id":"ref-for-syntax-externval\u2460\u2464"},{"id":"ref-for-syntax-externval\u2460\u2465"},{"id":"ref-for-syntax-externval\u2460\u2466"},{"id":"ref-for-syntax-externval\u2460\u2467"}],"title":"4. The WebAssembly Namespace"}],"url":"https://webassembly.github.io/spec/core/exec/runtime.html#syntax-externval"},
+"addressvaluetou64": {"dfnID":"addressvaluetou64","dfnText":"AddressValueToU64","external":false,"refSections":[{"refs":[{"id":"ref-for-addressvaluetou64"},{"id":"ref-for-addressvaluetou64\u2460"},{"id":"ref-for-addressvaluetou64\u2461"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-addressvaluetou64\u2462"},{"id":"ref-for-addressvaluetou64\u2463"},{"id":"ref-for-addressvaluetou64\u2464"},{"id":"ref-for-addressvaluetou64\u2465"},{"id":"ref-for-addressvaluetou64\u2466"}],"title":"4.4. Tables"}],"url":"#addressvaluetou64"},
 "ae59bd82": {"dfnID":"ae59bd82","dfnText":"store","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-store"}],"title":"3.1. Interaction of the WebAssembly Store with JavaScript"}],"url":"https://webassembly.github.io/spec/core/exec/runtime.html#syntax-store"},
 "associated-store": {"dfnID":"associated-store","dfnText":"associated store","external":false,"refSections":[{"refs":[{"id":"ref-for-associated-store"},{"id":"ref-for-associated-store\u2460"},{"id":"ref-for-associated-store\u2461"},{"id":"ref-for-associated-store\u2462"}],"title":"4. The WebAssembly Namespace"},{"refs":[{"id":"ref-for-associated-store\u2463"},{"id":"ref-for-associated-store\u2464"},{"id":"ref-for-associated-store\u2465"},{"id":"ref-for-associated-store\u2466"},{"id":"ref-for-associated-store\u2467"},{"id":"ref-for-associated-store\u2468"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-associated-store\u2460\u24ea"},{"id":"ref-for-associated-store\u2460\u2460"},{"id":"ref-for-associated-store\u2460\u2461"},{"id":"ref-for-associated-store\u2460\u2462"},{"id":"ref-for-associated-store\u2460\u2463"},{"id":"ref-for-associated-store\u2460\u2464"},{"id":"ref-for-associated-store\u2460\u2465"},{"id":"ref-for-associated-store\u2460\u2466"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-associated-store\u2460\u2467"},{"id":"ref-for-associated-store\u2460\u2468"},{"id":"ref-for-associated-store\u2461\u24ea"},{"id":"ref-for-associated-store\u2461\u2460"},{"id":"ref-for-associated-store\u2461\u2461"}],"title":"4.5. Globals"},{"refs":[{"id":"ref-for-associated-store\u2461\u2462"},{"id":"ref-for-associated-store\u2461\u2463"},{"id":"ref-for-associated-store\u2461\u2464"},{"id":"ref-for-associated-store\u2461\u2465"},{"id":"ref-for-associated-store\u2461\u2466"},{"id":"ref-for-associated-store\u2461\u2467"},{"id":"ref-for-associated-store\u2461\u2468"},{"id":"ref-for-associated-store\u2462\u24ea"},{"id":"ref-for-associated-store\u2462\u2460"}],"title":"4.6. Exported Functions"},{"refs":[{"id":"ref-for-associated-store\u2462\u2461"},{"id":"ref-for-associated-store\u2462\u2462"}],"title":"4.7.1. Tag types"},{"refs":[{"id":"ref-for-associated-store\u2462\u2463"}],"title":"4.8. Garbage Collected Objects"},{"refs":[{"id":"ref-for-associated-store\u2462\u2464"},{"id":"ref-for-associated-store\u2462\u2465"},{"id":"ref-for-associated-store\u2462\u2466"},{"id":"ref-for-associated-store\u2462\u2467"}],"title":"4.9. Exceptions"},{"refs":[{"id":"ref-for-associated-store\u2462\u2468"},{"id":"ref-for-associated-store\u2463\u24ea"},{"id":"ref-for-associated-store\u2463\u2460"}],"title":"4.9.1. JavaScript exceptions"}],"url":"#associated-store"},
 "asynchronously-compile-a-webassembly-module": {"dfnID":"asynchronously-compile-a-webassembly-module","dfnText":"asynchronously compile a WebAssembly module","external":false,"refSections":[{"refs":[{"id":"ref-for-asynchronously-compile-a-webassembly-module"},{"id":"ref-for-asynchronously-compile-a-webassembly-module\u2460"}],"title":"4. The WebAssembly Namespace"}],"url":"#asynchronously-compile-a-webassembly-module"},
 "asynchronously-instantiate-a-webassembly-module": {"dfnID":"asynchronously-instantiate-a-webassembly-module","dfnText":"asynchronously instantiate a WebAssembly module","external":false,"refSections":[{"refs":[{"id":"ref-for-asynchronously-instantiate-a-webassembly-module"},{"id":"ref-for-asynchronously-instantiate-a-webassembly-module\u2460"}],"title":"4. The WebAssembly Namespace"}],"url":"#asynchronously-instantiate-a-webassembly-module"},
 "b0d7f3c3": {"dfnID":"b0d7f3c3","dfnText":"USVString","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-USVString"},{"id":"ref-for-idl-USVString\u2460"},{"id":"ref-for-idl-USVString\u2461"}],"title":"4.1. Modules"}],"url":"https://webidl.spec.whatwg.org/#idl-USVString"},
 "b107f911": {"dfnID":"b107f911","dfnText":"current realm","external":true,"refSections":[{"refs":[{"id":"ref-for-current-realm"}],"title":"4.6. Exported Functions"}],"url":"https://tc39.github.io/ecma262/#current-realm"},
-"b111a5f8": {"dfnID":"b111a5f8","dfnText":"index type","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-idxtype"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-syntax-idxtype\u2460"}],"title":"4.4. Tables"}],"url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-idxtype"},
 "b262501e": {"dfnID":"b262501e","dfnText":"reject","external":true,"refSections":[{"refs":[{"id":"ref-for-reject"},{"id":"ref-for-reject\u2460"},{"id":"ref-for-reject\u2461"},{"id":"ref-for-reject\u2462"},{"id":"ref-for-reject\u2463"}],"title":"4. The WebAssembly Namespace"}],"url":"https://webidl.spec.whatwg.org/#reject"},
 "b29f5d72": {"dfnID":"b29f5d72","dfnText":"ToBigInt64","external":true,"refSections":[{"refs":[{"id":"ref-for-sec-tobigint64"}],"title":"4.6. Exported Functions"}],"url":"https://tc39.es/ecma262/multipage/abstract-operations.html#sec-tobigint64"},
 "b4cfa5ce": {"dfnID":"b4cfa5ce","dfnText":"throw","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-throw"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-dfn-throw\u2460"},{"id":"ref-for-dfn-throw\u2461"},{"id":"ref-for-dfn-throw\u2462"}],"title":"4.6. Exported Functions"}],"url":"https://webidl.spec.whatwg.org/#dfn-throw"},
@@ -4326,6 +4327,8 @@ let dfnPanelData = {
 "dictdef-tabledescriptor": {"dfnID":"dictdef-tabledescriptor","dfnText":"TableDescriptor","external":false,"refSections":[{"refs":[{"id":"ref-for-dictdef-tabledescriptor"}],"title":"4.4. Tables"}],"url":"#dictdef-tabledescriptor"},
 "dictdef-tagtype": {"dfnID":"dictdef-tagtype","dfnText":"TagType","external":false,"refSections":[{"refs":[{"id":"ref-for-dictdef-tagtype"}],"title":"4.7.1. Tag types"}],"url":"#dictdef-tagtype"},
 "dictdef-webassemblyinstantiatedsource": {"dfnID":"dictdef-webassemblyinstantiatedsource","dfnText":"WebAssemblyInstantiatedSource","external":false,"refSections":[{"refs":[{"id":"ref-for-dictdef-webassemblyinstantiatedsource"},{"id":"ref-for-dictdef-webassemblyinstantiatedsource\u2460"}],"title":"4. The WebAssembly Namespace"}],"url":"#dictdef-webassemblyinstantiatedsource"},
+"dom-addresstype-i32": {"dfnID":"dom-addresstype-i32","dfnText":"\"i32\"","external":false,"refSections":[],"url":"#dom-addresstype-i32"},
+"dom-addresstype-i64": {"dfnID":"dom-addresstype-i64","dfnText":"\"i64\"","external":false,"refSections":[],"url":"#dom-addresstype-i64"},
 "dom-exception-exception": {"dfnID":"dom-exception-exception","dfnText":"new Exception(exceptionTag, payload, options)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-exception-exception"}],"title":"4.9. Exceptions"}],"url":"#dom-exception-exception"},
 "dom-exception-exception-exceptiontag-payload-options-exceptiontag": {"dfnID":"dom-exception-exception-exceptiontag-payload-options-exceptiontag","dfnText":"exceptionTag","external":false,"refSections":[],"url":"#dom-exception-exception-exceptiontag-payload-options-exceptiontag"},
 "dom-exception-exception-exceptiontag-payload-options-options": {"dfnID":"dom-exception-exception-exceptiontag-payload-options-options","dfnText":"options","external":false,"refSections":[],"url":"#dom-exception-exception-exceptiontag-payload-options-options"},
@@ -4348,8 +4351,6 @@ let dfnPanelData = {
 "dom-importexportkind-memory": {"dfnID":"dom-importexportkind-memory","dfnText":"\"memory\"","external":false,"refSections":[],"url":"#dom-importexportkind-memory"},
 "dom-importexportkind-table": {"dfnID":"dom-importexportkind-table","dfnText":"\"table\"","external":false,"refSections":[],"url":"#dom-importexportkind-table"},
 "dom-importexportkind-tag": {"dfnID":"dom-importexportkind-tag","dfnText":"\"tag\"","external":false,"refSections":[],"url":"#dom-importexportkind-tag"},
-"dom-indextype-i32": {"dfnID":"dom-indextype-i32","dfnText":"\"i32\"","external":false,"refSections":[],"url":"#dom-indextype-i32"},
-"dom-indextype-i64": {"dfnID":"dom-indextype-i64","dfnText":"\"i64\"","external":false,"refSections":[],"url":"#dom-indextype-i64"},
 "dom-instance-exports": {"dfnID":"dom-instance-exports","dfnText":"exports","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-instance-exports"}],"title":"4.2. Instances"}],"url":"#dom-instance-exports"},
 "dom-instance-instance": {"dfnID":"dom-instance-instance","dfnText":"Instance(module, importObject)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-instance-instance"}],"title":"4.2. Instances"}],"url":"#dom-instance-instance"},
 "dom-instance-instance-module-importobject-importobject": {"dfnID":"dom-instance-instance-module-importobject-importobject","dfnText":"importObject","external":false,"refSections":[],"url":"#dom-instance-instance-module-importobject-importobject"},
@@ -4361,7 +4362,7 @@ let dfnPanelData = {
 "dom-memory-memory-descriptor-descriptor": {"dfnID":"dom-memory-memory-descriptor-descriptor","dfnText":"descriptor","external":false,"refSections":[],"url":"#dom-memory-memory-descriptor-descriptor"},
 "dom-memory-tofixedlengthbuffer": {"dfnID":"dom-memory-tofixedlengthbuffer","dfnText":"toFixedLengthBuffer()","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-memory-tofixedlengthbuffer"}],"title":"4.3. Memories"}],"url":"#dom-memory-tofixedlengthbuffer"},
 "dom-memory-toresizablebuffer": {"dfnID":"dom-memory-toresizablebuffer","dfnText":"toResizableBuffer()","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-memory-toresizablebuffer"}],"title":"4.3. Memories"}],"url":"#dom-memory-toresizablebuffer"},
-"dom-memorydescriptor-index": {"dfnID":"dom-memorydescriptor-index","dfnText":"index","external":false,"refSections":[],"url":"#dom-memorydescriptor-index"},
+"dom-memorydescriptor-addresstype": {"dfnID":"dom-memorydescriptor-addresstype","dfnText":"addressType","external":false,"refSections":[],"url":"#dom-memorydescriptor-addresstype"},
 "dom-memorydescriptor-initial": {"dfnID":"dom-memorydescriptor-initial","dfnText":"initial","external":false,"refSections":[],"url":"#dom-memorydescriptor-initial"},
 "dom-memorydescriptor-maximum": {"dfnID":"dom-memorydescriptor-maximum","dfnText":"maximum","external":false,"refSections":[],"url":"#dom-memorydescriptor-maximum"},
 "dom-module-customsections": {"dfnID":"dom-module-customsections","dfnText":"customSections(moduleObject, sectionName)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-module-customsections"}],"title":"4.1. Modules"}],"url":"#dom-module-customsections"},
@@ -4390,8 +4391,8 @@ let dfnPanelData = {
 "dom-table-table": {"dfnID":"dom-table-table","dfnText":"Table(descriptor, value)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-table-table"}],"title":"4.4. Tables"}],"url":"#dom-table-table"},
 "dom-table-table-descriptor-value-descriptor": {"dfnID":"dom-table-table-descriptor-value-descriptor","dfnText":"descriptor","external":false,"refSections":[],"url":"#dom-table-table-descriptor-value-descriptor"},
 "dom-table-table-descriptor-value-value": {"dfnID":"dom-table-table-descriptor-value-value","dfnText":"value","external":false,"refSections":[],"url":"#dom-table-table-descriptor-value-value"},
+"dom-tabledescriptor-addresstype": {"dfnID":"dom-tabledescriptor-addresstype","dfnText":"addressType","external":false,"refSections":[],"url":"#dom-tabledescriptor-addresstype"},
 "dom-tabledescriptor-element": {"dfnID":"dom-tabledescriptor-element","dfnText":"element","external":false,"refSections":[],"url":"#dom-tabledescriptor-element"},
-"dom-tabledescriptor-index": {"dfnID":"dom-tabledescriptor-index","dfnText":"index","external":false,"refSections":[],"url":"#dom-tabledescriptor-index"},
 "dom-tabledescriptor-initial": {"dfnID":"dom-tabledescriptor-initial","dfnText":"initial","external":false,"refSections":[],"url":"#dom-tabledescriptor-initial"},
 "dom-tabledescriptor-maximum": {"dfnID":"dom-tabledescriptor-maximum","dfnText":"maximum","external":false,"refSections":[],"url":"#dom-tabledescriptor-maximum"},
 "dom-tablekind-anyfunc": {"dfnID":"dom-tablekind-anyfunc","dfnText":"\"anyfunc\"","external":false,"refSections":[],"url":"#dom-tablekind-anyfunc"},
@@ -4433,8 +4434,8 @@ let dfnPanelData = {
 "ef3c2587": {"dfnID":"ef3c2587","dfnText":"externref","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-reftype"},{"id":"ref-for-syntax-reftype\u2460"},{"id":"ref-for-syntax-reftype\u2461"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-syntax-reftype\u2462"},{"id":"ref-for-syntax-reftype\u2463"},{"id":"ref-for-syntax-reftype\u2464"},{"id":"ref-for-syntax-reftype\u2465"},{"id":"ref-for-syntax-reftype\u2466"},{"id":"ref-for-syntax-reftype\u2467"}],"title":"4.5. Globals"},{"refs":[{"id":"ref-for-syntax-reftype\u2468"},{"id":"ref-for-syntax-reftype\u2460\u24ea"},{"id":"ref-for-syntax-reftype\u2460\u2460"},{"id":"ref-for-syntax-reftype\u2460\u2461"},{"id":"ref-for-syntax-reftype\u2460\u2462"},{"id":"ref-for-syntax-reftype\u2460\u2463"},{"id":"ref-for-syntax-reftype\u2460\u2464"},{"id":"ref-for-syntax-reftype\u2460\u2465"}],"title":"4.6. Exported Functions"},{"refs":[{"id":"ref-for-syntax-reftype\u2460\u2466"},{"id":"ref-for-syntax-reftype\u2460\u2467"}],"title":"4.9. Exceptions"},{"refs":[{"id":"ref-for-syntax-reftype\u2460\u2468"},{"id":"ref-for-syntax-reftype\u2461\u24ea"}],"title":"4.9.1. JavaScript exceptions"}],"url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-reftype"},
 "efd1ec5d": {"dfnID":"efd1ec5d","dfnText":"object","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-object"},{"id":"ref-for-idl-object\u2460"}],"title":"4. The WebAssembly Namespace"},{"refs":[{"id":"ref-for-idl-object\u2461"},{"id":"ref-for-idl-object\u2462"}],"title":"4.2. Instances"}],"url":"https://webidl.spec.whatwg.org/#idl-object"},
 "efe8653e": {"dfnID":"efe8653e","dfnText":"iterate (for map)","external":true,"refSections":[{"refs":[{"id":"ref-for-map-iterate"}],"title":"4.3. Memories"}],"url":"https://infra.spec.whatwg.org/#map-iterate"},
+"enumdef-addresstype": {"dfnID":"enumdef-addresstype","dfnText":"AddressType","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-addresstype"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-enumdef-addresstype\u2460"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-enumdef-addresstype\u2461"},{"id":"ref-for-enumdef-addresstype\u2462"},{"id":"ref-for-enumdef-addresstype\u2463"}],"title":"4.6. Exported Functions"}],"url":"#enumdef-addresstype"},
 "enumdef-importexportkind": {"dfnID":"enumdef-importexportkind","dfnText":"ImportExportKind","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-importexportkind"},{"id":"ref-for-enumdef-importexportkind\u2460"}],"title":"4.1. Modules"}],"url":"#enumdef-importexportkind"},
-"enumdef-indextype": {"dfnID":"enumdef-indextype","dfnText":"IndexType","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-indextype"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-enumdef-indextype\u2460"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-enumdef-indextype\u2461"},{"id":"ref-for-enumdef-indextype\u2462"},{"id":"ref-for-enumdef-indextype\u2463"}],"title":"4.6. Exported Functions"}],"url":"#enumdef-indextype"},
 "enumdef-tablekind": {"dfnID":"enumdef-tablekind","dfnText":"TableKind","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-tablekind"}],"title":"4.4. Tables"}],"url":"#enumdef-tablekind"},
 "enumdef-valuetype": {"dfnID":"enumdef-valuetype","dfnText":"ValueType","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-valuetype"}],"title":"4.5. Globals"},{"refs":[{"id":"ref-for-enumdef-valuetype\u2460"}],"title":"4.7.1. Tag types"}],"url":"#enumdef-valuetype"},
 "exception": {"dfnID":"exception","dfnText":"Exception","external":false,"refSections":[{"refs":[{"id":"ref-for-exception"}],"title":"3.2. WebAssembly JS Object Caches"},{"refs":[{"id":"ref-for-exception\u2460"}],"title":"4.6. Exported Functions"},{"refs":[{"id":"ref-for-exception\u2461"},{"id":"ref-for-exception\u2462"}],"title":"4.9. Exceptions"}],"url":"#exception"},
@@ -4476,7 +4477,6 @@ let dfnPanelData = {
 "host-value-cache": {"dfnID":"host-value-cache","dfnText":"Host value cache","external":false,"refSections":[{"refs":[{"id":"ref-for-host-value-cache"},{"id":"ref-for-host-value-cache\u2460"}],"title":"4.6. Exported Functions"}],"url":"#host-value-cache"},
 "identified-with": {"dfnID":"identified-with","dfnText":"identified with","external":false,"refSections":[{"refs":[{"id":"ref-for-identified-with"},{"id":"ref-for-identified-with\u2460"},{"id":"ref-for-identified-with\u2461"},{"id":"ref-for-identified-with\u2462"}],"title":"4.3. Memories"}],"url":"#identified-with"},
 "index-of-the-host-function": {"dfnID":"index-of-the-host-function","dfnText":"index of the host function","external":false,"refSections":[{"refs":[{"id":"ref-for-index-of-the-host-function"}],"title":"4.6. Exported Functions"}],"url":"#index-of-the-host-function"},
-"indexvaluetou64": {"dfnID":"indexvaluetou64","dfnText":"IndexValueToU64","external":false,"refSections":[{"refs":[{"id":"ref-for-indexvaluetou64"},{"id":"ref-for-indexvaluetou64\u2460"},{"id":"ref-for-indexvaluetou64\u2461"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-indexvaluetou64\u2462"},{"id":"ref-for-indexvaluetou64\u2463"},{"id":"ref-for-indexvaluetou64\u2464"},{"id":"ref-for-indexvaluetou64\u2465"},{"id":"ref-for-indexvaluetou64\u2466"}],"title":"4.4. Tables"}],"url":"#indexvaluetou64"},
 "initialize-a-global-object": {"dfnID":"initialize-a-global-object","dfnText":"initialize a global object","external":false,"refSections":[{"refs":[{"id":"ref-for-initialize-a-global-object"},{"id":"ref-for-initialize-a-global-object\u2460"}],"title":"4.5. Globals"}],"url":"#initialize-a-global-object"},
 "initialize-a-memory-object": {"dfnID":"initialize-a-memory-object","dfnText":"initialize a memory object","external":false,"refSections":[{"refs":[{"id":"ref-for-initialize-a-memory-object"},{"id":"ref-for-initialize-a-memory-object\u2460"}],"title":"4.3. Memories"}],"url":"#initialize-a-memory-object"},
 "initialize-a-table-object": {"dfnID":"initialize-a-table-object","dfnText":"initialize a table object","external":false,"refSections":[{"refs":[{"id":"ref-for-initialize-a-table-object"},{"id":"ref-for-initialize-a-table-object\u2460"}],"title":"4.4. Tables"}],"url":"#initialize-a-table-object"},
@@ -4510,8 +4510,8 @@ let dfnPanelData = {
 "tojsvalue": {"dfnID":"tojsvalue","dfnText":"ToJSValue","external":false,"refSections":[{"refs":[{"id":"ref-for-tojsvalue"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-tojsvalue\u2460"}],"title":"4.5. Globals"},{"refs":[{"id":"ref-for-tojsvalue\u2461"},{"id":"ref-for-tojsvalue\u2462"},{"id":"ref-for-tojsvalue\u2463"},{"id":"ref-for-tojsvalue\u2464"}],"title":"4.6. Exported Functions"},{"refs":[{"id":"ref-for-tojsvalue\u2465"}],"title":"4.9. Exceptions"}],"url":"#tojsvalue"},
 "tovaluetype": {"dfnID":"tovaluetype","dfnText":"ToValueType","external":false,"refSections":[{"refs":[{"id":"ref-for-tovaluetype"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-tovaluetype\u2460"}],"title":"4.5. Globals"},{"refs":[{"id":"ref-for-tovaluetype\u2461"}],"title":"4.7.1. Tag types"}],"url":"#tovaluetype"},
 "towebassemblyvalue": {"dfnID":"towebassemblyvalue","dfnText":"ToWebAssemblyValue","external":false,"refSections":[{"refs":[{"id":"ref-for-towebassemblyvalue"}],"title":"4. The WebAssembly Namespace"},{"refs":[{"id":"ref-for-towebassemblyvalue\u2460"},{"id":"ref-for-towebassemblyvalue\u2461"},{"id":"ref-for-towebassemblyvalue\u2462"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-towebassemblyvalue\u2463"},{"id":"ref-for-towebassemblyvalue\u2464"},{"id":"ref-for-towebassemblyvalue\u2465"}],"title":"4.5. Globals"},{"refs":[{"id":"ref-for-towebassemblyvalue\u2466"},{"id":"ref-for-towebassemblyvalue\u2467"},{"id":"ref-for-towebassemblyvalue\u2468"},{"id":"ref-for-towebassemblyvalue\u2460\u24ea"},{"id":"ref-for-towebassemblyvalue\u2460\u2460"}],"title":"4.6. Exported Functions"},{"refs":[{"id":"ref-for-towebassemblyvalue\u2460\u2461"}],"title":"4.9. Exceptions"}],"url":"#towebassemblyvalue"},
-"typedefdef-indexvalue": {"dfnID":"typedefdef-indexvalue","dfnText":"IndexValue","external":false,"refSections":[{"refs":[{"id":"ref-for-typedefdef-indexvalue"},{"id":"ref-for-typedefdef-indexvalue\u2460"},{"id":"ref-for-typedefdef-indexvalue\u2461"},{"id":"ref-for-typedefdef-indexvalue\u2462"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-typedefdef-indexvalue\u2463"},{"id":"ref-for-typedefdef-indexvalue\u2464"},{"id":"ref-for-typedefdef-indexvalue\u2465"},{"id":"ref-for-typedefdef-indexvalue\u2466"},{"id":"ref-for-typedefdef-indexvalue\u2467"},{"id":"ref-for-typedefdef-indexvalue\u2468"},{"id":"ref-for-typedefdef-indexvalue\u2460\u24ea"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-typedefdef-indexvalue\u2460\u2460"}],"title":"4.6. Exported Functions"}],"url":"#typedefdef-indexvalue"},
-"u64toindexvalue": {"dfnID":"u64toindexvalue","dfnText":"U64ToIndexValue","external":false,"refSections":[{"refs":[{"id":"ref-for-u64toindexvalue"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-u64toindexvalue\u2460"}],"title":"4.4. Tables"}],"url":"#u64toindexvalue"},
+"typedefdef-addressvalue": {"dfnID":"typedefdef-addressvalue","dfnText":"AddressValue","external":false,"refSections":[{"refs":[{"id":"ref-for-typedefdef-addressvalue"},{"id":"ref-for-typedefdef-addressvalue\u2460"},{"id":"ref-for-typedefdef-addressvalue\u2461"},{"id":"ref-for-typedefdef-addressvalue\u2462"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-typedefdef-addressvalue\u2463"},{"id":"ref-for-typedefdef-addressvalue\u2464"},{"id":"ref-for-typedefdef-addressvalue\u2465"},{"id":"ref-for-typedefdef-addressvalue\u2466"},{"id":"ref-for-typedefdef-addressvalue\u2467"},{"id":"ref-for-typedefdef-addressvalue\u2468"},{"id":"ref-for-typedefdef-addressvalue\u2460\u24ea"}],"title":"4.4. Tables"},{"refs":[{"id":"ref-for-typedefdef-addressvalue\u2460\u2460"}],"title":"4.6. Exported Functions"}],"url":"#typedefdef-addressvalue"},
+"u64toaddressvalue": {"dfnID":"u64toaddressvalue","dfnText":"U64ToAddressValue","external":false,"refSections":[{"refs":[{"id":"ref-for-u64toaddressvalue"}],"title":"4.3. Memories"},{"refs":[{"id":"ref-for-u64toaddressvalue\u2460"}],"title":"4.4. Tables"}],"url":"#u64toaddressvalue"},
 };
 
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -4902,6 +4902,7 @@ function genLinkingSyntaxes(dfn) {
 let refsData = {
 "#a-new-exported-function": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"a new exported function","type":"dfn","url":"#a-new-exported-function"},
 "#a-new-exported-gc-object": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"a new exported gc object","type":"dfn","url":"#a-new-exported-gc-object"},
+"#addressvaluetou64": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"addressvaluetou64","type":"dfn","url":"#addressvaluetou64"},
 "#associated-store": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"associated store","type":"dfn","url":"#associated-store"},
 "#asynchronously-compile-a-webassembly-module": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"asynchronously compile a webassembly module","type":"dfn","url":"#asynchronously-compile-a-webassembly-module"},
 "#asynchronously-instantiate-a-webassembly-module": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"asynchronously instantiate a webassembly module","type":"dfn","url":"#asynchronously-instantiate-a-webassembly-module"},
@@ -4964,8 +4965,8 @@ let refsData = {
 "#dom-webassembly-validate": {"export":true,"for_":["WebAssembly"],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"validate(bytes)","type":"method","url":"#dom-webassembly-validate"},
 "#dom-webassemblyinstantiatedsource-instance": {"export":true,"for_":["WebAssemblyInstantiatedSource"],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"instance","type":"dict-member","url":"#dom-webassemblyinstantiatedsource-instance"},
 "#dom-webassemblyinstantiatedsource-module": {"export":true,"for_":["WebAssemblyInstantiatedSource"],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"module","type":"dict-member","url":"#dom-webassemblyinstantiatedsource-module"},
+"#enumdef-addresstype": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"AddressType","type":"enum","url":"#enumdef-addresstype"},
 "#enumdef-importexportkind": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"ImportExportKind","type":"enum","url":"#enumdef-importexportkind"},
-"#enumdef-indextype": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"IndexType","type":"enum","url":"#enumdef-indextype"},
 "#enumdef-tablekind": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"TableKind","type":"enum","url":"#enumdef-tablekind"},
 "#enumdef-valuetype": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"ValueType","type":"enum","url":"#enumdef-valuetype"},
 "#exception": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"Exception","type":"interface","url":"#exception"},
@@ -4989,7 +4990,6 @@ let refsData = {
 "#host-value-cache": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"host value cache","type":"dfn","url":"#host-value-cache"},
 "#identified-with": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"identified with","type":"dfn","url":"#identified-with"},
 "#index-of-the-host-function": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"index of the host function","type":"dfn","url":"#index-of-the-host-function"},
-"#indexvaluetou64": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"indexvaluetou64","type":"dfn","url":"#indexvaluetou64"},
 "#initialize-a-global-object": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"initialize a global object","type":"dfn","url":"#initialize-a-global-object"},
 "#initialize-a-memory-object": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"initialize a memory object","type":"dfn","url":"#initialize-a-memory-object"},
 "#initialize-a-table-object": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"initialize a table object","type":"dfn","url":"#initialize-a-table-object"},
@@ -5023,8 +5023,8 @@ let refsData = {
 "#tojsvalue": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"tojsvalue","type":"dfn","url":"#tojsvalue"},
 "#tovaluetype": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"tovaluetype","type":"dfn","url":"#tovaluetype"},
 "#towebassemblyvalue": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"towebassemblyvalue","type":"dfn","url":"#towebassemblyvalue"},
-"#typedefdef-indexvalue": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"IndexValue","type":"typedef","url":"#typedefdef-indexvalue"},
-"#u64toindexvalue": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"u64toindexvalue","type":"dfn","url":"#u64toindexvalue"},
+"#typedefdef-addressvalue": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"AddressValue","type":"typedef","url":"#typedefdef-addressvalue"},
+"#u64toaddressvalue": {"export":true,"for_":[],"level":"2","normative":true,"shortname":"wasm-js-api","spec":"wasm-js-api-2","status":"local","text":"u64toaddressvalue","type":"dfn","url":"#u64toaddressvalue"},
 "https://encoding.spec.whatwg.org/#utf-8-decode-without-bom-or-fail": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"encoding","spec":"encoding","status":"current","text":"utf-8 decode without bom or fail","type":"dfn","url":"https://encoding.spec.whatwg.org/#utf-8-decode-without-bom-or-fail"},
 "https://heycam.github.io/webidl/#EnforceRange": {"export":true,"for_":[],"level":"","normative":true,"shortname":"webidl","spec":"webidl","status":"anchor-block","text":"[enforcerange]","type":"dfn","url":"https://heycam.github.io/webidl/#EnforceRange"},
 "https://heycam.github.io/webidl/#create-a-namespace-object": {"export":true,"for_":[],"level":"","normative":true,"shortname":"webidl","spec":"webidl","status":"anchor-block","text":"create a namespace object","type":"dfn","url":"https://heycam.github.io/webidl/#create-a-namespace-object"},
@@ -5153,7 +5153,7 @@ let refsData = {
 "https://webassembly.github.io/spec/core/syntax/modules.html#syntax-module": {"export":true,"for_":[],"level":"","normative":true,"shortname":"webassembly","spec":"webassembly","status":"anchor-block","text":"module","type":"dfn","url":"https://webassembly.github.io/spec/core/syntax/modules.html#syntax-module"},
 "https://webassembly.github.io/spec/core/syntax/types.html#external-types": {"export":true,"for_":["external-type"],"level":"","normative":true,"shortname":"webassembly","spec":"webassembly","status":"anchor-block","text":"func","type":"dfn","url":"https://webassembly.github.io/spec/core/syntax/types.html#external-types"},
 "https://webassembly.github.io/spec/core/syntax/types.html#heap-types": {"export":true,"for_":["heap-type"],"level":"","normative":true,"shortname":"webassembly","spec":"webassembly","status":"anchor-block","text":"extern","type":"dfn","url":"https://webassembly.github.io/spec/core/syntax/types.html#heap-types"},
-"https://webassembly.github.io/spec/core/syntax/types.html#syntax-idxtype": {"export":true,"for_":[],"level":"","normative":true,"shortname":"webassembly","spec":"webassembly","status":"anchor-block","text":"index type","type":"dfn","url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-idxtype"},
+"https://webassembly.github.io/spec/core/syntax/types.html#syntax-addrtype": {"export":true,"for_":[],"level":"","normative":true,"shortname":"webassembly","spec":"webassembly","status":"anchor-block","text":"address type","type":"dfn","url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-addrtype"},
 "https://webassembly.github.io/spec/core/syntax/types.html#syntax-mut": {"export":true,"for_":[],"level":"","normative":true,"shortname":"webassembly","spec":"webassembly","status":"anchor-block","text":"const","type":"dfn","url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-mut"},
 "https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype": {"export":true,"for_":[],"level":"","normative":true,"shortname":"webassembly","spec":"webassembly","status":"anchor-block","text":"i64","type":"dfn","url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype"},
 "https://webassembly.github.io/spec/core/syntax/types.html#syntax-reftype": {"export":true,"for_":[],"level":"","normative":true,"shortname":"webassembly","spec":"webassembly","status":"anchor-block","text":"reftype","type":"dfn","url":"https://webassembly.github.io/spec/core/syntax/types.html#syntax-reftype"},

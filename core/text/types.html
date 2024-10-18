@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Types &#8212; WebAssembly 3.0 (Draft 2024-10-08)</title>
+    <title>Types &#8212; WebAssembly 3.0 (Draft 2024-10-18)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -288,20 +288,20 @@ They cannot be referenced from anywhere.</p>
 \end{array}\end{split}\]</div>
 </section>
 </section>
-<section id="index-type">
-<span id="text-idxtype"></span><span id="index-10"></span><h2>Index Type<a class="headerlink" href="#index-type" title="Permalink to this heading">¶</a></h2>
+<section id="address-types">
+<span id="text-addrtype"></span><span id="index-10"></span><h2>Address Types<a class="headerlink" href="#address-types" title="Permalink to this heading">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll}
-\def\mathdef4534#1{{}}\mathdef4534{index type} &amp; \href{../text/types.html#text-idxtype}{\mathtt{idxtype}} &amp;::=&amp;
+\def\mathdef4534#1{{}}\mathdef4534{address type} &amp; \href{../text/types.html#text-addrtype}{\mathtt{addrtype}} &amp;::=&amp;
   \def\mathdef4729#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef4729{i32} &amp;\Rightarrow&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{i32}} \\ &amp;&amp;|&amp;
   \def\mathdef4730#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef4730{i64} &amp;\Rightarrow&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{i64}} \\
 \end{array}\end{split}\]</div>
 <section id="id4">
 <h3>Abbreviations<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
-<p>The index type can be omited, in which case it defaults <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\)</span>:</p>
+<p>The address type can be omited, in which case it defaults <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{array}{llclll}
-\def\mathdef4534#1{{}}\mathdef4534{index type} &amp;
+\def\mathdef4534#1{{}}\mathdef4534{address type} &amp;
   \def\mathdef4731#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef4731{} &amp;\equiv&amp; \def\mathdef4732#1{\mbox{‘}\mathtt{#1}\mbox{’}}\mathdef4732{i32}
 \end{array}\]</div>
 </section>
@@ -320,7 +320,7 @@ They cannot be referenced from anywhere.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll&#64;{\qquad\qquad}l}
 \def\mathdef4534#1{{}}\mathdef4534{memory type} &amp; \href{../text/types.html#text-memtype}{\mathtt{memtype}}_I &amp;::=&amp;
-  \mathit{it}{:}\href{../text/types.html#text-idxtype}{\mathtt{idxtype}}~~\mathit{lim}{:}\href{../text/types.html#text-limits}{\mathtt{limits}} &amp;\Rightarrow&amp; \mathit{it}~\mathit{lim} \\
+  \mathit{at}{:}\href{../text/types.html#text-addrtype}{\mathtt{addrtype}}~~\mathit{lim}{:}\href{../text/types.html#text-limits}{\mathtt{limits}} &amp;\Rightarrow&amp; \mathit{at}~\mathit{lim} \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="table-types">
@@ -328,7 +328,7 @@ They cannot be referenced from anywhere.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll}
 \def\mathdef4534#1{{}}\mathdef4534{table type} &amp; \href{../text/types.html#text-tabletype}{\mathtt{tabletype}}_I &amp;::=&amp;
-  \mathit{it}{:}\href{../text/types.html#text-idxtype}{\mathtt{idxtype}}~~\mathit{lim}{:}\href{../text/types.html#text-limits}{\mathtt{limits}}~~\mathit{et}{:}\href{../text/types.html#text-reftype}{\mathtt{reftype}}_I &amp;\Rightarrow&amp; \mathit{it}~\mathit{lim}~\mathit{et} \\
+  \mathit{at}{:}\href{../text/types.html#text-addrtype}{\mathtt{addrtype}}~~\mathit{lim}{:}\href{../text/types.html#text-limits}{\mathtt{limits}}~~\mathit{et}{:}\href{../text/types.html#text-reftype}{\mathtt{reftype}}_I &amp;\Rightarrow&amp; \mathit{at}~\mathit{lim}~\mathit{et} \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="global-types">
