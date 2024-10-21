@@ -48,7 +48,7 @@ test(() => {
 }, "Basic i32");
 
 test(() => {
-  const argument = { "element": "anyfunc", "index": "i64", "initial": 5n };
+  const argument = { "element": "anyfunc", "address": "i64", "initial": 5n };
   const table = new WebAssembly.Table(argument);
   assert_equal_to_array(table, nulls(5), "before", "i64");
 
@@ -68,7 +68,7 @@ test(() => {
 }, "Reached maximum (i32)");
 
 test(() => {
-  const argument = { "element": "anyfunc", "index": "i64", "initial": 3n, "maximum": 5n };
+  const argument = { "element": "anyfunc", "address": "i64", "initial": 3n, "maximum": 5n };
   const table = new WebAssembly.Table(argument);
   assert_equal_to_array(table, nulls(3), "before", "i64");
 
@@ -87,7 +87,7 @@ test(() => {
 }, "Exceeded maximum (i32)");
 
 test(() => {
-  const argument = { "element": "anyfunc", "index": "i64", "initial": 2n, "maximum": 5n };
+  const argument = { "element": "anyfunc", "address": "i64", "initial": 2n, "maximum": 5n };
   const table = new WebAssembly.Table(argument);
   assert_equal_to_array(table, nulls(2), "before", "i64");
 
@@ -117,13 +117,13 @@ for (const value of outOfRangeValues) {
 
 const outOfRangeValuesI64 = [
   -1n,
-  0x1_0000_0000_0000_0000n,
-  "0x1_0000_0000_0000_0000",
+  0x10000000000000000n,
+  "0x10000000000000000",
 ];
 
 for (const value of outOfRangeValuesI64) {
   test(() => {
-    const argument = { "element": "anyfunc", "index": "i64", "initial": 1n };
+    const argument = { "element": "anyfunc", "address": "i64", "initial": 1n };
     const table = new WebAssembly.Table(argument);
     assert_throws_js(TypeError, () => table.grow(value));
   }, `Out-of-range i64 argument: ${format_value(value)}`);

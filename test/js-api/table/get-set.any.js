@@ -101,7 +101,7 @@ test(() => {
 }, "Basic");
 
 test(() => {
-  const argument = { "element": "anyfunc", "index": "i64", "initial": 5n };
+  const argument = { "element": "anyfunc", "address": "i64", "initial": 5n };
   const table = new WebAssembly.Table(argument);
   assert_equal_to_array(table, [null, null, null, null, null], undefined, "i64");
 
@@ -136,7 +136,7 @@ test(() => {
 }, "Growing");
 
 test(() => {
-  const argument = { "element": "anyfunc", "index": "i64", "initial": 5n };
+  const argument = { "element": "anyfunc", "address": "i64", "initial": 5n };
   const table = new WebAssembly.Table(argument);
   assert_equal_to_array(table, [null, null, null, null, null], undefined, "i64");
 
@@ -168,7 +168,7 @@ test(() => {
 }, "Setting out-of-bounds");
 
 test(() => {
-  const argument = { "element": "anyfunc", "index": "i64", "initial": 5n };
+  const argument = { "element": "anyfunc", "address": "i64", "initial": 5n };
   const table = new WebAssembly.Table(argument);
   assert_equal_to_array(table, [null, null, null, null, null], undefined, "i64");
 
@@ -251,19 +251,19 @@ for (const value of outOfRangeValues) {
 
 const outOfRangeValuesI64 = [
   -1n,
-  0x1_0000_0000_0000_0000n,
-  "0x1_0000_0000_0000_0000",
+  0x10000000000000000n,
+  "0x10000000000000000",
 ];
 
 for (const value of outOfRangeValuesI64) {
   test(() => {
-    const argument = { "element": "anyfunc", "index": "i64", "initial": 1n };
+    const argument = { "element": "anyfunc", "address": "i64", "initial": 1n };
     const table = new WebAssembly.Table(argument);
     assert_throws_js(TypeError, () => table.get(value));
   }, `Getting out-of-range argument (i64): ${format_value(value)}`);
 
   test(() => {
-    const argument = { "element": "anyfunc", "index": "i64", "initial": 1n };
+    const argument = { "element": "anyfunc", "address": "i64", "initial": 1n };
     const table = new WebAssembly.Table(argument);
     assert_throws_js(TypeError, () => table.set(value, null));
   }, `Setting out-of-range argument (i64): ${format_value(value)}`);

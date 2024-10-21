@@ -48,7 +48,7 @@ test(() => {
 }, "Zero initial");
 
 test(() => {
-  const argument = { "index": "i64", "initial": 0n };
+  const argument = { "address": "i64", "initial": 0n };
   const memory = new WebAssembly.Memory(argument);
   const oldMemory = memory.buffer;
   assert_ArrayBuffer(oldMemory, { "size": 0 }, "Buffer before growing");
@@ -93,7 +93,7 @@ test(() => {
 }, "Non-zero initial");
 
 test(() => {
-  const argument = { "index": "i64", "initial": 3n };
+  const argument = { "address": "i64", "initial": 3n };
   const memory = new WebAssembly.Memory(argument);
   const oldMemory = memory.buffer;
   assert_ArrayBuffer(oldMemory, { "size": 3 }, "Buffer before growing");
@@ -123,7 +123,7 @@ test(() => {
 }, "Zero initial with respected maximum");
 
 test(() => {
-  const argument = { "index": "i64", "initial": 0n, "maximum": 2n };
+  const argument = { "address": "i64", "initial": 0n, "maximum": 2n };
   const memory = new WebAssembly.Memory(argument);
   const oldMemory = memory.buffer;
   assert_ArrayBuffer(oldMemory, { "size": 0 }, "Buffer before growing");
@@ -162,7 +162,7 @@ test(() => {
 }, "Zero initial with respected maximum grown twice");
 
 test(() => {
-  const argument = { "index": "i64", "initial": 0n, "maximum": 2n };
+  const argument = { "address": "i64", "initial": 0n, "maximum": 2n };
   const memory = new WebAssembly.Memory(argument);
   const oldMemory = memory.buffer;
   assert_ArrayBuffer(oldMemory, { "size": 0 }, "Buffer before growing");
@@ -197,7 +197,7 @@ test(() => {
 }, "Zero initial growing too much");
 
 test(() => {
-  const argument = { "index": "i64", "initial": 1n, "maximum": 2n };
+  const argument = { "address": "i64", "initial": 1n, "maximum": 2n };
   const memory = new WebAssembly.Memory(argument);
   const oldMemory = memory.buffer;
   assert_ArrayBuffer(oldMemory, { "size": 1 }, "Buffer before growing");
@@ -229,13 +229,13 @@ for (const value of outOfRangeValues) {
 
 const outOfRangeValuesI64 = [
   -1n,
-  0x1_0000_0000_0000_0000n,
-  "0x1_0000_0000_0000_0000",
+  0x10000000000000000n,
+  "0x10000000000000000",
 ];
 
 for (const value of outOfRangeValuesI64) {
   test(() => {
-    const argument = { "index": "i64", "initial": 0n };
+    const argument = { "address": "i64", "initial": 0n };
     const memory = new WebAssembly.Memory(argument);
     assert_throws_js(TypeError, () => memory.grow(value));
   }, `Out-of-range i64 argument: ${format_value(value)}`);

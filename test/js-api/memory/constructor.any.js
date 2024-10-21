@@ -69,11 +69,11 @@ const outOfRangeValuesI64 = [
 
 for (const value of outOfRangeValuesI64) {
   test(() => {
-    assert_throws_js(TypeError, () => new WebAssembly.Memory({ "index": "i64", "initial": value }));
+    assert_throws_js(TypeError, () => new WebAssembly.Memory({ "address": "i64", "initial": value }));
   }, `Out-of-range initial i64 value in descriptor: ${format_value(value)}`);
 
   test(() => {
-    assert_throws_js(TypeError, () => new WebAssembly.Memory({ "index": "i64", "initial": 0n, "maximum": value }));
+    assert_throws_js(TypeError, () => new WebAssembly.Memory({ "address": "i64", "initial": 0n, "maximum": value }));
   }, `Out-of-range maximum i64 value in descriptor: ${format_value(value)}`);
 }
 
@@ -82,7 +82,7 @@ test(() => {
 }, "Initial value exceeds maximum");
 
 test(() => {
-  assert_throws_js(RangeError, () => new WebAssembly.Memory({ "index": "i64", "initial": 10n, "maximum": 9n }));
+  assert_throws_js(RangeError, () => new WebAssembly.Memory({ "address": "i64", "initial": 10n, "maximum": 9n }));
 }, "Initial value exceeds maximum (i64)");
 
 test(() => {
@@ -98,7 +98,7 @@ test(() => {
         case "initial":
         case "maximum":
           return 0;
-        case "index":
+        case "address":
           return "i32";
         default:
           return undefined;
@@ -132,11 +132,11 @@ test(() => {
       };
     },
 
-    get index() {
-      order.push("index");
+    get address() {
+      order.push("address");
       return {
         toString() {
-          order.push("index toString");
+          order.push("address toString");
           return "i32";
         },
       };
@@ -144,8 +144,8 @@ test(() => {
   });
 
   assert_array_equals(order, [
-    "index",
-    "index toString",
+    "address",
+    "address toString",
     "initial",
     "initial valueOf",
     "maximum",
@@ -166,15 +166,15 @@ test(() => {
 }, "Non-zero initial");
 
 test(() => {
-  const argument = { "index": "i64", "initial": 0n };
+  const argument = { "address": "i64", "initial": 0n };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 0, "index": "i64" });
+  assert_Memory(memory, { "size": 0, "address": "i64" });
 }, "Zero initial (i64)");
 
 test(() => {
-  const argument = { "index": "i64", "initial": 4n };
+  const argument = { "address": "i64", "initial": 4n };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 4, "index": "i64" });
+  assert_Memory(memory, { "size": 4, "address": "i64" });
 }, "Non-zero initial (i64)");
 
 test(() => {
@@ -186,20 +186,20 @@ test(() => {
 test(() => {
   const argument = { "initial": 1 };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 1, "index": "i32" });
-}, "Memory with index parameter omitted");
+  assert_Memory(memory, { "size": 1, "address": "i32" });
+}, "Memory with address parameter omitted");
 
 test(() => {
-  const argument = { "initial": 1, "index": "i32" };
+  const argument = { "initial": 1, "address": "i32" };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 1, "index": "i32" });
-}, "Memory with i32 index constructor");
+  assert_Memory(memory, { "size": 1, "address": "i32" });
+}, "Memory with i32 address constructor");
 
 test(() => {
-  const argument = { "initial": 1n, "index": "i64" };
+  const argument = { "initial": 1n, "address": "i64" };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 1, "index": "i64" });
-}, "Memory with i64 index constructor");
+  assert_Memory(memory, { "size": 1, "address": "i64" });
+}, "Memory with i64 address constructor");
 
 test(() => {
   const argument = { "initial": "3" };
@@ -208,9 +208,9 @@ test(() => {
 }, "Memory with string value for initial");
 
 test(() => {
-  const argument = { "index": "i64", "initial": "3" };
+  const argument = { "address": "i64", "initial": "3" };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 3 });
+  assert_Memory(memory, { "size": 3, "address": "i64" });
 }, "Memory with string value for initial (i64)");
 
 test(() => {
@@ -220,11 +220,11 @@ test(() => {
 }, "Memory with boolean value for initial");
 
 test(() => {
-  const argument = { "index": "i64", "initial": true };
+  const argument = { "address": "i64", "initial": true };
   const memory = new WebAssembly.Memory(argument);
-  assert_Memory(memory, { "size": 1 });
+  assert_Memory(memory, { "size": 1, "address": "i64" });
 }, "Memory with boolean value for initial (i64)");
 
 test(() => {
-  assert_throws_js(TypeError, () => new WebAssembly.Memory({ "initial": 1, "index": "none" }));
-}, "Unknown memory index");
+  assert_throws_js(TypeError, () => new WebAssembly.Memory({ "initial": 1, "address": "none" }));
+}, "Unknown memory address");

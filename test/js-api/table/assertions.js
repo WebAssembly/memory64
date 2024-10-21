@@ -16,13 +16,13 @@ function assert_equal_to_array(table, expected, message, index = "i32") {
                    `${message}: table.get(${expected.length + 1} of ${expected.length})`);
 }
 
-function assert_Table(actual, expected, index = "i32") {
+function assert_Table(actual, expected, address = "i32") {
   assert_equals(Object.getPrototypeOf(actual), WebAssembly.Table.prototype,
                 "prototype");
   assert_true(Object.isExtensible(actual), "extensible");
 
   assert_equals(actual.length, expected.length, "length");
-  for (let i = index === "i64" ? 0n : 0; i < expected.length; ++i) {
+  for (let i = address === "i64" ? 0n : 0; i < expected.length; ++i) {
     assert_equals(actual.get(i), null, `actual.get(${i})`);
   }
 }

@@ -78,11 +78,11 @@ const outOfRangeValuesI64 = [
 
 for (const value of outOfRangeValuesI64) {
   test(() => {
-    assert_throws_js(TypeError, () => new WebAssembly.Table({ "element": "anyfunc", "index": "i64", "initial": value }));
+    assert_throws_js(TypeError, () => new WebAssembly.Table({ "element": "anyfunc", "address": "i64", "initial": value }));
   }, `Out-of-range initial i64 value in descriptor: ${format_value(value)}`);
 
   test(() => {
-    assert_throws_js(TypeError, () => new WebAssembly.Table({ "element": "anyfunc", "index": "i64", "initial": 0n, "maximum": value }));
+    assert_throws_js(TypeError, () => new WebAssembly.Table({ "element": "anyfunc", "address": "i64", "initial": 0n, "maximum": value }));
   }, `Out-of-range maximum i64 value in descriptor: ${format_value(value)}`);
 }
 
@@ -91,7 +91,7 @@ test(() => {
 }, "Initial value exceeds maximum");
 
 test(() => {
-  assert_throws_js(RangeError, () => new WebAssembly.Table({ "element": "anyfunc", "index": "i64", "initial": 10n, "maximum": 9n }));
+  assert_throws_js(RangeError, () => new WebAssembly.Table({ "element": "anyfunc", "address": "i64", "initial": 10n, "maximum": 9n }));
 }, "Initial value exceeds maximum (i64)");
 
 test(() => {
@@ -107,13 +107,13 @@ test(() => {
 }, "Basic (non-zero)");
 
 test(() => {
-  const argument = { "element": "anyfunc", "index": "i64", "initial": 0n };
+  const argument = { "element": "anyfunc", "address": "i64", "initial": 0n };
   const table = new WebAssembly.Table(argument);
   assert_Table(table, { "length": 0n }, "i64");
 }, "Basic (zero, i64)");
 
 test(() => {
-  const argument = { "element": "anyfunc", "index": "i64", "initial": 5n };
+  const argument = { "element": "anyfunc", "address": "i64", "initial": 5n };
   const table = new WebAssembly.Table(argument);
   assert_Table(table, { "length": 5n }, "i64");
 }, "Basic (non-zero, i64)");
@@ -189,11 +189,11 @@ test(() => {
       };
     },
 
-    get index() {
-      order.push("index");
+    get address() {
+      order.push("address");
       return {
         toString() {
-          order.push("index toString");
+          order.push("address toString");
           return "i32";
         },
       };
@@ -203,8 +203,8 @@ test(() => {
   assert_array_equals(order, [
     "element",
     "element toString",
-    "index",
-    "index toString",
+    "address",
+    "address toString",
     "initial",
     "initial valueOf",
     "maximum",
@@ -251,77 +251,77 @@ test(() => {
 }, "initialize anyfunc table with a bad default value");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": 3, "index": "i32" };
+  const argument = { "element": "anyfunc", "initial": 3, "address": "i32" };
   const table = new WebAssembly.Table(argument);
   // Once this is merged with the type reflection proposal we should check the
   // address type of `table`.
   assert_equals(table.length, 3);
-}, "Table with i32 index constructor");
+}, "Table with i32 address constructor");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": 3n, "index": "i64" };
+  const argument = { "element": "anyfunc", "initial": 3n, "address": "i64" };
   const table = new WebAssembly.Table(argument);
   // Once this is merged with the type reflection proposal we should check the
   // address type of `table`.
   assert_equals(table.length, 3n);
-}, "Table with i64 index constructor");
+}, "Table with i64 address constructor");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": "3", "index": "i32" };
+  const argument = { "element": "anyfunc", "initial": "3", "address": "i32" };
   const table = new WebAssembly.Table(argument);
   assert_equals(table.length, 3);
 }, "Table with string value for initial");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": "3", "index": "i64" };
+  const argument = { "element": "anyfunc", "initial": "3", "address": "i64" };
   const table = new WebAssembly.Table(argument);
   assert_equals(table.length, 3n);
 }, "Table with string value for initial (i64)");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": true, "index": "i32" };
+  const argument = { "element": "anyfunc", "initial": true, "address": "i32" };
   const table = new WebAssembly.Table(argument);
   assert_equals(table.length, 1);
 }, "Table with boolean value for initial");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": true, "index": "i64" };
+  const argument = { "element": "anyfunc", "initial": true, "address": "i64" };
   const table = new WebAssembly.Table(argument);
   assert_equals(table.length, 1n);
 }, "Table with boolean value for initial (i64)");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": 0, "maximum": "3", "index": "i32" };
+  const argument = { "element": "anyfunc", "initial": 0, "maximum": "3", "address": "i32" };
   const table = new WebAssembly.Table(argument);
   table.grow(3);
   assert_equals(table.length, 3);
 }, "Table with string value for maximum");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": 0n, "maximum": "3", "index": "i64" };
+  const argument = { "element": "anyfunc", "initial": 0n, "maximum": "3", "address": "i64" };
   const table = new WebAssembly.Table(argument);
   table.grow(3n);
   assert_equals(table.length, 3n);
 }, "Table with string value for maximum (i64)");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": 0, "maximum": true, "index": "i32" };
+  const argument = { "element": "anyfunc", "initial": 0, "maximum": true, "address": "i32" };
   const table = new WebAssembly.Table(argument);
   table.grow(1);
   assert_equals(table.length, 1);
 }, "Table with boolean value for maximum");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": 0n, "maximum": true, "index": "i64" };
+  const argument = { "element": "anyfunc", "initial": 0n, "maximum": true, "address": "i64" };
   const table = new WebAssembly.Table(argument);
   table.grow(1n);
   assert_equals(table.length, 1n);
 }, "Table with boolean value for maximum (i64)");
 
 test(() => {
-  const argument = { "element": "anyfunc", "initial": 3, "index": "unknown" };
+  const argument = { "element": "anyfunc", "initial": 3, "address": "unknown" };
   assert_throws_js(TypeError, () => new WebAssembly.Table(argument));
-}, "Unknown table index");
+}, "Unknown table address");
 
 test(() => {
   const argument = { "element": "i32", "initial": 3n };
