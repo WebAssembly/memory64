@@ -6,7 +6,7 @@
   <meta content="ED" name="w3c-status">
   <meta content="Bikeshed version 3febb7930, updated Tue Oct 15 11:33:47 2024 -0700" name="generator">
   <link href="https://www.w3.org/TR/wasm-js-api-2/" rel="canonical">
-  <meta content="4056ff9582da36059c794ee54b3e825f76828bb1" name="revision">
+  <meta content="9e107e01e8404fea07040727e5de16c4b6744d1f" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>
 emu-const {
@@ -743,7 +743,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">WebAssembly JavaScript Interface</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-10-18">18 October 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-10-21">21 October 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1523,7 +1523,7 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-memorydescriptor"><code><c- g>MemoryDescriptor</c-></code></dfn> {
   <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="AddressValue" id="dom-memorydescriptor-initial"><code><c- g>initial</c-></code></dfn>;
   <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue①"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="AddressValue" id="dom-memorydescriptor-maximum"><code><c- g>maximum</c-></code></dfn>;
-  <a data-link-type="idl-name" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype"><c- n>AddressType</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="AddressType" id="dom-memorydescriptor-addresstype"><code><c- g>addressType</c-></code></dfn>;
+  <a data-link-type="idl-name" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype"><c- n>AddressType</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="MemoryDescriptor" data-dfn-type="dict-member" data-export data-type="AddressType" id="dom-memorydescriptor-address"><code><c- g>address</c-></code></dfn>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#LegacyNamespace" id="ref-for-LegacyNamespace②"><c- g>LegacyNamespace</c-></a>=<a data-link-type="idl-name" href="#namespacedef-webassembly" id="ref-for-namespacedef-webassembly③"><c- n>WebAssembly</c-></a>, Exposed=*]
@@ -1626,7 +1626,7 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
      The <dfn class="dfn-paneled idl-code" data-dfn-for="Memory" data-dfn-type="constructor" data-export data-lt="Memory(descriptor)|constructor(descriptor)" id="dom-memory-memory"><code>Memory(<var>descriptor</var>)</code></dfn> constructor, when invoked, performs the following steps: 
     <ol>
      <li data-md>
-      <p>If <var>descriptor</var>["addressType"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists②">exists</a>, let <var>addrtype</var> be <var>descriptor</var>["addressType"]; otherwise, let <var>addrtype</var> be "i32".</p>
+      <p>If <var>descriptor</var>["address"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists②">exists</a>, let <var>addrtype</var> be <var>descriptor</var>["address"]; otherwise, let <var>addrtype</var> be "i32".</p>
      <li data-md>
       <p>Let <var>initial</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑤">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64">AddressValueToU64</a>(<var>descriptor</var>["initial"], <var>addrtype</var>).</p>
      <li data-md>
@@ -1838,7 +1838,7 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
   <c- b>required</c-> <a data-link-type="idl-name" href="#enumdef-tablekind" id="ref-for-enumdef-tablekind"><c- n>TableKind</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="TableKind" id="dom-tabledescriptor-element"><code><c- g>element</c-></code></dfn>;
   <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue④"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="AddressValue" id="dom-tabledescriptor-initial"><code><c- g>initial</c-></code></dfn>;
   <a data-link-type="idl-name" href="#typedefdef-addressvalue" id="ref-for-typedefdef-addressvalue⑤"><c- n>AddressValue</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="AddressValue" id="dom-tabledescriptor-maximum"><code><c- g>maximum</c-></code></dfn>;
-  <a data-link-type="idl-name" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype①"><c- n>AddressType</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="AddressType" id="dom-tabledescriptor-addresstype"><code><c- g>addressType</c-></code></dfn>;
+  <a data-link-type="idl-name" href="#enumdef-addresstype" id="ref-for-enumdef-addresstype①"><c- n>AddressType</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="TableDescriptor" data-dfn-type="dict-member" data-export data-type="AddressType" id="dom-tabledescriptor-address"><code><c- g>address</c-></code></dfn>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#LegacyNamespace" id="ref-for-LegacyNamespace③"><c- g>LegacyNamespace</c-></a>=<a data-link-type="idl-name" href="#namespacedef-webassembly" id="ref-for-namespacedef-webassembly④"><c- n>WebAssembly</c-></a>, Exposed=*]
@@ -1897,7 +1897,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
         <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw">Throw</a> a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror③">TypeError</a></code> exception.</p>
       </ol>
      <li data-md>
-      <p>If <var>descriptor</var>["addressType"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists⑦">exists</a>, let <var>addrtype</var> be <var>descriptor</var>["addressType"]; otherwise, let <var>addrtype</var> be "i32".</p>
+      <p>If <var>descriptor</var>["address"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists⑦">exists</a>, let <var>addrtype</var> be <var>descriptor</var>["address"]; otherwise, let <var>addrtype</var> be "i32".</p>
      <li data-md>
       <p>Let <var>initial</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①①">?</a> <a data-link-type="dfn" href="#addressvaluetou64" id="ref-for-addressvaluetou64③">AddressValueToU64</a>(<var>descriptor</var>["initial"], <var>addrtype</var>).</p>
      <li data-md>
@@ -3291,13 +3291,13 @@ In practice, an implementation may run out of resources for valid modules below 
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#HostResizeArrayBuffer">abstract operation HostResizeArrayBuffer</a><span>, in § 4.3</span>
-   <li><a href="#enumdef-addresstype">AddressType</a><span>, in § 4.1</span>
    <li>
-    addressType
+    address
     <ul>
-     <li><a href="#dom-memorydescriptor-addresstype">dict-member for MemoryDescriptor</a><span>, in § 4.3</span>
-     <li><a href="#dom-tabledescriptor-addresstype">dict-member for TableDescriptor</a><span>, in § 4.4</span>
+     <li><a href="#dom-memorydescriptor-address">dict-member for MemoryDescriptor</a><span>, in § 4.3</span>
+     <li><a href="#dom-tabledescriptor-address">dict-member for TableDescriptor</a><span>, in § 4.4</span>
     </ul>
+   <li><a href="#enumdef-addresstype">AddressType</a><span>, in § 4.1</span>
    <li><a href="#typedefdef-addressvalue">AddressValue</a><span>, in § 4.1</span>
    <li><a href="#addressvaluetou64">AddressValueToU64</a><span>, in § 4.6</span>
    <li><a href="#a-new-exported-function">a new Exported Function</a><span>, in § 4.6</span>
@@ -3833,7 +3833,7 @@ In practice, an implementation may run out of resources for valid modules below 
 <c- b>dictionary</c-> <a href="#dictdef-memorydescriptor"><code><c- g>MemoryDescriptor</c-></code></a> {
   <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a data-type="AddressValue" href="#dom-memorydescriptor-initial"><code><c- g>initial</c-></code></a>;
   <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a data-type="AddressValue" href="#dom-memorydescriptor-maximum"><code><c- g>maximum</c-></code></a>;
-  <a data-link-type="idl-name" href="#enumdef-addresstype"><c- n>AddressType</c-></a> <a data-type="AddressType" href="#dom-memorydescriptor-addresstype"><code><c- g>addressType</c-></code></a>;
+  <a data-link-type="idl-name" href="#enumdef-addresstype"><c- n>AddressType</c-></a> <a data-type="AddressType" href="#dom-memorydescriptor-address"><code><c- g>address</c-></code></a>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#LegacyNamespace"><c- g>LegacyNamespace</c-></a>=<a data-link-type="idl-name" href="#namespacedef-webassembly"><c- n>WebAssembly</c-></a>, Exposed=*]
@@ -3856,7 +3856,7 @@ In practice, an implementation may run out of resources for valid modules below 
   <c- b>required</c-> <a data-link-type="idl-name" href="#enumdef-tablekind"><c- n>TableKind</c-></a> <a data-type="TableKind" href="#dom-tabledescriptor-element"><code><c- g>element</c-></code></a>;
   <c- b>required</c-> <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a data-type="AddressValue" href="#dom-tabledescriptor-initial"><code><c- g>initial</c-></code></a>;
   <a data-link-type="idl-name" href="#typedefdef-addressvalue"><c- n>AddressValue</c-></a> <a data-type="AddressValue" href="#dom-tabledescriptor-maximum"><code><c- g>maximum</c-></code></a>;
-  <a data-link-type="idl-name" href="#enumdef-addresstype"><c- n>AddressType</c-></a> <a data-type="AddressType" href="#dom-tabledescriptor-addresstype"><code><c- g>addressType</c-></code></a>;
+  <a data-link-type="idl-name" href="#enumdef-addresstype"><c- n>AddressType</c-></a> <a data-type="AddressType" href="#dom-tabledescriptor-address"><code><c- g>address</c-></code></a>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#LegacyNamespace"><c- g>LegacyNamespace</c-></a>=<a data-link-type="idl-name" href="#namespacedef-webassembly"><c- n>WebAssembly</c-></a>, Exposed=*]
@@ -4362,7 +4362,7 @@ let dfnPanelData = {
 "dom-memory-memory-descriptor-descriptor": {"dfnID":"dom-memory-memory-descriptor-descriptor","dfnText":"descriptor","external":false,"refSections":[],"url":"#dom-memory-memory-descriptor-descriptor"},
 "dom-memory-tofixedlengthbuffer": {"dfnID":"dom-memory-tofixedlengthbuffer","dfnText":"toFixedLengthBuffer()","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-memory-tofixedlengthbuffer"}],"title":"4.3. Memories"}],"url":"#dom-memory-tofixedlengthbuffer"},
 "dom-memory-toresizablebuffer": {"dfnID":"dom-memory-toresizablebuffer","dfnText":"toResizableBuffer()","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-memory-toresizablebuffer"}],"title":"4.3. Memories"}],"url":"#dom-memory-toresizablebuffer"},
-"dom-memorydescriptor-addresstype": {"dfnID":"dom-memorydescriptor-addresstype","dfnText":"addressType","external":false,"refSections":[],"url":"#dom-memorydescriptor-addresstype"},
+"dom-memorydescriptor-address": {"dfnID":"dom-memorydescriptor-address","dfnText":"address","external":false,"refSections":[],"url":"#dom-memorydescriptor-address"},
 "dom-memorydescriptor-initial": {"dfnID":"dom-memorydescriptor-initial","dfnText":"initial","external":false,"refSections":[],"url":"#dom-memorydescriptor-initial"},
 "dom-memorydescriptor-maximum": {"dfnID":"dom-memorydescriptor-maximum","dfnText":"maximum","external":false,"refSections":[],"url":"#dom-memorydescriptor-maximum"},
 "dom-module-customsections": {"dfnID":"dom-module-customsections","dfnText":"customSections(moduleObject, sectionName)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-module-customsections"}],"title":"4.1. Modules"}],"url":"#dom-module-customsections"},
@@ -4391,7 +4391,7 @@ let dfnPanelData = {
 "dom-table-table": {"dfnID":"dom-table-table","dfnText":"Table(descriptor, value)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-table-table"}],"title":"4.4. Tables"}],"url":"#dom-table-table"},
 "dom-table-table-descriptor-value-descriptor": {"dfnID":"dom-table-table-descriptor-value-descriptor","dfnText":"descriptor","external":false,"refSections":[],"url":"#dom-table-table-descriptor-value-descriptor"},
 "dom-table-table-descriptor-value-value": {"dfnID":"dom-table-table-descriptor-value-value","dfnText":"value","external":false,"refSections":[],"url":"#dom-table-table-descriptor-value-value"},
-"dom-tabledescriptor-addresstype": {"dfnID":"dom-tabledescriptor-addresstype","dfnText":"addressType","external":false,"refSections":[],"url":"#dom-tabledescriptor-addresstype"},
+"dom-tabledescriptor-address": {"dfnID":"dom-tabledescriptor-address","dfnText":"address","external":false,"refSections":[],"url":"#dom-tabledescriptor-address"},
 "dom-tabledescriptor-element": {"dfnID":"dom-tabledescriptor-element","dfnText":"element","external":false,"refSections":[],"url":"#dom-tabledescriptor-element"},
 "dom-tabledescriptor-initial": {"dfnID":"dom-tabledescriptor-initial","dfnText":"initial","external":false,"refSections":[],"url":"#dom-tabledescriptor-initial"},
 "dom-tabledescriptor-maximum": {"dfnID":"dom-tabledescriptor-maximum","dfnText":"maximum","external":false,"refSections":[],"url":"#dom-tabledescriptor-maximum"},
