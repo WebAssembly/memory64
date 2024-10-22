@@ -1,18 +1,18 @@
-function assert_equal_to_array(table, expected, message, index = "i32") {
-  function idx(i) {
-    return index === "i64" ? BigInt(i) : i;
+function assert_equal_to_array(table, expected, message, address = "i32") {
+  function addr(i) {
+    return address === "i64" ? BigInt(i) : i;
   }
 
-  assert_equals(table.length, idx(expected.length), `${message}: length`);
+  assert_equals(table.length, addr(expected.length), `${message}: length`);
   // The argument check in get() happens before the range check, and negative numbers
   // are illegal, hence will throw TypeError per spec.
-  assert_throws_js(TypeError, () => table.get(idx(-1)), `${message}: table.get(-1)`);
+  assert_throws_js(TypeError, () => table.get(addr(-1)), `${message}: table.get(-1)`);
   for (let i = 0; i < expected.length; ++i) {
-    assert_equals(table.get(idx(i)), expected[i], `${message}: table.get(${i} of ${expected.length})`);
+    assert_equals(table.get(addr(i)), expected[i], `${message}: table.get(${i} of ${expected.length})`);
   }
-  assert_throws_js(RangeError, () => table.get(idx(expected.length)),
+  assert_throws_js(RangeError, () => table.get(addr(expected.length)),
                    `${message}: table.get(${expected.length} of ${expected.length})`);
-  assert_throws_js(RangeError, () => table.get(idx(expected.length + 1)),
+  assert_throws_js(RangeError, () => table.get(addr(expected.length + 1)),
                    `${message}: table.get(${expected.length + 1} of ${expected.length})`);
 }
 
