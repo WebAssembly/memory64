@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Runtime Structure &#8212; WebAssembly 3.0 (Draft 2024-10-21)</title>
+    <title>Runtime Structure &#8212; WebAssembly 3.0 (Draft 2024-10-29)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -675,7 +675,8 @@ but configurations with multiple threads may be supported in the future.</p>
 \def\mathdef2655#1{{}}\mathdef2655{evaluation contexts} &amp; E &amp;::=&amp;
   [\_] ~|~
   \href{../exec/runtime.html#syntax-val}{\mathit{val}}^\ast~E~\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast ~|~
-  \href{../exec/runtime.html#syntax-label}{\mathsf{label}}_n\{\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast\}~E~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} \\
+  \href{../exec/runtime.html#syntax-label}{\mathsf{label}}_n\{\href{../syntax/instructions.html#syntax-instr}{\mathit{instr}}^\ast\}~E~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} ~|~
+  \href{../exec/runtime.html#syntax-handler}{\mathsf{handler}}_n\{\href{../syntax/instructions.html#syntax-catch}{\mathit{catch}}^\ast\}~E~\href{../syntax/instructions.html#syntax-instr-control}{\mathsf{end}} \\
 \end{array}\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{rcl}
