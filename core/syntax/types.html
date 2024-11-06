@@ -311,7 +311,7 @@ Each type can also be declared <em>final</em>, preventing further subtyping.</p>
 </section>
 <section id="address-type">
 <span id="syntax-addrtype"></span><h2>Address Type<a class="headerlink" href="#address-type" title="Permalink to this heading">¶</a></h2>
-<p><em>Address types</em> classify the values that can be used to index into
+<p><em>Address types</em> are a subset of <a class="reference internal" href="#syntax-numtype"><span class="std std-ref">number types</span></a> that classify the values that can be used as offsets into
 <a class="reference internal" href="modules.html#syntax-mem"><span class="std std-ref">memories</span></a> and <a class="reference internal" href="modules.html#syntax-table"><span class="std std-ref">tables</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
@@ -320,12 +320,11 @@ Each type can also be declared <em>final</em>, preventing further subtyping.</p>
 \end{array}\end{split}\]</div>
 <section id="aux-addrtype-min">
 <span id="id5"></span><h3>Conventions<a class="headerlink" href="#aux-addrtype-min" title="Permalink to this heading">¶</a></h3>
-<p>The <em>minimum</em> of two address types is defined as <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\)</span> if either of the types are
-<span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i32}}\)</span>, and <span class="math notranslate nohighlight">\(\href{../syntax/types.html#syntax-valtype}{\mathsf{i64}}\)</span> otherwise.</p>
+<p>The <em>minimum</em> of two address types is defined as the address type whose <a class="reference internal" href="#bitwidth-numtype"><span class="std std-ref">bit width</span></a> is the minimum of the two.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llll}
-\href{../syntax/types.html#aux-addrtype-min}{\mathrm{atmin}}(\href{../syntax/types.html#syntax-valtype}{\mathsf{i64}}, \href{../syntax/types.html#syntax-valtype}{\mathsf{i64}}) &amp;=&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{i64}} \\
-\href{../syntax/types.html#aux-addrtype-min}{\mathrm{atmin}}(\mathit{at}_1, \mathit{at}_2) &amp;=&amp; \href{../syntax/types.html#syntax-valtype}{\mathsf{i32}} &amp; (\mathrel{\mbox{otherwise}}) \\
+\href{../syntax/types.html#aux-addrtype-min}{\mathrm{atmin}}(\mathit{at}_1, \mathit{at}_2) &amp;=&amp; \mathit{at}_1 &amp; (\mathrel{\mbox{if}} |\mathit{at}_1| \leq |\mathit{at}_2|) \\
+\href{../syntax/types.html#aux-addrtype-min}{\mathrm{atmin}}(\mathit{at}_1, \mathit{at}_2) &amp;=&amp; \mathit{at}_2 &amp; (\mathrel{\mbox{otherwise}}) \\
 \end{array}\end{split}\]</div>
 </section>
 </section>
@@ -345,7 +344,7 @@ Each type can also be declared <em>final</em>, preventing further subtyping.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llrl}
 \def\mathdef3097#1{{}}\mathdef3097{memory type} &amp; \href{../syntax/types.html#syntax-memtype}{\mathit{memtype}} &amp;::=&amp;
-  ~\href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}} \\
+  \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}} \\
 \end{array}\end{split}\]</div>
 <p>The limits constrain the minimum and optionally the maximum size of a memory.
 The limits are given in units of <a class="reference internal" href="../exec/runtime.html#page-size"><span class="std std-ref">page size</span></a>.</p>
@@ -356,7 +355,7 @@ The limits are given in units of <a class="reference internal" href="../exec/run
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llrl}
 \def\mathdef3097#1{{}}\mathdef3097{table type} &amp; \href{../syntax/types.html#syntax-tabletype}{\mathit{tabletype}} &amp;::=&amp;
-  ~\href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}} ~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}} \\
+  \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}} \\
 \end{array}\end{split}\]</div>
 <p>Like memories, tables are constrained by limits for their minimum and optionally maximum size.
 The limits are given in numbers of entries.</p>

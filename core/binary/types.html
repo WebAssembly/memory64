@@ -245,7 +245,7 @@ Additional shorthands are recognized for unary recursions and sub types without 
 </section>
 <section id="limits">
 <span id="binary-limits"></span><span id="index-11"></span><h2>Limits<a class="headerlink" href="#limits" title="Permalink to this heading">¶</a></h2>
-<p><a class="reference internal" href="../syntax/types.html#syntax-limits"><span class="std std-ref">Limits</span></a> are encoded with a preceding flag indicating whether a maximum is present, and the corresponding <a class="reference internal" href="../syntax/types.html#syntax-addrtype"><span class="std std-ref">address type</span></a>.</p>
+<p><a class="reference internal" href="../syntax/types.html#syntax-limits"><span class="std std-ref">Limits</span></a> are encoded with a preceding flag indicating whether a maximum is present, and a flag for the <a class="reference internal" href="../syntax/types.html#syntax-addrtype"><span class="std std-ref">address type</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll}
 \def\mathdef2292#1{{}}\mathdef2292{limits} &amp; \href{../binary/types.html#binary-limits}{\mathtt{limits}} &amp;::=&amp;
@@ -261,7 +261,7 @@ Additional shorthands are recognized for unary recursions and sub types without 
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll&#64;{\qquad\qquad}l}
 \def\mathdef2292#1{{}}\mathdef2292{memory type} &amp; \href{../binary/types.html#binary-memtype}{\mathtt{memtype}} &amp;::=&amp;
-  (\mathit{at}, \mathit{lim}){:}\href{../binary/types.html#binary-limits}{\mathtt{limits}} &amp;\Rightarrow&amp; \mathit{at}~~\mathit{lim} \\
+  (\mathit{at},\mathit{lim}){:}\href{../binary/types.html#binary-limits}{\mathtt{limits}} &amp;\Rightarrow&amp; \mathit{at}~\mathit{lim} \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="table-types">
@@ -270,7 +270,7 @@ Additional shorthands are recognized for unary recursions and sub types without 
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll}
 \def\mathdef2292#1{{}}\mathdef2292{table type} &amp; \href{../binary/types.html#binary-tabletype}{\mathtt{tabletype}} &amp;::=&amp;
-  \mathit{et}{:}\href{../binary/types.html#binary-reftype}{\mathtt{reftype}}~~(\mathit{at}, \mathit{lim}){:}\href{../binary/types.html#binary-limits}{\mathtt{limits}} &amp;\Rightarrow&amp; \mathit{at}~~\mathit{lim}~\mathit{et} \\
+  \mathit{et}{:}\href{../binary/types.html#binary-reftype}{\mathtt{reftype}}~~(\mathit{at},\mathit{lim}){:}\href{../binary/types.html#binary-limits}{\mathtt{limits}} &amp;\Rightarrow&amp; \mathit{at}~\mathit{lim}~\mathit{et} \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="global-types">

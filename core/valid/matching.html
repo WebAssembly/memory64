@@ -496,15 +496,13 @@ as used in the premise of the former rule above.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}~\\[-1ex]
 \frac{
-  C \href{../valid/matching.html#match-numtype}{\vdash} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}_1 \href{../valid/matching.html#match-numtype}{\leq} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}_2
-  \qquad
   C \href{../valid/matching.html#match-limits}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}}_1 \href{../valid/matching.html#match-limits}{\leq} \href{../syntax/types.html#syntax-limits}{\mathit{limits}}_2
   \qquad
   C \href{../valid/matching.html#match-reftype}{\vdash} \href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}_1 \href{../valid/matching.html#match-reftype}{\leq} \href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}_2
   \qquad
   C \href{../valid/matching.html#match-reftype}{\vdash} \href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}_2 \href{../valid/matching.html#match-reftype}{\leq} \href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}_1
 }{
-  C \href{../valid/matching.html#match-tabletype}{\vdash} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}_1~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}_1~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}_1 \href{../valid/matching.html#match-tabletype}{\leq} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}_2~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}_2~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}_2
+  C \href{../valid/matching.html#match-tabletype}{\vdash} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}_1~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}_1 \href{../valid/matching.html#match-tabletype}{\leq} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}_2~\href{../syntax/types.html#syntax-reftype}{\mathit{reftype}}_2
 }\end{split}\]</div>
 </section>
 <section id="memory-types">
@@ -517,11 +515,9 @@ as used in the premise of the former rule above.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}~\\[-1ex]
 \frac{
-  C \href{../valid/matching.html#match-numtype}{\vdash} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}_1 \href{../valid/matching.html#match-numtype}{\leq} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}_2
-  \qquad
   C \href{../valid/matching.html#match-limits}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}}_1 \href{../valid/matching.html#match-limits}{\leq} \href{../syntax/types.html#syntax-limits}{\mathit{limits}}_2
 }{
-  C \href{../valid/matching.html#match-memtype}{\vdash} \href{../syntax/types.html#syntax-limits}{\mathit{limits}}_1 \href{../valid/matching.html#match-memtype}{\leq} \href{../syntax/types.html#syntax-limits}{\mathit{limits}}_2
+  C \href{../valid/matching.html#match-memtype}{\vdash} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}_1 \href{../valid/matching.html#match-memtype}{\leq} \href{../syntax/types.html#syntax-addrtype}{\mathit{addrtype}}~\href{../syntax/types.html#syntax-limits}{\mathit{limits}}_2
 }\end{split}\]</div>
 </section>
 <section id="global-types">
