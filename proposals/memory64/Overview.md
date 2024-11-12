@@ -199,7 +199,7 @@ have to support 32-bit memory addresses in their ABI.
     - ```
         C.tables[d] = aD limits t   C.tables[s] = aS limits t    aR = min {aD, aS}
       -----------------------------------------------------------------------------
-      C ⊦ table.copy d s : [aD aS aR] → []
+      C ⊦ table.copy d s : [aD aS aN] → []
       ```
   - table.init x y
     - ```
