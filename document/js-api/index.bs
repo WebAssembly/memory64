@@ -1747,7 +1747,7 @@ Note: ECMAScript doesn't specify any sort of behavior on out-of-memory condition
 
 The WebAssembly core specification allows an implementation to define limits on the syntactic structure of the module.
 While each embedding of WebAssembly may choose to define its own limits, for predictability the standard WebAssembly JavaScript Interface described in this document defines the following exact limits.
-An implementation must reject a module that exceeds one of the following limits with a {{CompileError}}.
+An implementation must reject a module that exceeds one of the following limits with a {{CompileError}}, i.e. the module is considered invalid.
 In practice, an implementation may run out of resources for valid modules below these limits.
 
 <ul>
@@ -1755,7 +1755,7 @@ In practice, an implementation may run out of resources for valid modules below 
 <li>The maximum number of types defined in the types section is 1,000,000.</li>
 <li>The maximum number of recursion groups defined in the types sections is 1,000,000.</li>
 <li>The maximum number of types defined in a recursion group is 1,000,000.</li>
-<li>The maximum depth of a defined subtype hierarchy is 63 (where a type defined with no supertype has depth 0).
+<li>The maximum depth of a defined subtype hierarchy is 63 (where a type defined with no supertype has depth 0).</li>
 <li>The maximum number of functions defined in a module is 1,000,000.</li>
 <li>The maximum number of imports declared in a module is 100,000.</li>
 <li>The maximum number of exports declared in a module is 100,000.</li>
@@ -1764,6 +1764,10 @@ In practice, an implementation may run out of resources for valid modules below 
 <li>The maximum number of data segments defined in a module is 100,000.</li>
 
 <li>The maximum number of tables, including declared or imported tables, is 100,000.</li>
+<li>The maximum initial size of a table is 10,000,000.</li>
+<li>The maximum number of table entries in any table initialization is 10,000,000.</li>
+<li>The maximum initial size of a 32-bit memory is 65,536 pages (4 GiB).</li>
+<li>The maximum initial size of a 64-bit memory is 262,144 pages (16 GiB).</li>
 <li>The maximum number of memories, including defined and imported memories, is 100.</li>
 
 <li>The maximum number of parameters to any function or block is 1,000.</li>
@@ -1774,13 +1778,13 @@ In practice, an implementation may run out of resources for valid modules below 
 <li>The maximum number of operands to `array.new_fixed` is 10,000.</li>
 </ul>
 
-An implementation must throw a {{RuntimeError}} if one of the following limits is exceeded during runtime:
+An implementation must fail to grow tables or memories beyond the following limits at runtime.
 In practice, an implementation may run out of resources for valid modules below these limits.
 
 <ul>
-<li>The maximal initial or maximum size of a table is 10,000,000.</li>
-<li>The maximum size of a 32-bit memory is 65,536 pages (4 GiB).</li>
-<li>The maximum size of a 64-bit memory is 262,144 pages (16 GiB).</li>
+<li>A table can grow to have up to 10,000,000 entries.</li>
+<li>A 32-bit memory can grow to have up to 65,536 pages (4 GiB).</li>
+<li>A 64-bit memory can grow to have up to 262,144 pages (16 GiB).</li>
 </ul>
 
 <h2 id="security-considerations">Security and Privacy Considerations</h2>
